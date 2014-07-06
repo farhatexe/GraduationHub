@@ -1,0 +1,37 @@
+﻿@model dynamic
+
+@foreach (ModelMetadata prop in ViewData.ModelMetadata.Properties
+    .Where(p => p.ShowForEdit))
+{
+    if (prop.TemplateHint == "HiddenInput")
+    {
+        @Html.Hidden(prop.PropertyName)
+    }
+    else
+    {
+
+        if (prop.ModelType == typeof(bool))
+        {
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="checkbox col-md-10">
+                    <label>
+                        @Html.Editor(prop.PropertyName) @prop.DisplayName
+                    </label>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.BootstrapLabel(prop.PropertyName)
+                <div class="col-md-10">
+                    @Html.Editor(prop.PropertyName)
+                    @Html.ValidationMessage(prop.PropertyName, new { @class = "text-danger" })
+                </div>
+            </div>
+
+        }
+
+    }
+}
