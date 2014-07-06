@@ -10,7 +10,7 @@ namespace GraduationHub.Web.Infrastructure.Tasks
 			Scan(scan =>
 			{
 				scan.AssembliesFromApplicationBaseDirectory(
-                    a => a.FullName.StartsWith("KeysGraduationHub"));
+                    a => a.FullName.StartsWith("GraduationHub.Web"));
 				scan.AddAllTypesOf<IRunAtInit>();
 				scan.AddAllTypesOf<IRunAtStartup>();
 				scan.AddAllTypesOf<IRunOnEachRequest>();

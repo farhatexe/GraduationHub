@@ -35,8 +35,9 @@ namespace GraduationHub.Web.Infrastructure
 
         void IRunOnEachRequest.Execute()
         {
-            _httpContext.Items["_Transaction"] =
-                _dbContext.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+            DbContextTransaction tran = _dbContext.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+
+            _httpContext.Items["_Transaction"] = tran;
         }
 
         void IRunOnError.Execute()
