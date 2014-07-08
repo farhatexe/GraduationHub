@@ -184,6 +184,7 @@
     <Compile Include="Controllers\InvitationsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
+    <Compile Include="Domain\GraduatingClass.cs" />
     <Compile Include="Domain\Invitation.cs" />
     <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Infrastructure\Alerts\AlertDecoratorResult.cs" />
     <Compile Include="Infrastructure\Alerts\AlertExtensions.cs" />
     <Compile Include="Infrastructure\AppBaseController.cs" />
+    <Compile Include="Infrastructure\ContainerPerRequestExtensions.cs" />
     <Compile Include="Infrastructure\ControllerConvention.cs" />
     <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\CurrentUser.cs" />
@@ -206,10 +208,12 @@
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Infrastructure\ModelMetadata\ExtensibleModelMetadataProvider.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\EmailFilter.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\Filter\GraduatingClassIdDropDownFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\LabelConventionFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\PasswordFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\ReadOnlyTemplateSelectorFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\TextAreaByNameFilter.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\Filter\WatermarkConventionFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\IModelMetadataFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\ModelMetadataRegistry.cs" />
     <Compile Include="Infrastructure\ModelMetadata\RenderAttribute.cs" />
@@ -230,7 +234,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Invitations\IndexViewModel.cs" />
+    <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
+    <Compile Include="Models\Invitations\InvitationCreateFormModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -321,6 +326,8 @@
     <Content Include="Views\Invitations\Details.cshtml" />
     <Content Include="Views\Invitations\Edit.cshtml" />
     <Content Include="Views\Invitations\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GraduatingClassId.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

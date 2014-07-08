@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GraduationHub.Web.Models.Invitations.IndexViewModel>
+﻿@model IEnumerable<GraduationHub.Web.Models.Invitations.InvitationIndexViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.StudentName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GraduationYear)
+            @Html.DisplayNameFor(model => model.GraduatingClassDescription)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.StudentName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GraduationYear)
+            @Html.DisplayFor(modelItem => item.GraduatingClassDescription)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)

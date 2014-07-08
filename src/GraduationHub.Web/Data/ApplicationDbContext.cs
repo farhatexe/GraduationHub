@@ -15,6 +15,8 @@ namespace GraduationHub.Web.Data
 
         public DbSet<Invitation> Invitations { get; set; }
 
+        public DbSet<GraduatingClass> GraduatingClasses { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

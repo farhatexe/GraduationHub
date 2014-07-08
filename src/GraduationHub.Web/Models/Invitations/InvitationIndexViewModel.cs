@@ -3,7 +3,7 @@ using GraduationHub.Web.Infrastructure.Mapping;
 
 namespace GraduationHub.Web.Models.Invitations
 {
-    public class IndexViewModel : IMapFrom<Invitation>
+    public class InvitationIndexViewModel : IMapFrom<Invitation>
     {
         public int Id { get; set; }
 
@@ -11,7 +11,7 @@ namespace GraduationHub.Web.Models.Invitations
 
         public string Email { get; set; }
 
-        public int GraduationYear { get; set; }
+        public string GraduatingClassDescription { get; set; }
 
         public bool HasBeenRedeemed { get; set; }
 
