@@ -48,6 +48,9 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="DataTables.Mvc">
+      <HintPath>..\..\lib\datatables.mvc.1.0.0.0\DataTables.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -302,6 +305,7 @@
     <Content Include="Content\DataTables-1.10.0\media\images\sort_both.png" />
     <Content Include="Content\DataTables-1.10.0\media\images\sort_desc.png" />
     <Content Include="Content\DataTables-1.10.0\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables-1.10.0\plugins\dataTables.bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -356,6 +360,7 @@
     <Content Include="Scripts\DataTables-1.10.0\media\js\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables-1.10.0\media\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables-1.10.0\media\js\jquery.js" />
+    <Content Include="Scripts\DataTables-1.10.0\plugins\dataTables.bootstrap.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />

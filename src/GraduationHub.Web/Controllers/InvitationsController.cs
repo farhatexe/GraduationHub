@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
+using DataTables.Mvc;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
+using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
 using GraduationHub.Web.Models.Invitations;
@@ -23,9 +26,25 @@ namespace GraduationHub.Web.Controllers
 
 
         // GET: Invitations
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await _context.Invitations.Project().To<InvitationIndexViewModel>().ToListAsync());
+            //return View(await _context.Invitations.Project().To<InvitationIndexViewModel>().ToListAsync());
+            return View();
+        }
+
+        public async Task<ActionResult> IndexTable([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            // Data
+            var data = await _context.Invitations
+                .Project().To<InvitationIndexViewModel>().ToListAsync();
+
+            int totalRecords = data.Count();
+
+            var paged = data.Skip(requestModel.Start).Take(requestModel.Length);
+
+            var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
+
+            return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Invitations/Details/5
@@ -53,7 +72,7 @@ namespace GraduationHub.Web.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken, Log("Create Invitation")]
         public async Task<ActionResult> Create(InvitationCreateFormModel formModel)
         {
             if (!ModelState.IsValid) return View(formModel);
@@ -118,7 +137,7 @@ namespace GraduationHub.Web.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken, Log("Edited Invitation")]
         public async Task<ActionResult> Edit(InvitationEditFormModel editModel)
         {
             if (ModelState.IsValid)
@@ -183,7 +202,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: Invitations/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete"), Log("Deleted Invitation")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
