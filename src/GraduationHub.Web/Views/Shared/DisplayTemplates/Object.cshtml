@@ -1,0 +1,21 @@
+﻿@model dynamic
+
+<dl class="dl-horizontal">
+    @foreach (ModelMetadata prop in ViewData.ModelMetadata.Properties
+        .Where(p => p.ShowForEdit))
+    {
+        if (prop.TemplateHint == "HiddenInput")
+        {
+            @Html.Hidden(prop.PropertyName)
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayName(prop.PropertyName)
+            </dt>
+            <dd>
+                @Html.Display(prop.PropertyName)
+            </dd>
+        }
+    }
+</dl>
