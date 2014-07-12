@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using DataTables.Mvc;
@@ -34,9 +36,12 @@ namespace GraduationHub.Web.Controllers
 
         public async Task<ActionResult> IndexTable([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
         {
+            
             // Data
             var data = await _context.Invitations
-                .Project().To<InvitationIndexViewModel>().ToListAsync();
+                .Project().To<InvitationIndexViewModel>()
+                .OrderBy(requestModel.Sort())
+                .ToListAsync();
 
             int totalRecords = data.Count();
 
@@ -189,16 +194,20 @@ namespace GraduationHub.Web.Controllers
         // GET: Invitations/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invitation invitation = await _context.Invitations.FindAsync(id);
-            if (invitation == null)
+            var model = await _context.Invitations
+                            .Project().To<InvitationDeleteFormModel>()
+                            .SingleAsync(i=>i.Id == id);
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(invitation);
+            return View(model);
         }
 
         // POST: Invitations/Delete/5

@@ -1,11 +1,13 @@
-﻿using GraduationHub.Web.Domain;
+﻿using AutoMapper;
+using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure.Mapping;
 
 namespace GraduationHub.Web.Models.Invitations
 {
-    public class InvitationIndexViewModel : IMapFrom<Invitation>
+    public class InvitationIndexViewModel : IHaveCustomMappings
     {
-        public int Id { get; set; }
+        // Note: This is a datatables property for setting the Row Id.
+        public int DT_RowId { get; set; }
 
         public string StudentName { get; set; }
 
@@ -16,5 +18,11 @@ namespace GraduationHub.Web.Models.Invitations
         public bool HasBeenRedeemed { get; set; }
 
         public bool HasBeenSent { get; set; }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<Invitation, InvitationIndexViewModel>()
+                .ForMember(d => d.DT_RowId, o => o.MapFrom(s => s.Id));
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model GraduationHub.Web.Domain.Invitation
+﻿@model GraduationHub.Web.Models.Invitations.InvitationDeleteFormModel
 
 @{
     ViewBag.Title = "Delete";
@@ -10,56 +10,7 @@
 <div>
     <h4>Invitation</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StudentName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GraduationYear)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GraduationYear)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.InviteCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.InviteCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HasBeenRedeemed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HasBeenRedeemed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HasBeenSent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HasBeenSent)
-        </dd>
-
-    </dl>
+    @Html.DisplayForModel()
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

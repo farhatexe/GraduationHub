@@ -1,9 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Graduate Hub Invitations</h2>
+<p>
+    Use this page to invite Students to join the Graduate Hub. Students will receive an email containing a unique inviation code that will authorize them to create an account and use the Hub.
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,18 +17,20 @@
             <th>
                 Student Name
             </th>
-            <th>
-                Graduating Class Description
-            </th>
+
             <th>
                 Email
             </th>
             <th>
-                Has Been Redeemed
+                Class
             </th>
             <th>
-                Has Been Sent
+                Redeemed
             </th>
+            <th>
+                Sent
+            </th>
+            <th></th>
         </tr>
     </thead>
 </table>
@@ -36,22 +40,49 @@
     @Scripts.Render("~/bundles/datatables")
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#invitations').DataTable({
+                order:[[0, 'asc']],
                 processing: true,
                 serverSide: true,
+                stateSave: true,
                 ajax: {
-                    url: "Invitations/IndexTable"
+                    url: 'Invitations/IndexTable'
                 },
+                columnDefs: [
+                    {
+                        targets: [3, 4],
+                        searchable: false,
+                        className: 'text-center',
+                        render: function(data, type, row) {
+                            return data === true ? 'Yes' : 'No';
+                        }
+                    }
+                ],
                 columns: [
-                    { data: "studentName" },
-                    { data: "graduatingClassDescription" },
-                    { data: "email" },
-                    { data: "hasBeenRedeemed" },
-                    { data: "hasBeenSent" }
-                ]
+                    { data: 'studentName' },
+                    { data: 'email' },
+                    { data: 'graduatingClassDescription' },
+                    { data: 'hasBeenRedeemed' },
+                    { data: 'hasBeenSent' },
+                    {
+                        searchable: false,
+                        orderable:false,
+                        className: 'text-center',
+                        render: function(data, type, row) {
 
+                            var template = _.template("<a title='Edit Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Edit/<%= dT_RowId %>'>" +
+                                "<span class='glyphicon glyphicon-pencil'/></a>&nbsp;&nbsp;&nbsp;" +
+                                "<a title='Delete Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Delete/<%= dT_RowId %>'>" +
+                                "<span class='glyphicon glyphicon-remove'/></a>", { dT_RowId: row.dT_RowId });
+
+                            return template;
+
+                        }
+                    }
+                ]
             });
+
         });
     </script>
 }
