@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GraduationHub.Web.Domain
 {
@@ -6,12 +7,14 @@ namespace GraduationHub.Web.Domain
     {
         public int Id { get; set; }
 
-        public string StudentName { get; set; }
+        [StringLength(75)]
+        public string InviteeName { get; set; }
 
         public int GraduatingClassId { get; set; }
 
         public virtual GraduatingClass GraduatingClass { get; set; }
 
+        [StringLength(75)]
         public string Email { get; set; }
 
         public Guid? InviteCode { get; set; }
@@ -19,5 +22,7 @@ namespace GraduationHub.Web.Domain
         public bool HasBeenRedeemed { get; set; }
 
         public bool HasBeenSent { get; set; }
+
+        public bool IsTeacher { get; set; }
     }
 }

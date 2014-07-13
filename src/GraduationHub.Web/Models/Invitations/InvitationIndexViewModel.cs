@@ -9,7 +9,7 @@ namespace GraduationHub.Web.Models.Invitations
         // Note: This is a datatables property for setting the Row Id.
         public int DT_RowId { get; set; }
 
-        public string StudentName { get; set; }
+        public string InviteeName { get; set; }
 
         public string Email { get; set; }
 
@@ -18,6 +18,8 @@ namespace GraduationHub.Web.Models.Invitations
         public bool HasBeenRedeemed { get; set; }
 
         public bool HasBeenSent { get; set; }
+
+        public bool IsTeacher { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

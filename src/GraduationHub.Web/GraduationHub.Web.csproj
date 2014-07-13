@@ -198,6 +198,7 @@
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\GraduatingClass.cs" />
     <Compile Include="Domain\Invitation.cs" />
+    <Compile Include="Domain\InvitationManager.cs" />
     <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,7 +249,13 @@
       <DependentUpon>201407061631541_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\Account\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Account\ManageUserViewModel.cs" />
+    <Compile Include="Models\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Invitations\InvitationDeleteFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationEditFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
@@ -342,7 +349,8 @@
     <Content Include="Content\DataTables-1.10.0\images\Sorting icons.psd" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\app\keystoneGraduateHubApp.js" />
+    <Content Include="Scripts\app\controllers\addInvitationController.js" />
+    <Content Include="Scripts\app\graduateHubApp.js" />
     <Content Include="Scripts\app\services\alerts.js" />
     <Content Include="Scripts\app\services\exceptionOverride.js" />
     <Content Include="Scripts\app\utilities\bootstrapAlerts.js" />
@@ -444,10 +452,10 @@
     <Content Include="Views\Shared\EditorTemplates\GraduatingClassId.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\app\controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using DataTables.Mvc;
@@ -34,18 +34,25 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-        public async Task<ActionResult> IndexTable([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        public async Task<ActionResult> IndexTable(
+            [ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
         {
-            
-            // Data
-            var data = await _context.Invitations
+            // Query
+            IQueryable<InvitationIndexViewModel> query = _context.Invitations
                 .Project().To<InvitationIndexViewModel>()
-                .OrderBy(requestModel.Sort())
-                .ToListAsync();
+                .OrderBy(requestModel.Sort());
+
+            if (requestModel.HasSearchValues())
+            {
+                query = query.Where(requestModel.SearchValues(), requestModel.Search.Value);
+            }
+
+            // Data
+            List<InvitationIndexViewModel> data = await query.ToListAsync();
 
             int totalRecords = data.Count();
 
-            var paged = data.Skip(requestModel.Start).Take(requestModel.Length);
+            IEnumerable<InvitationIndexViewModel> paged = data.Skip(requestModel.Start).Take(requestModel.Length);
 
             var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
 
@@ -107,9 +114,10 @@ namespace GraduationHub.Web.Controllers
 
             var invitation = new Invitation
             {
-                StudentName = formModel.StudentName,
+                InviteeName = formModel.InviteeName,
                 GraduatingClassId = formModel.GraduatingClassId,
-                Email = formModel.Email
+                Email = formModel.Email,
+                IsTeacher = formModel.IsTeacher
             };
 
             _context.Invitations.Add(invitation);
@@ -178,14 +186,15 @@ namespace GraduationHub.Web.Controllers
                 }
 
                 invitation.GraduatingClassId = editModel.GraduatingClassId;
-                invitation.StudentName = editModel.StudentName;
+                invitation.InviteeName = editModel.InviteeName;
                 invitation.Email = editModel.Email;
-                
+                invitation.IsTeacher = editModel.IsTeacher;
+                invitation.HasBeenRedeemed = editModel.HasBeenRedeemed;
+
                 _context.Entry(invitation).State = EntityState.Modified;
-                
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction<InvitationsController>(c => c.Index()).WithSuccess("Invitation updated.");
-
             }
 
             return View(editModel);
@@ -194,14 +203,13 @@ namespace GraduationHub.Web.Controllers
         // GET: Invitations/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var model = await _context.Invitations
-                            .Project().To<InvitationDeleteFormModel>()
-                            .SingleAsync(i=>i.Id == id);
+            InvitationDeleteFormModel model = await _context.Invitations
+                .Project().To<InvitationDeleteFormModel>()
+                .SingleAsync(i => i.Id == id);
 
             if (model == null)
             {

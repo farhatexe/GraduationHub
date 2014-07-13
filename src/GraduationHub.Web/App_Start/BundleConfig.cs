@@ -37,7 +37,7 @@ namespace GraduationHub.Web
                 );
 
             bundles.Add(new ScriptBundle("~/bundles/app")
-                .Include("~/Scripts/app/failtrackerApp.js")
+                .Include("~/Scripts/app/graduateHubApp.js")
                 .IncludeDirectory("~/Scripts/app/utilities", "*.js")
                 .IncludeDirectory("~/Scripts/app/controllers", "*.js")
                 .IncludeDirectory("~/Scripts/app/services", "*.js")

@@ -5,7 +5,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
+using GraduationHub.Web.Infrastructure;
+using GraduationHub.Web.Models.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,16 +19,18 @@ using GraduationHub.Web.Models;
 namespace GraduationHub.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : AppBaseController
     {
+        private readonly IInvitationManager _invitationManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager)
         {
+            _invitationManager = invitationManager;
             UserManager = userManager;
         }
 
@@ -89,26 +94,37 @@ namespace GraduationHub.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            
+            /*Validate*/
+            var invitation = await _invitationManager.GetInvitation(model.Email, model.GraduatingClassId, model.InviteCode);
+            
+            // Invitation could not be found.
+            if (invitation == null)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInAsync(user, isPersistent: false);
+                ModelState.AddModelError("", "Could not locate Invitation. Please check your invitation email for the correct values.");
+                return View(model);
+            }
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            
+            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            
+            if (result.Succeeded)
+            {
+                await SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    AddErrors(result);
-                }
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+             
+                return RedirectToAction<HomeController>(c => c.Index());
+            }
+            else
+            {
+                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form

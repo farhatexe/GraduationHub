@@ -15,7 +15,7 @@
     <thead>
         <tr>
             <th>
-                Student Name
+                Invitee Name
             </th>
 
             <th>
@@ -23,6 +23,9 @@
             </th>
             <th>
                 Class
+            </th>
+            <th>
+                Is Teacher
             </th>
             <th>
                 Redeemed
@@ -42,7 +45,7 @@
     <script>
         $(document).ready(function() {
             $('#invitations').DataTable({
-                order:[[0, 'asc']],
+                order: [[0, 'asc']],
                 processing: true,
                 serverSide: true,
                 stateSave: true,
@@ -51,24 +54,26 @@
                 },
                 columnDefs: [
                     {
-                        targets: [3, 4],
-                        searchable: false,
-                        className: 'text-center',
+                        targets: [3, 4, 5],
                         render: function(data, type, row) {
                             return data === true ? 'Yes' : 'No';
                         }
+                    },
+                    {
+                        targets: [2, 3, 4, 5, 6],
+                        searchable: false,
+                        className: 'text-center',
                     }
                 ],
                 columns: [
-                    { data: 'studentName' },
+                    { data: 'inviteeName' },
                     { data: 'email' },
                     { data: 'graduatingClassDescription' },
+                    { data: 'isTeacher' },
                     { data: 'hasBeenRedeemed' },
                     { data: 'hasBeenSent' },
                     {
-                        searchable: false,
-                        orderable:false,
-                        className: 'text-center',
+                        orderable: false,
                         render: function(data, type, row) {
 
                             var template = _.template("<a title='Edit Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Edit/<%= dT_RowId %>'>" +

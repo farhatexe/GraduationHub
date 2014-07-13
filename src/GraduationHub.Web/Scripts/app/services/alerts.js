@@ -3,7 +3,7 @@
 
     var serviceId = 'alerts';
 
-    angular.module('graduationHubApp').factory(serviceId, function () {
+    angular.module('graduateHubApp').factory(serviceId, function () {
         return window.alerts;
     });
 

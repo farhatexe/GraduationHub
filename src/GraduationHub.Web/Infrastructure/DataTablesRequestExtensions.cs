@@ -20,6 +20,21 @@ namespace GraduationHub.Web.Infrastructure
 
             return string.Join(", ", columns);
         }
+
+        public static string SearchValues(this IDataTablesRequest dataTablesRequest)
+        {
+            string[] predicates = dataTablesRequest
+                .Columns.Where(x => x.Searchable)
+                .Select(c => string.Format("{0}.Contains(@0)", c.Data))
+                .ToArray();
+
+            return string.Join(" OR ", predicates);
+        }
+
+        public static bool HasSearchValues(this IDataTablesRequest dataTablesRequest)
+        {
+            return !string.IsNullOrWhiteSpace(dataTablesRequest.Search.Value);
+        }
     }
 
     public static class ColumnOrderDirectionExtensions

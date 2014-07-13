@@ -10,7 +10,7 @@ namespace GraduationHub.Web.Models.Invitations
         [HiddenInput]
         public int Id { get; set; }
 
-        public string StudentName { get; set; }
+        public string InviteeName { get; set; }
 
         [Display(Name="Graduating Class")]
         public string GraduatingClassDescription { get; set; }

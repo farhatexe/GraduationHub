@@ -11,12 +11,16 @@ namespace GraduationHub.Web.Models.Invitations
         public int Id { get; set; }
 
         [Required]
-        public string StudentName { get; set; }
+        public string InviteeName { get; set; }
 
         [Required]
         public int GraduatingClassId { get; set; }
 
         [Required]
         public string Email { get; set; }
+
+        public bool HasBeenRedeemed { get; set; }
+
+        public bool IsTeacher { get; set; }
     }
 }
