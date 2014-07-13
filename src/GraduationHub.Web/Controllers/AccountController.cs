@@ -13,16 +13,14 @@ namespace GraduationHub.Web.Controllers
     [Authorize]
     public class AccountController : AppBaseController
     {
-        private readonly IInvitationManager _invitationManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager)
+        public AccountController(ApplicationUserManager userManager)
         {
-            _invitationManager = invitationManager;
             UserManager = userManager;
         }
 
@@ -81,11 +79,11 @@ namespace GraduationHub.Web.Controllers
             if (!ModelState.IsValid) return View(model);
 
             /*Validate*/
-            Invitation invitation =
-                await _invitationManager.GetInvitation(model.Email, model.GraduatingClassId, model.InviteCode);
+            bool hasValidInvitation =
+                await _userManager.HasValidInvitationAsync(model.Email, model.GraduatingClassId, model.InviteCode);
 
             // Invitation could not be found.
-            if (invitation == null)
+            if (!hasValidInvitation)
             {
                 ModelState.AddModelError("",
                     "Could not locate Invitation. Please check your invitation email for the correct values.");
