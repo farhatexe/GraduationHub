@@ -249,8 +249,6 @@
       <DependentUpon>201407061631541_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Account\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="Models\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\ManageUserViewModel.cs" />
@@ -417,12 +415,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
