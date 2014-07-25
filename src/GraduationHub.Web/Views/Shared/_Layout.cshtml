@@ -11,7 +11,7 @@
     @Scripts.Render("~/bundles/angular")
 
 </head>
-<body>
+<body ng-app="graduateHubApp">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,7 +28,8 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Invite", "Index", "Invitations")</li>
-        
+                    <li>@Html.ActionLink("Info", "Index", "GraduateInformation")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

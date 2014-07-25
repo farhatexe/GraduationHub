@@ -17,6 +17,8 @@ namespace GraduationHub.Web.Data
 
         public DbSet<GraduatingClass> GraduatingClasses { get; set; }
 
+        public DbSet<GraduateInformation> GraduateInformation { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

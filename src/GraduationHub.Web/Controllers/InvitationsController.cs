@@ -153,51 +153,48 @@ namespace GraduationHub.Web.Controllers
         [ValidateAntiForgeryToken, Log("Edited Invitation")]
         public async Task<ActionResult> Edit(InvitationEditFormModel editModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(editModel);
+
+            // If the email is already being used to authenticate into the system, it cannot be used
+            bool userExists = await _context.Users
+                .AnyAsync(u => u.Email.Equals(editModel.Email, StringComparison.OrdinalIgnoreCase));
+
+
+            if (userExists)
             {
-                // If the email is already being used to authenticate into the system, it cannot be used
-                bool userExists = await _context.Users
-                    .AnyAsync(u => u.Email.Equals(editModel.Email, StringComparison.OrdinalIgnoreCase));
-
-
-                if (userExists)
-                {
-                    return RedirectToAction<InvitationsController>(c => c.Index())
-                        .WithError("It appears there is an existing User with this email address.");
-                }
-
-                // if there is an invitation for the same year, same email, this is invalid.
-                bool invitationExists = await _context.Invitations.AnyAsync(i =>
-                    i.Email.Equals(editModel.Email, StringComparison.OrdinalIgnoreCase)
-                    && i.GraduatingClassId == editModel.GraduatingClassId
-                    && i.Id != editModel.Id);
-
-                if (invitationExists)
-                {
-                    return RedirectToAction<InvitationsController>(c => c.Index())
-                        .WithError("It appears that this email has an invitation already.");
-                }
-                Invitation invitation = await _context.Invitations.SingleOrDefaultAsync(i => i.Id == editModel.Id);
-
-                if (invitation == null)
-                {
-                    return RedirectToAction<InvitationsController>(c => c.Index())
-                        .WithError("Could not load the Invitation.");
-                }
-
-                invitation.GraduatingClassId = editModel.GraduatingClassId;
-                invitation.InviteeName = editModel.InviteeName;
-                invitation.Email = editModel.Email;
-                invitation.IsTeacher = editModel.IsTeacher;
-                invitation.HasBeenRedeemed = editModel.HasBeenRedeemed;
-
-                _context.Entry(invitation).State = EntityState.Modified;
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction<InvitationsController>(c => c.Index()).WithSuccess("Invitation updated.");
+                return RedirectToAction<InvitationsController>(c => c.Index())
+                    .WithError("It appears there is an existing User with this email address.");
             }
 
-            return View(editModel);
+            // if there is an invitation for the same year, same email, this is invalid.
+            bool invitationExists = await _context.Invitations.AnyAsync(i =>
+                i.Email.Equals(editModel.Email, StringComparison.OrdinalIgnoreCase)
+                && i.GraduatingClassId == editModel.GraduatingClassId
+                && i.Id != editModel.Id);
+
+            if (invitationExists)
+            {
+                return RedirectToAction<InvitationsController>(c => c.Index())
+                    .WithError("It appears that this email has an invitation already.");
+            }
+            Invitation invitation = await _context.Invitations.SingleOrDefaultAsync(i => i.Id == editModel.Id);
+
+            if (invitation == null)
+            {
+                return RedirectToAction<InvitationsController>(c => c.Index())
+                    .WithError("Could not load the Invitation.");
+            }
+
+            invitation.GraduatingClassId = editModel.GraduatingClassId;
+            invitation.InviteeName = editModel.InviteeName;
+            invitation.Email = editModel.Email;
+            invitation.IsTeacher = editModel.IsTeacher;
+            invitation.HasBeenRedeemed = editModel.HasBeenRedeemed;
+
+            _context.Entry(invitation).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction<InvitationsController>(c => c.Index()).WithSuccess("Invitation updated.");
         }
 
         // GET: Invitations/Delete/5

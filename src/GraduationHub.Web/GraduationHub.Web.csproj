@@ -192,10 +192,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GraduateInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
+    <Compile Include="Domain\GraduateInformation.cs" />
     <Compile Include="Domain\GraduatingClass.cs" />
     <Compile Include="Domain\Invitation.cs" />
     <Compile Include="Domain\InvitationManager.cs" />
@@ -228,6 +231,7 @@
     <Compile Include="Infrastructure\ModelMetadata\Filter\ReadOnlyTemplateSelectorFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\TextAreaByNameFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\Filter\WatermarkConventionFilter.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\HelpAttribute.cs" />
     <Compile Include="Infrastructure\ModelMetadata\IModelMetadataFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\ModelMetadataRegistry.cs" />
     <Compile Include="Infrastructure\ModelMetadata\RenderAttribute.cs" />
@@ -254,6 +258,8 @@
     <Compile Include="Models\Account\ManageUserViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\GraduateInformation\AddressModel.cs" />
+    <Compile Include="Models\GraduateInformation\GraduateInformationCreateFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationDeleteFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationEditFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
@@ -447,6 +453,12 @@
     <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\YesNo.cshtml" />
+    <Content Include="Views\GraduateInformation\Create.cshtml" />
+    <Content Include="Views\GraduateInformation\Delete.cshtml" />
+    <Content Include="Views\GraduateInformation\Details.cshtml" />
+    <Content Include="Views\GraduateInformation\Edit.cshtml" />
+    <Content Include="Views\GraduateInformation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
