@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using GraduationHub.Web.Data;
 
 namespace GraduationHub.Web.Domain
 {
@@ -6,7 +7,7 @@ namespace GraduationHub.Web.Domain
     {
         public int Id { get; set; }
 
-        [StringLength(75)]
+        [StringLength(FieldLengths.GraduatingClass.Description)]
         public string Description { get; set; }
     }
 }

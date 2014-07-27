@@ -196,12 +196,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Data\FieldLengths.cs" />
     <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\GraduateInformation.cs" />
     <Compile Include="Domain\GraduatingClass.cs" />
     <Compile Include="Domain\Invitation.cs" />
-    <Compile Include="Domain\InvitationManager.cs" />
     <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -265,6 +265,7 @@
     <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
     <Compile Include="Models\Invitations\InvitationCreateFormModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\InvitationManager.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -462,6 +463,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Infrastructure\Validation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -2,8 +2,9 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using GraduationHub.Web.Data;
+using GraduationHub.Web.Domain;
 
-namespace GraduationHub.Web.Domain
+namespace GraduationHub.Web.Services
 {
     public class InvitationManager : IInvitationManager
     {

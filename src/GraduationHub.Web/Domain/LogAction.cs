@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using GraduationHub.Web.Data;
 
 namespace GraduationHub.Web.Domain
 {
@@ -17,12 +19,15 @@ namespace GraduationHub.Web.Domain
 
         public DateTime PerformedAt { get; set; }
 
+        [StringLength(FieldLengths.LogAction.Controller)]
         public string Controller { get; set; }
 
+        [StringLength(FieldLengths.LogAction.Action)]
         public string Action { get; set; }
 
         public ApplicationUser PerformedBy { get; set; }
 
+        [StringLength(FieldLengths.LogAction.Description)]
         public string Description { get; set; }
     }
 }

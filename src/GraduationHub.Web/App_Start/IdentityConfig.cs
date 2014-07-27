@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
+using GraduationHub.Web.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
