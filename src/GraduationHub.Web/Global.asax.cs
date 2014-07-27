@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using FluentValidation.Mvc;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.ModelMetadata;
@@ -42,18 +41,8 @@ namespace GraduationHub.Web
                 cfg.AddRegistry(new MvcRegistry(() => Container ?? ObjectFactory.Container));
                 cfg.AddRegistry(new TaskRegistry());
                 cfg.AddRegistry(new ModelMetadataRegistry());
-                cfg.AddRegistry(new ValidationRegistry());
             });
 
-            var validatorFactory = new StructureMapValidatorFactory(() => Container ?? ObjectFactory.Container);
-            var fluentValidationModelValidatorProvider = new FluentValidationModelValidatorProvider(validatorFactory);
-
-
-            ModelValidatorProviders.Providers.Add(fluentValidationModelValidatorProvider);
-            //DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
-            
-            DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = 
-                fluentValidationModelValidatorProvider.AddImplicitRequiredValidator = false;
 
             using (IContainer container = ObjectFactory.Container.GetNestedContainer())
             {
