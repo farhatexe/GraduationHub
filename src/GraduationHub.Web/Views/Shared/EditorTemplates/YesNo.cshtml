@@ -1,0 +1,36 @@
+﻿@model Boolean?
+
+@{
+    bool value = false;
+
+    if (Model != null)
+    {
+        value = Model.Value;
+    }
+}
+
+<div class="radio-inline">
+    <label>
+        @Html.RadioButton("", value, value) Yes
+    </label>
+</div>
+<div class="radio-inline">
+    <label>
+        @Html.RadioButton("", value, value) No
+    </label>
+</div>
+
+@*
+
+<div class="radio-inline">
+    <label>
+        @Html.RadioButton("", Model.HasValue && !Model.Value) Yes
+    </label>
+</div>
+<div class="radio-inline">
+    <label>
+        @Html.RadioButton("", Model.HasValue && Model.Value) No
+    </label>
+</div>
+*@
+

@@ -1,5 +1,4 @@
-﻿@using GraduationHub.Web.Controllers
-@model GraduationHub.Web.Models.Invitations.InvitationCreateFormModel
+﻿@model GraduationHub.Web.Models.GraduateInformation.GraduateInformationCreateFormModel
 
 @{
     ViewBag.Title = "Create";
@@ -8,17 +7,17 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Invitation</h4>
+        <h4>Graduate Information</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
         @Html.EditorForModel()
-
+       
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -28,7 +27,7 @@
 }
 
 <div>
-    @(Html.ActionLink<InvitationsController>(c => c.Index(), "Back to List"))
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

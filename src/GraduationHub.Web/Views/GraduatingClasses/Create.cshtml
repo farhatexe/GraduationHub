@@ -1,35 +1,34 @@
 ﻿@using GraduationHub.Web.Controllers
-@model GraduationHub.Web.Models.Invitations.InvitationEditFormModel
+@model GraduationHub.Web.Models.GraduatingClass.GraduatingClassCreateModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Invitation</h4>
+        <h4>GraduatingClass</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
+        
         @Html.EditorForModel()
 
-        <div class="form-group">
+        <div class="form-group">   
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @(Html.ActionLink<InvitationsController>(c => c.Index(), "Back to List"))
+    @(Html.ActionLink<GraduatingClassesController>(c => c.Index(), "Back to List"))
 </div>
 
 @section Scripts {

@@ -193,6 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GraduateInformationController.cs" />
+    <Compile Include="Controllers\GraduatingClassesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
@@ -260,6 +261,10 @@
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\GraduateInformation\AddressModel.cs" />
     <Compile Include="Models\GraduateInformation\GraduateInformationCreateFormModel.cs" />
+    <Compile Include="Models\GraduatingClass\GraduatingClassCreateModel.cs" />
+    <Compile Include="Models\GraduatingClass\GraduatingClassDeleteModel.cs" />
+    <Compile Include="Models\GraduatingClass\GraduatingClassEditModel.cs" />
+    <Compile Include="Models\GraduatingClass\GraduatingClassIndexListModel.cs" />
     <Compile Include="Models\Invitations\InvitationDeleteFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationEditFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
@@ -446,7 +451,6 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Invitations\Create.cshtml" />
     <Content Include="Views\Invitations\Delete.cshtml" />
-    <Content Include="Views\Invitations\Details.cshtml" />
     <Content Include="Views\Invitations\Edit.cshtml" />
     <Content Include="Views\Invitations\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
@@ -460,10 +464,13 @@
     <Content Include="Views\GraduateInformation\Details.cshtml" />
     <Content Include="Views\GraduateInformation\Edit.cshtml" />
     <Content Include="Views\GraduateInformation\Index.cshtml" />
+    <Content Include="Views\GraduatingClasses\Create.cshtml" />
+    <Content Include="Views\GraduatingClasses\Delete.cshtml" />
+    <Content Include="Views\GraduatingClasses\Edit.cshtml" />
+    <Content Include="Views\GraduatingClasses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Validation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

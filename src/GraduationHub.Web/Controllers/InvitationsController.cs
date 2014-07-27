@@ -59,21 +59,6 @@ namespace GraduationHub.Web.Controllers
             return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Invitations/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Invitation invitation = await _context.Invitations.FindAsync(id);
-            if (invitation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(invitation);
-        }
-
         // GET: Invitations/Create
         public ActionResult Create()
         {
@@ -204,7 +189,7 @@ namespace GraduationHub.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InvitationDeleteFormModel model = await _context.Invitations
+            var model = await _context.Invitations
                 .Project().To<InvitationDeleteFormModel>()
                 .SingleAsync(i => i.Id == id);
 
