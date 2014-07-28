@@ -476,7 +476,6 @@
     <Content Include="Views\GraduatingClasses\Index.cshtml" />
     <Content Include="Views\ImportantDates\Create.cshtml" />
     <Content Include="Views\ImportantDates\Delete.cshtml" />
-    <Content Include="Views\ImportantDates\Details.cshtml" />
     <Content Include="Views\ImportantDates\Edit.cshtml" />
     <Content Include="Views\ImportantDates\Index.cshtml" />
   </ItemGroup>

@@ -152,7 +152,9 @@ namespace GraduationHub.Web.Controllers
             GraduatingClass graduatingClass = await _context.GraduatingClasses.FindAsync(id);
             _context.GraduatingClasses.Remove(graduatingClass);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+            return RedirectToAction<GraduatingClassesController>(c => c.Index())
+                .WithSuccess("Graduating Class Deleted.");
         }
     }
 }

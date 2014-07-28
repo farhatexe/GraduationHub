@@ -1,4 +1,5 @@
-﻿@model GraduationHub.Web.Domain.ImportantDate
+﻿@using GraduationHub.Web.Controllers
+@model GraduationHub.Web.Domain.ImportantDate
 
 @{
     ViewBag.Title = "Create";
@@ -48,7 +49,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @(Html.ActionLink<ImportantDatesController>(c => c.Index(), "Back to List"))
 </div>
 
 @section Scripts {

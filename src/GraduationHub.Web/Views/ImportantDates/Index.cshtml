@@ -1,4 +1,5 @@
-﻿@model IEnumerable<GraduationHub.Web.Domain.ImportantDate>
+﻿@using GraduationHub.Web.Controllers
+@model IEnumerable<GraduationHub.Web.Domain.ImportantDate>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @(Html.ActionLink<ImportantDatesController>(c => c.Create(), "Create New"))
 </p>
 <table class="table">
     <tr>
