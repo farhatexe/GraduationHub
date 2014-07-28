@@ -42,5 +42,10 @@
             public const int Height = 20;
 
         }
+
+        public class ImportantDate
+        {
+            public const int Description = 500;
+        }
     }
 }

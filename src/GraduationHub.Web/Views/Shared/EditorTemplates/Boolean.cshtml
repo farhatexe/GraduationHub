@@ -1,4 +1,6 @@
 ﻿@model Boolean?
-<label>
-    @Html.CheckBox("", Model.HasValue && Model.Value) @ViewData.ModelMetadata.DisplayName
-</label>
+<div class="checkbox">
+    <label>
+        @Html.CheckBox("", Model.HasValue && Model.Value) @ViewData.ModelMetadata.DisplayName
+    </label>
+</div>

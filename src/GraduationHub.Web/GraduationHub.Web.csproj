@@ -195,6 +195,7 @@
     <Compile Include="Controllers\GraduateInformationController.cs" />
     <Compile Include="Controllers\GraduatingClassesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportantDatesController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\FieldLengths.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\GraduateInformation.cs" />
     <Compile Include="Domain\GraduatingClass.cs" />
+    <Compile Include="Domain\ImportantDates.cs" />
     <Compile Include="Domain\Invitation.cs" />
     <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
@@ -265,6 +267,10 @@
     <Compile Include="Models\GraduatingClass\GraduatingClassDeleteModel.cs" />
     <Compile Include="Models\GraduatingClass\GraduatingClassEditModel.cs" />
     <Compile Include="Models\GraduatingClass\GraduatingClassIndexListModel.cs" />
+    <Compile Include="Models\ImportantDates\ImporantDateIndexModel.cs" />
+    <Compile Include="Models\ImportantDates\ImportantDateCreateModel.cs" />
+    <Compile Include="Models\ImportantDates\ImportantDateDeleteModel.cs" />
+    <Compile Include="Models\ImportantDates\ImportantDateEditModel.cs" />
     <Compile Include="Models\Invitations\InvitationDeleteFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationEditFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
@@ -468,6 +474,11 @@
     <Content Include="Views\GraduatingClasses\Delete.cshtml" />
     <Content Include="Views\GraduatingClasses\Edit.cshtml" />
     <Content Include="Views\GraduatingClasses\Index.cshtml" />
+    <Content Include="Views\ImportantDates\Create.cshtml" />
+    <Content Include="Views\ImportantDates\Delete.cshtml" />
+    <Content Include="Views\ImportantDates\Details.cshtml" />
+    <Content Include="Views\ImportantDates\Edit.cshtml" />
+    <Content Include="Views\ImportantDates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
