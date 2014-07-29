@@ -10,7 +10,8 @@ namespace GraduationHub.Web
             bundles.Add(new ScriptBundle("~/bundles/libraries").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/jquery.validate*",
-                "~/Scripts/underscore.js"
+                "~/Scripts/underscore.js",
+                "~/Scripts/moment.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -21,9 +22,6 @@ namespace GraduationHub.Web
                 "~/Scripts/DataTables-1.10.0/plugins/dataTables.bootstrap.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
-                "~/Scripts/moment.js"));
-
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -32,6 +30,7 @@ namespace GraduationHub.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap-datepicker.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/jasny-bootstrap.js"));
 
@@ -48,12 +47,13 @@ namespace GraduationHub.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/datepicker3.css",
                 "~/Content/DataTables-1.10.0/plugins/dataTables.bootstrap.css",
                 "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
