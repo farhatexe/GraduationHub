@@ -25,5 +25,7 @@ namespace GraduationHub.Web.Data
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<GraduationHub.Web.Domain.FrequentlyAskedQuestion> FrequentlyAskedQuestions { get; set; }
     }
 }

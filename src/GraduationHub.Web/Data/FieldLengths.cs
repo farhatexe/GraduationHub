@@ -47,5 +47,11 @@
         {
             public const int Description = 500;
         }
+
+        public class FrequentlyAskedQuestion
+        {
+            public const int Question = 150;
+            public const int Answer = 300;
+        }
     }
 }

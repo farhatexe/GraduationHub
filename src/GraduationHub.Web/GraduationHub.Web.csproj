@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FrequentlyAskedQuestionsController.cs" />
     <Compile Include="Controllers\GraduateInformationController.cs" />
     <Compile Include="Controllers\GraduatingClassesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Data\FieldLengths.cs" />
     <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
+    <Compile Include="Domain\FrequentlyAskedQuestion.cs" />
     <Compile Include="Domain\GraduateInformation.cs" />
     <Compile Include="Domain\GraduatingClass.cs" />
     <Compile Include="Domain\ImportantDates.cs" />
@@ -262,6 +264,10 @@
     <Compile Include="Models\Account\ManageUserViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionCreateModel.cs" />
+    <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionDeleteModel.cs" />
+    <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionEditModel.cs" />
+    <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionIndexModel.cs" />
     <Compile Include="Models\GraduateInformation\AddressModel.cs" />
     <Compile Include="Models\GraduateInformation\GraduateInformationCreateFormModel.cs" />
     <Compile Include="Models\GraduatingClass\GraduatingClassCreateModel.cs" />
@@ -539,6 +545,10 @@
     <Content Include="Views\ImportantDates\Edit.cshtml" />
     <Content Include="Views\ImportantDates\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\FrequentlyAskedQuestions\Create.cshtml" />
+    <Content Include="Views\FrequentlyAskedQuestions\Delete.cshtml" />
+    <Content Include="Views\FrequentlyAskedQuestions\Edit.cshtml" />
+    <Content Include="Views\FrequentlyAskedQuestions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
