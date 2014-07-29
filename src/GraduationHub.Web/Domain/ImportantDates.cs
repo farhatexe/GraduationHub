@@ -11,7 +11,7 @@ namespace GraduationHub.Web.Domain
         public DateTime DueDate { get; set; }
 
         [StringLength(FieldLengths.ImportantDate.Description)]
-        public string Description { get; set; }
+        public string Comments { get; set; }
 
         public int GraduatingClassId { get; set; }
 

@@ -26,3 +26,5 @@
 /// <reference path="datatables-1.10.0/extensions/keytable/js/datatables.keytable.js" />
 /// <reference path="datatables-1.10.0/extensions/scroller/js/datatables.scroller.js" />
 /// <reference path="datatables-1.10.0/extensions/tabletools/js/datatables.tabletools.js" />
+/// <reference path="moment-with-langs.min.js" />
+/// <reference path="moment.min.js" />

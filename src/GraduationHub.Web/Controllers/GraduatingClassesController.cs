@@ -35,7 +35,7 @@ namespace GraduationHub.Web.Controllers
             [ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
         {
             // Query
-            IQueryable<GraduatingClassIndexModel> query = _context.GraduatingClasses
+            var query = _context.GraduatingClasses
                 .Project().To<GraduatingClassIndexModel>()
                 .OrderBy(requestModel.Sort());
 
@@ -45,11 +45,11 @@ namespace GraduationHub.Web.Controllers
             }
 
             // Data
-            List<GraduatingClassIndexModel> data = await query.ToListAsync();
+            var data = await query.ToListAsync();
 
             int totalRecords = data.Count();
 
-            IEnumerable<GraduatingClassIndexModel> paged = data.Skip(requestModel.Start).Take(requestModel.Length);
+            var paged = data.Skip(requestModel.Start).Take(requestModel.Length);
 
             var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
 
@@ -63,8 +63,6 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: GraduatingClasses/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken, Log("Created Invitation")]
         public async Task<ActionResult> Create(GraduatingClassCreateModel model)
@@ -89,7 +87,7 @@ namespace GraduationHub.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            GraduatingClassEditModel invitation =
+            var invitation =
                 await _context.GraduatingClasses.Project().To<GraduatingClassEditModel>()
                     .SingleOrDefaultAsync(i => i.Id == id.Value);
 

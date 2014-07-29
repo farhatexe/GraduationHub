@@ -16,6 +16,6 @@ namespace GraduationHub.Web.Models.ImportantDates
         [Display(Name = "Graduating Class")]
         public string GraduatingClassDescription { get; set; }
 
-        public string Description { get; set; }
+        public string Comments { get; set; }
     }
 }

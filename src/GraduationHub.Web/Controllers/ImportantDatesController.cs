@@ -1,13 +1,18 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
+using DataTables.Mvc;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
+using GraduationHub.Web.Models.ImportantDates;
 
 namespace GraduationHub.Web.Controllers
 {
@@ -23,26 +28,52 @@ namespace GraduationHub.Web.Controllers
         // GET: ImportantDates
         public async Task<ActionResult> Index()
         {
-            IQueryable<ImportantDate> importantDates = _context.ImportantDates.Include(i => i.GraduatingClass);
-            return View(await importantDates.ToListAsync());
+            return View();
+        }
+
+        public async Task<ActionResult> IndexTable(
+            [ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            // Query
+            IQueryable<ImportantDateIndexModel> query = _context.ImportantDates
+                .Project().To<ImportantDateIndexModel>()
+                .OrderBy(requestModel.Sort());
+
+            if (requestModel.HasSearchValues())
+            {
+                query = query.Where(requestModel.SearchValues(), requestModel.Search.Value);
+            }
+
+            // Data
+            List<ImportantDateIndexModel> data = await query.ToListAsync();
+
+            int totalRecords = data.Count();
+
+            IEnumerable<ImportantDateIndexModel> paged = data.Skip(requestModel.Start).Take(requestModel.Length);
+
+            var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
+
+            return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
 
         // GET: ImportantDates/Create
         public ActionResult Create()
         {
-            ViewBag.GraduatingClassId = new SelectList(_context.GraduatingClasses, "Id", "Description");
             return View();
         }
 
         // POST: ImportantDates/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken, Log("Create Important Date")]
-        public async Task<ActionResult> Create(
-            [Bind(Include = "Id,DueDate,Description,GraduatingClassId")] ImportantDate importantDate)
+        [HttpPost, ValidateAntiForgeryToken, Log("Create Important Date")]
+        public async Task<ActionResult> Create(ImportantDateCreateModel model)
         {
-            if (!ModelState.IsValid) return View(importantDate);
+            if (!ModelState.IsValid) return View(model);
+
+            var importantDate = new ImportantDate
+            {
+                DueDate = model.DueDate,
+                Comments = model.Comments,
+                GraduatingClassId = model.GraduatingClassId
+            };
 
             _context.ImportantDates.Add(importantDate);
 
@@ -59,27 +90,35 @@ namespace GraduationHub.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportantDate importantDate = await _context.ImportantDates.FindAsync(id);
-            if (importantDate == null)
+
+            ImportantDateEditModel model = await _context.ImportantDates.Project().To<ImportantDateEditModel>()
+                .SingleOrDefaultAsync(i => i.Id == id.Value);
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GraduatingClassId = new SelectList(_context.GraduatingClasses, "Id", "Description",
-                importantDate.GraduatingClassId);
-            return View(importantDate);
+
+            return View(model);
         }
 
         // POST: ImportantDates/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken, Log("Edit Important Date")]
-        public async Task<ActionResult> Edit(
-            [Bind(Include = "Id,DueDate,Description,GraduatingClassId")] ImportantDate importantDate)
+        [HttpPost, ValidateAntiForgeryToken, Log("Edit Important Date")]
+        public async Task<ActionResult> Edit(ImportantDateEditModel model)
         {
-            if (!ModelState.IsValid) return View(importantDate);
+            if (!ModelState.IsValid) return View(model);
 
-            _context.Entry(importantDate).State = EntityState.Modified;
+            ImportantDate importantDate = await _context.ImportantDates.SingleOrDefaultAsync(i => i.Id == model.Id);
+
+            if (importantDate == null)
+            {
+                return RedirectToAction<ImportantDatesController>(c => c.Index())
+                    .WithError("Could not load Important Date");
+            }
+
+            importantDate.DueDate = model.DueDate;
+            importantDate.Comments = model.Comments;
+            importantDate.GraduatingClassId = model.GraduatingClassId;
 
             await _context.SaveChangesAsync();
 
@@ -94,12 +133,15 @@ namespace GraduationHub.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportantDate importantDate = await _context.ImportantDates.FindAsync(id);
-            if (importantDate == null)
+
+            var model = await _context.ImportantDates.Project().To<ImportantDateDeleteModel>()
+                .SingleOrDefaultAsync(i => i.Id == id.Value);
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(importantDate);
+            return View(model);
         }
 
         // POST: ImportantDates/Delete/5
@@ -108,12 +150,13 @@ namespace GraduationHub.Web.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             ImportantDate importantDate = await _context.ImportantDates.FindAsync(id);
+            
             _context.ImportantDates.Remove(importantDate);
+            
             await _context.SaveChangesAsync();
+
             return RedirectToAction<ImportantDatesController>(c => c.Index())
                 .WithSuccess("Important Date Deleted.");
         }
-
-
     }
 }

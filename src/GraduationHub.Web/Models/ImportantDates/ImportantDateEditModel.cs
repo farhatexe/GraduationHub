@@ -10,12 +10,12 @@ namespace GraduationHub.Web.Models.ImportantDates
     {
         [HiddenInput]
         public int Id { get; set; }
+        
+        [Display(Name = "Graduating Class")]
+        public int GraduatingClassId { get; set; }
 
         public DateTime DueDate { get; set; }
-
-        [Required]
-        public string GraduatingClassId { get; set; }
-
-        public string Description { get; set; }
+        
+        public string Comments { get; set; }
     }
 }
