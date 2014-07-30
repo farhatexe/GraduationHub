@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
@@ -11,7 +12,10 @@ namespace GraduationHub.Web.Models.FrequentlyAskedQuestions
         [HiddenInput]
         public int Id { get; set; }
 
-        [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Question)]
+        [Range(1, Int32.MaxValue)]
+        public int Number { get; set; }
+
+        [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Question), DataType(DataType.MultilineText)]
         public string Question { get; set; }
 
         [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Answer),

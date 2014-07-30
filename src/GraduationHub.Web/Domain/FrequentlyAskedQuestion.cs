@@ -7,6 +7,9 @@ namespace GraduationHub.Web.Domain
     {
         public int Id { get; set; }
 
+        
+        public int Number { get; set; }
+
         [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Question)]
         public string Question { get; set; }
 

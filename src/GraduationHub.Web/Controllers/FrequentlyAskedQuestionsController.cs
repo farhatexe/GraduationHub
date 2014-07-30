@@ -1,25 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Dynamic;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
+using DataTables.Mvc;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
+using GraduationHub.Web.Filters;
+using GraduationHub.Web.Infrastructure;
+using GraduationHub.Web.Infrastructure.Alerts;
+using GraduationHub.Web.Models.FrequentlyAskedQuestions;
 
 namespace GraduationHub.Web.Controllers
 {
-    public class FrequentlyAskedQuestionsController : Controller
+    public class FrequentlyAskedQuestionsController : AppBaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+
+        public FrequentlyAskedQuestionsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         // GET: FrequentlyAskedQuestions
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await db.FrequentlyAskedQuestions.ToListAsync());
+            return View();
+        }
+
+        public async Task<ActionResult> IndexTable(
+            [ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
+        {
+            // Query
+            IQueryable<FrequentlyAskedQuestionIndexModel> query = _context.FrequentlyAskedQuestions
+                .Project().To<FrequentlyAskedQuestionIndexModel>()
+                .OrderBy(requestModel.Sort());
+
+            if (requestModel.HasSearchValues())
+            {
+                query = query.Where(requestModel.SearchValues(), requestModel.Search.Value);
+            }
+
+            // Data
+            List<FrequentlyAskedQuestionIndexModel> data = await query.ToListAsync();
+
+            int totalRecords = data.Count();
+
+            IEnumerable<FrequentlyAskedQuestionIndexModel> paged =
+                data.Skip(requestModel.Start).Take(requestModel.Length);
+
+            var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
+
+            return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
 
         // GET: FrequentlyAskedQuestions/Create
@@ -29,20 +64,19 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: FrequentlyAskedQuestions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Question,Answer")] FrequentlyAskedQuestion frequentlyAskedQuestion)
+        [HttpPost, ValidateAntiForgeryToken, Log("Create Frequently Asked Question")]
+        public async Task<ActionResult> Create(FrequentlyAskedQuestionCreateModel model)
         {
-            if (ModelState.IsValid)
-            {
-                db.FrequentlyAskedQuestions.Add(frequentlyAskedQuestion);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(model);
 
-            return View(frequentlyAskedQuestion);
+            var frequentlyAskedQuestion = new FrequentlyAskedQuestion {Number = model.Number, Question = model.Question, Answer = model.Answer};
+
+            _context.FrequentlyAskedQuestions.Add(frequentlyAskedQuestion);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction<FrequentlyAskedQuestionsController>(c => c.Index())
+                .WithSuccess("Frequently Asked Question Created.");
         }
 
         // GET: FrequentlyAskedQuestions/Edit/5
@@ -52,28 +86,41 @@ namespace GraduationHub.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FrequentlyAskedQuestion frequentlyAskedQuestion = await db.FrequentlyAskedQuestions.FindAsync(id);
-            if (frequentlyAskedQuestion == null)
+
+            FrequentlyAskedQuestionEditModel model = await _context.FrequentlyAskedQuestions.Project()
+                .To<FrequentlyAskedQuestionEditModel>()
+                .SingleOrDefaultAsync(i => i.Id == id.Value);
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(frequentlyAskedQuestion);
+
+            return View(model);
         }
 
-        // POST: FrequentlyAskedQuestions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Question,Answer")] FrequentlyAskedQuestion frequentlyAskedQuestion)
+        [HttpPost, ValidateAntiForgeryToken, Log("Edit Frequently Asked Question")]
+        public async Task<ActionResult> Edit(FrequentlyAskedQuestionEditModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            FrequentlyAskedQuestion faq =
+                await _context.FrequentlyAskedQuestions.SingleOrDefaultAsync(i => i.Id == model.Id);
+
+            if (faq == null)
             {
-                db.Entry(frequentlyAskedQuestion).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction<FrequentlyAskedQuestionsController>(c => c.Index())
+                    .WithError("Could not load the Frequently Asked Question");
             }
-            return View(frequentlyAskedQuestion);
+
+            faq.Number = model.Number;
+            faq.Question = model.Question;
+            faq.Answer = model.Answer;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction<FrequentlyAskedQuestionsController>(c => c.Index())
+                .WithSuccess("Frequently Asked Question Edited.");
         }
 
         // GET: FrequentlyAskedQuestions/Delete/5
@@ -83,32 +130,31 @@ namespace GraduationHub.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FrequentlyAskedQuestion frequentlyAskedQuestion = await db.FrequentlyAskedQuestions.FindAsync(id);
-            if (frequentlyAskedQuestion == null)
+
+            FrequentlyAskedQuestionDeleteModel model = await _context.FrequentlyAskedQuestions.Project()
+                .To<FrequentlyAskedQuestionDeleteModel>()
+                .SingleOrDefaultAsync(i => i.Id == id.Value);
+
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(frequentlyAskedQuestion);
+            return View(model);
         }
 
         // POST: FrequentlyAskedQuestions/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken, Log("Frequently Asked Question Deleted")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            FrequentlyAskedQuestion frequentlyAskedQuestion = await db.FrequentlyAskedQuestions.FindAsync(id);
-            db.FrequentlyAskedQuestions.Remove(frequentlyAskedQuestion);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+            FrequentlyAskedQuestion frequentlyAskedQuestion = await _context.FrequentlyAskedQuestions.FindAsync(id);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            _context.FrequentlyAskedQuestions.Remove(frequentlyAskedQuestion);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction<FrequentlyAskedQuestionsController>(c => c.Index())
+                .WithSuccess("Frequently Asked Question Deleted.");
         }
     }
 }

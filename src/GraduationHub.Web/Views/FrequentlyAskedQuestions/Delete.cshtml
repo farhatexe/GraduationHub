@@ -1,4 +1,5 @@
-﻿@model GraduationHub.Web.Models.FrequentlyAskedQuestions.FrequentlyAskedQuestionDeleteModel
+﻿@using GraduationHub.Web.Controllers
+@model GraduationHub.Web.Models.FrequentlyAskedQuestions.FrequentlyAskedQuestionDeleteModel
 
 @{
     ViewBag.Title = "Delete";
@@ -19,7 +20,8 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @(Html.ActionLink<FrequentlyAskedQuestionsController>(c => c.Index(), "Back to List")) 
+
         </div>
     }
 </div>

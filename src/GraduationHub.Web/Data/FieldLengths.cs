@@ -51,7 +51,7 @@
         public class FrequentlyAskedQuestion
         {
             public const int Question = 150;
-            public const int Answer = 300;
+            public const int Answer = 1000;
         }
     }
 }
