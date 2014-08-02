@@ -10,6 +10,9 @@ namespace GraduationHub.Web.Models.StudentExpressions
         [HiddenInput]
         public int Id { get; set; }
 
+        [HiddenInput]
+        public int TextMaxLength { get; set; }
+
         public StudentExpressionType Type { get; set; }
 
         [DataType(DataType.MultilineText)]
