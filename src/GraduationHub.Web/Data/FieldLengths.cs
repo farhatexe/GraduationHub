@@ -53,5 +53,19 @@
             public const int Question = 150;
             public const int Answer = 1000;
         }
+
+        public class StudentPictures
+        {
+            public const int ImageName = 75;
+            public const int Description = 175;
+        }
+
+        public class StudentExpression
+        {
+            public const int Biography = 200;
+            public const int Thanks = 100;
+            public const int SlideShowCaption = 35;
+        }
+
     }
 }

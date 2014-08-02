@@ -1,0 +1,15 @@
+﻿@using GraduationHub.Web.Domain
+@model  StudentExpressionType
+
+@{
+    var options = Enum.GetValues(typeof (StudentExpressionType))
+        .Cast<StudentExpressionType>()
+        .Select(t => new SelectListItem
+        {
+            Text = t.ToString(),
+            Value = t.ToString(),
+            Selected = t == Model
+        }).ToArray();
+}
+
+@Html.DropDownList("", options, new{@class="form-control"})

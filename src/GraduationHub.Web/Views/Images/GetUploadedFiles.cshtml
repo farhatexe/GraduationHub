@@ -1,0 +1,23 @@
+﻿@using GraduationHub.Web.Models.Images
+@model IEnumerable<GraduationHub.Web.Models.Images.UploadedFilesModel>
+
+@{
+    int slide = 0;
+    int carouselIndicator = 0;
+}
+
+<div class="row">
+@foreach (UploadedFilesModel item in @Model)
+{
+    <div class="col-sm-6 col-md-3">
+        <a href="#" class="thumbnail">
+            <img src="@Url.Action("GetFile", new { id = item.Id})" />
+        </a>
+        <div class="caption">
+            <h3>@item.ImageName</h3>
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+    </div>
+    }
+</div>

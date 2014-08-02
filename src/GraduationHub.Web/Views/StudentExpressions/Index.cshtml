@@ -1,0 +1,63 @@
+﻿@using GraduationHub.Web.Controllers
+@model IEnumerable<GraduationHub.Web.Domain.StudentExpression>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @(Html.ActionLink<StudentExpressionsController>(c => c.Create(), "Create New"))
+</p>
+<table class="table table-striped table-bordered" id="dataTable">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Date Submitted</th>
+            <th>Text</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                order: [[0, 'asc']],
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                deferRender: true,
+                ajax: {
+                    url: 'StudentExpressions/IndexTable'
+                },
+                columns: [
+                    { data: 'student' },
+                    { data: 'dateSubmitted' },
+                    { data: 'text' },
+                    {
+                        width:'5%',
+                        orderable: false,
+                        render: function(data, type, row) {
+
+                            var template = _.template("<a title='Edit Text' data-toggle='tooltip' data-placement='top' href='/StudentExpressions/Edit/<%= dT_RowId %>'>" +
+                                "<span class='glyphicon glyphicon-pencil'/></a>&nbsp;&nbsp;&nbsp;" +
+                                "<a title='Delete Text' data-toggle='tooltip' data-placement='top' href='/StudentExpressions/Delete/<%= dT_RowId %>'>" +
+                                "<span class='glyphicon glyphicon-remove'/></a>", { dT_RowId: row.dT_RowId });
+
+                            return template;
+
+                        }
+                    }
+                ]
+            });
+        });
+
+
+    </script>
+}

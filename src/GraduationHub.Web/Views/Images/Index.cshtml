@@ -1,0 +1,40 @@
+﻿
+<h2>DropZone!</h2>
+
+<div class="jumbotron">
+    @using (Html.BeginForm("SaveUploadedFile", "Images", FormMethod.Post, new
+    {
+        @class = "dropzone",
+        id = "dropzoneJsForm",
+        enctype = "multipart/form-data"
+    }))
+    {
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
+        </div>
+    }
+
+</div>
+
+@Html.Action("GetUploadedFiles")
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dropzone")
+
+    <script>
+        Dropzone.options.dropzoneJsForm = {
+            init: function() {
+                this.on('complete', function(data) {
+                    var res = eval('(' + data.xhr.responseText + ')');
+                });
+            }
+        }
+
+
+
+
+    </script>
+}

@@ -10,10 +10,8 @@ namespace GraduationHub.Web.Data
             : base("DefaultConnection", false)
         {
         }
-
-        public DbSet<LogAction> Logs { get; set; }
-
-        public DbSet<Invitation> Invitations { get; set; }
+        
+        public DbSet<FrequentlyAskedQuestion> FrequentlyAskedQuestions { get; set; }
 
         public DbSet<GraduatingClass> GraduatingClasses { get; set; }
 
@@ -21,11 +19,17 @@ namespace GraduationHub.Web.Data
 
         public DbSet<ImportantDate> ImportantDates { get; set; }
 
+        public DbSet<Invitation> Invitations { get; set; }
+
+        public DbSet<LogAction> Logs { get; set; }
+
+        public DbSet<StudentExpression> StudentExpressions { get; set; }
+
+        public DbSet<StudentPictures> StudentPictures { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<GraduationHub.Web.Domain.FrequentlyAskedQuestion> FrequentlyAskedQuestions { get; set; }
     }
 }

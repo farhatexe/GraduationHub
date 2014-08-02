@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - KEYS Graduate Hub</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/dropZone")
     <link href="~/Content/DataTables-1.10.0/plugins/dataTables.bootstrap.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
@@ -25,13 +26,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Invite", "Index", "Invitations")</li>
                     <li>@Html.ActionLink("Info", "Index", "GraduateInformation")</li>
                     <li>@Html.ActionLink("Graduating Classes", "Index", "GraduatingClasses")</li>
                     <li>@Html.ActionLink("Dates", "Index", "ImportantDates")</li>
                     <li>@Html.ActionLink("FAQ", "Index", "FrequentlyAskedQuestions")</li>
+                    <li>@Html.ActionLink("Images", "Index", "Images")</li>
+                    <li>@Html.ActionLink("Expressions", "Index", "StudentExpressions")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
