@@ -15,7 +15,7 @@
         $scope.add = add;
 
         function init(invitation) {
-            
+
         }
 
         function add() {
@@ -23,11 +23,11 @@
         }
 
         function save() {
-            
+
         }
 
         function cancel() {
-            
+
         }
     }
-})
+})();

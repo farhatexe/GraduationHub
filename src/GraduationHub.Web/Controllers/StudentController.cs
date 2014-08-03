@@ -10,23 +10,15 @@ namespace GraduationHub.Web.Controllers
     public class StudentController : Controller
     {
 
-        /*
-         * Display Name
-         * Display Silohotted (Left)
-         * Display Dates 
-         * Display FAQ
-         * Display Bio
-         * Display Thanks
-         * Display Caption
-         * Display Baby Picture
-         * Display Youthful 1
-         * Display Youthful 2
-         * Display Youthful 3
-         * Display Youthful 4
-         */
 
         // GET: Student
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult MyBiography()
         {
             return View();
         }

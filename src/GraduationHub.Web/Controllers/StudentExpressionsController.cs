@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq.Dynamic;
 using System.Linq;
 using System.Linq.Dynamic;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using DataTables.Mvc;
@@ -16,8 +13,8 @@ using GraduationHub.Web.Domain;
 using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
-using GraduationHub.Web.Models.FrequentlyAskedQuestions;
 using GraduationHub.Web.Models.StudentExpressions;
+using GraduationHub.Web.Models.Students;
 
 namespace GraduationHub.Web.Controllers
 {
@@ -38,46 +35,43 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-        public async Task<ActionResult> IndexTable([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest requestModel)
+        public async Task<ActionResult> IndexTable(
+            [ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
         {
-            
-                var currentUser = _currentUser.User;
+            ApplicationUser currentUser = _currentUser.User;
 
-                // Query
-                var query = _context.StudentExpressions
-                    .Where(i => i.StudentId == currentUser.Id)
-                    .Project().To<StudentExpressionIndexModel>()
-                    .OrderBy(requestModel.Sort());
+            // Query
+            IQueryable<StudentExpressionIndexModel> query = _context.StudentExpressions
+                .Where(i => i.StudentId == currentUser.Id)
+                .Project().To<StudentExpressionIndexModel>()
+                .OrderBy(requestModel.Sort());
 
-                if (requestModel.HasSearchValues())
-                {
-                    query = query.Where(requestModel.SearchValues(), requestModel.Search.Value);
-                }
+            if (requestModel.HasSearchValues())
+            {
+                query = query.Where(requestModel.SearchValues(), requestModel.Search.Value);
+            }
 
-                // Data
-                var data = await query.ToListAsync();
+            // Data
+            List<StudentExpressionIndexModel> data = await query.ToListAsync();
 
-                int totalRecords = data.Count();
+            int totalRecords = data.Count();
 
-                var paged = data.Skip(requestModel.Start).Take(requestModel.Length);
+            IEnumerable<StudentExpressionIndexModel> paged = data.Skip(requestModel.Start).Take(requestModel.Length);
 
-                var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
+            var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
 
-                return JsonSuccess(response, JsonRequestBehavior.AllowGet);
-            
+            return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
 
 
         // GET: StudentExpressions/Create
         public ActionResult Create()
         {
-
-
             return View(new StudentExpressionCreateModel());
         }
 
         // POST: StudentExpressions/Create
-        [HttpPost, ValidateAntiForgeryToken, Log("Create Student Expression") ]
+        [HttpPost, ValidateAntiForgeryToken, Log("Create Student Expression")]
         public async Task<ActionResult> Create(StudentExpressionCreateModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -107,7 +101,7 @@ namespace GraduationHub.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var model = await _context.StudentExpressions
+            StudentExpressionEditModel model = await _context.StudentExpressions
                 .Project().To<StudentExpressionEditModel>()
                 .SingleOrDefaultAsync(i => i.Id == id.Value);
 
@@ -124,7 +118,8 @@ namespace GraduationHub.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var studentExpression = await _context.StudentExpressions.SingleOrDefaultAsync(i => i.Id == model.Id);
+            StudentExpression studentExpression =
+                await _context.StudentExpressions.SingleOrDefaultAsync(i => i.Id == model.Id);
 
             if (studentExpression == null)
             {
@@ -135,7 +130,7 @@ namespace GraduationHub.Web.Controllers
             studentExpression.Text = model.Text;
 
             _context.Entry(studentExpression).State = EntityState.Modified;
-            
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction<StudentExpressionsController>(c => c.Index())
@@ -150,7 +145,7 @@ namespace GraduationHub.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var model = await _context.StudentExpressions.Project()
+            StudentExpressionDeleteModel model = await _context.StudentExpressions.Project()
                 .To<StudentExpressionDeleteModel>()
                 .SingleOrDefaultAsync(i => i.Id == id.Value);
 
@@ -167,14 +162,50 @@ namespace GraduationHub.Web.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             StudentExpression studentExpression = await _context.StudentExpressions.FindAsync(id);
-            
+
             _context.StudentExpressions.Remove(studentExpression);
-            
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction<StudentExpressionsController>(c => c.Index())
                 .WithSuccess("Student Expression Deleted.");
         }
 
+        [HttpPost, Log("Created or Modified 'My Biography'")]
+        public async Task<ActionResult> MyBiography(StudentExpressionModel model)
+        {
+            ApplicationUser currentUser = _currentUser.User;
+
+            try
+            {
+                // Load the current Biography OR get a new biography
+                var biography = await _context.StudentExpressions
+                    .Where(i => i.StudentId == currentUser.Id && i.Type == StudentExpressionType.Biography)
+                    .SingleOrDefaultAsync() ?? new StudentExpression
+                    {
+                        Type = StudentExpressionType.Biography, 
+                        Student = currentUser
+                    };
+
+                biography.Text = model.Comments;
+
+                if (biography.Id.Equals(default(int)))
+                {
+                    _context.StudentExpressions.Add(biography);
+                }
+                else
+                {
+                    _context.Entry(biography).State = EntityState.Modified;
+                }
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return JsonSuccess(model);
+        }
     }
 }

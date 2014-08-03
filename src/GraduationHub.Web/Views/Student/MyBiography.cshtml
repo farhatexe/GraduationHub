@@ -1,0 +1,50 @@
+﻿@model GraduationHub.Web.Models.Students.StudentExpressionModel
+@{
+    Layout = "";
+}
+
+<p>Please tell us a little more about you, what your passions are that God has placed in your life. Where do you feel He is leading you?</p>
+
+
+<div ng-controller="studentBiographyController"
+     ng-init='init(@Html.Json(Model))'>
+
+    <div ng-cloak ng-hide="editing" class="ng-hide">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 ng-click="edit()" class="panel-title text-right" style="cursor:pointer">
+                    <span class="glyphicon glyphicon-pencil"></span> My Biography
+                </h3>
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+    </div>
+
+    <div ng-cloak ng-hide="!editing">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-right">My Biography</h3>
+
+            </div>
+            <div class="panel-body">
+
+                
+                
+                <textarea class="form-control" rows="7" ng-model="biography.comments"></textarea>
+
+                <span class="help-block text-right">200 Words Remaining.</span>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="save()">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

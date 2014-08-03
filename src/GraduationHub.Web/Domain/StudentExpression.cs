@@ -6,6 +6,11 @@ namespace GraduationHub.Web.Domain
 {
     public class StudentExpression
     {
+        public StudentExpression()
+        {
+            DateSubmitted = DateTime.Now;
+        }
+
         public int Id { get; set; }
 
         public string StudentId { get; set; }
