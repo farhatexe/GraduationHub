@@ -20,15 +20,4 @@ namespace GraduationHub.Web.Domain
 
         public DateTime DateSubmitted { get; set; }
     }
-
-    public enum StudentExpressionType
-    {
-        Biography,
-        ThankYou,
-        SlideshowCaption
-    }
-
-
-
-
 }

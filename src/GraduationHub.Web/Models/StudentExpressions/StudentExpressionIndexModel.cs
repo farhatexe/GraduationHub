@@ -12,6 +12,8 @@ namespace GraduationHub.Web.Models.StudentExpressions
 
         public string Student { get; set; }
 
+        public StudentExpressionType Type { get; set; }
+
         public DateTime DateSubmitted { get; set; }
 
         public StudentExpressionType StudentExpressionType { get; set; }

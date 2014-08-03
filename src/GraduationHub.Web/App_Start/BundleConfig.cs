@@ -17,6 +17,9 @@ namespace GraduationHub.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/simplyCountable").Include(
+                "~/Scripts/jquery.simplyCountable.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
                    "~/Scripts/dropzone/dropzone.js"));
 

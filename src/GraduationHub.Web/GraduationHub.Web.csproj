@@ -199,6 +199,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ImportantDatesController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentExpressionsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\FieldLengths.cs" />
@@ -207,11 +208,13 @@
     <Compile Include="Domain\FrequentlyAskedQuestion.cs" />
     <Compile Include="Domain\GraduateInformation.cs" />
     <Compile Include="Domain\GraduatingClass.cs" />
+    <Compile Include="Domain\StudentExpressionType.cs" />
     <Compile Include="Domain\StudentPictures.cs" />
     <Compile Include="Domain\ImportantDates.cs" />
     <Compile Include="Domain\Invitation.cs" />
     <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Domain\StudentExpression.cs" />
+    <Compile Include="Domain\StudentPictureType.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -245,6 +248,8 @@
     <Compile Include="Infrastructure\ModelMetadata\IModelMetadataFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\ModelMetadataRegistry.cs" />
     <Compile Include="Infrastructure\ModelMetadata\RenderAttribute.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\StudentExpressionInput.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\StudentPicture.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
     <Compile Include="Infrastructure\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
@@ -291,6 +296,7 @@
     <Compile Include="Models\StudentExpressions\StudentExpressionDeleteModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionEditModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionIndexModel.cs" />
+    <Compile Include="Models\Students\StudentsIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InvitationManager.cs" />
     <Compile Include="Startup.cs" />
@@ -352,6 +358,8 @@
     <Content Include="Content\DataTables-1.10.0\plugins\dataTables.bootstrap.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker3.css" />
+    <Content Include="Content\Images\female_silhoutte.png" />
+    <Content Include="Content\Images\male_silhouette.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -579,6 +587,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

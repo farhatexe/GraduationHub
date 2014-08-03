@@ -16,17 +16,10 @@ namespace GraduationHub.Web.Domain
         [StringLength(FieldLengths.StudentPictures.Description)]
         public string Description { get; set; }
 
-        public SlideShowImageType ImageType { get; set; }
+        public StudentPictureType ImageType { get; set; }
 
         public Byte[] ImageData { get; set; }
 
         public DateTime DateSubmitted { get; set; }
-    }
-
-    public enum SlideShowImageType
-    {
-        SeniorPortrait,
-        BabyPicture,
-        YouthfulFavorite
     }
 }

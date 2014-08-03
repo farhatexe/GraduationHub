@@ -25,5 +25,8 @@ namespace GraduationHub.Web.Domain
         public bool HasBeenSent { get; set; }
 
         public bool IsTeacher { get; set; }
+
+
     }
+
 }
