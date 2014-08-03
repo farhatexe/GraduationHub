@@ -187,7 +187,7 @@ namespace GraduationHub.Web.Controllers
                         Student = currentUser
                     };
 
-                biography.Text = model.Comments;
+                biography.Text = model.Text;
 
                 if (biography.Id.Equals(default(int)))
                 {

@@ -299,7 +299,7 @@
     <Compile Include="Models\StudentExpressions\StudentExpressionEditModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionIndexModel.cs" />
     <Compile Include="Models\Students\StudentsIndex.cs" />
-    <Compile Include="Models\Students\StudentTextModel.cs" />
+    <Compile Include="Models\Students\StudentExpressionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InvitationManager.cs" />
     <Compile Include="Startup.cs" />

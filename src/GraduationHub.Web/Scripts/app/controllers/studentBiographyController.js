@@ -15,7 +15,7 @@
         $scope.edit = edit;
 
         function init(biography) {
-            $scope.originalBiography = biography;
+            $scope.originalBiography = angular.extend({}, biography);
             $scope.biography = biography;
         }
 

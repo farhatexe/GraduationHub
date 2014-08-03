@@ -18,7 +18,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-
+                <textarea class="form-control" rows="7" readonly ng-model="biography.text"></textarea>
             </div>
         </div>
     </div>
@@ -32,9 +32,7 @@
             </div>
             <div class="panel-body">
 
-                
-                
-                <textarea class="form-control" rows="7" ng-model="biography.comments"></textarea>
+                <textarea class="form-control" rows="7" ng-model="biography.text"></textarea>
 
                 <span class="help-block text-right">200 Words Remaining.</span>
                 <button class="btn btn-default" ng-click="cancel()">Cancel</button>
