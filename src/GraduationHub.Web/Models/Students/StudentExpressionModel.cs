@@ -8,7 +8,5 @@ namespace GraduationHub.Web.Models.Students
     {
         [Required]
         public string Text { get; set; }
-
-        /*public StudentExpressionType Type { get; set; }*/
     }
 }

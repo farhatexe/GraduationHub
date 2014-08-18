@@ -3,7 +3,7 @@ using GraduationHub.Web.Infrastructure.Mapping;
 
 namespace GraduationHub.Web.Models.Images
 {
-    public class UploadedFilesModel : IMapFrom<StudentPictures>
+    public class UploadedFilesModel : IMapFrom<StudentPicture>
     {
         public int Id { get; set; }
 

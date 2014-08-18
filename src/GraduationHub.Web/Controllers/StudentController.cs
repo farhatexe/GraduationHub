@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
@@ -30,20 +29,47 @@ namespace GraduationHub.Web.Controllers
         // GET: Student
         public async Task<ActionResult> Index()
         {
-
             return View();
         }
 
         [ChildActionOnly]
         public ActionResult MyBiography()
         {
-            var currentUser = _currentUser.User;
+            ApplicationUser currentUser = _currentUser.User;
 
-            var studentBiography = _context.StudentExpressions
+            StudentExpressionModel studentBiography = _context.StudentExpressions
                 .Where(i => i.Type == StudentExpressionType.Biography && i.StudentId == currentUser.Id)
                 .Project().To<StudentExpressionModel>().SingleOrDefault() ?? new StudentExpressionModel();
 
             return View(studentBiography);
         }
+
+        [ChildActionOnly]
+        public ActionResult MySeniorPicture()
+        {
+            return View();
+        }
+
+        public ActionResult GetSeniorPicture()
+        {
+            ApplicationUser currentUser = _currentUser.User;
+
+            var webImage = new WebImage("~/Content/Images/male_silhouette.png");
+            webImage.Resize(300, 300, false, true);
+            
+            var model = _context.StudentPictures
+                .Where(i => i.ImageType == StudentPictureType.SeniorPortrait && i.StudentId == currentUser.Id)
+                .Project().To<StudentPictureModel>().SingleOrDefault() ?? new StudentPictureModel();
+
+            if (model.ImageData == null)
+            {
+                model.ImageName = "male_silhouette.png";
+                model.Description = "Senior Portrait";
+                model.ImageData = webImage.GetBytes();
+            }
+
+            return new FileStreamResult(new MemoryStream(model.ImageData), model.ContentType);
+        }
+
     }
 }

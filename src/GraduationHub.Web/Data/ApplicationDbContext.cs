@@ -26,10 +26,8 @@ namespace GraduationHub.Web.Data
 
         public DbSet<StudentExpression> StudentExpressions { get; set; }
 
-        public DbSet<StudentPictures> StudentPictures { get; set; }
+        public DbSet<StudentPicture> StudentPictures { get; set; }
         
-        public DbSet<Movie> Movies { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

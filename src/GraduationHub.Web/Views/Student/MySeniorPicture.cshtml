@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "";
+}
+
+<div ng-controller="seniorPictureController">
+    <div class="row">
+        <div class="col-md-2" ng-cloak ng-hide="editing">
+            <div class="thumbnail" >
+                <div class="pull-right"><span ng-click="edit()" class="glyphicon glyphicon-upload" style="cursor: pointer"></span></div>
+                
+                    <img src="@Url.Action("GetSeniorPicture")" />
+                
+                <div class="caption text-center">
+                    <h4>Senior Portrait</h4>
+                </div>
+            </div>
+        </div>
+        <div ng-cloak ng-hide="!editing">
+            <form action="@Url.Action("SaveSeniorPicture", "Images")" >
+                
+                    <input name="file" type="file" multiple />
+                    <input type="submit" value="Upload" />
+                
+            </form>
+          <p>
+              <a href="#" class="btn btn-primary fileinput-button" role="button">Upload</a>
+                <a href="#" ng-click="cancel()" class="btn btn-default" role="button">Cancel</a>
+            </p>
+        </div>
+    </div>
+</div>

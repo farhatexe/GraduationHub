@@ -1,9 +1,37 @@
 ﻿<style>
-    textarea {
-        max-width: 100%;
-    }
+    textarea { max-width: 100%; }
 </style>
 
 <h1>Chuck Bryan</h1>
 
 @Html.Action("MyBiography")
+
+@Html.Action("MySeniorPicture")
+
+@section scripts{
+    @Scripts.Render("~/bundles/dropzone")
+    @Scripts.Render("~/bundles/simplyCountable")
+    <script>
+        $(document).ready(function() {
+            $('#myBiography').simplyCountable({
+                countType: 'words',
+                strictMax: true,
+                countDirection: 'down',
+                counter: '#myBiographyCounter',
+                maxCount: 200
+            });
+
+            Dropzone.options.seniorPortraitDz = {
+                maxFiles: 1,
+                init: function () {
+                   
+                    this.on('complete', function (data) {
+                        var res = eval('(' + data.xhr.responseText + ')');
+                    });
+                }
+            }
+
+
+        });
+    </script>
+}
