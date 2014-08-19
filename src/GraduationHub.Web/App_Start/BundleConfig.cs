@@ -52,6 +52,7 @@ namespace GraduationHub.Web
                 );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/bootstrap.css",
                 "~/Content/datepicker3.css",
                 "~/Content/DataTables-1.10.0/plugins/dataTables.bootstrap.css",
                 "~/Content/site.css"));
