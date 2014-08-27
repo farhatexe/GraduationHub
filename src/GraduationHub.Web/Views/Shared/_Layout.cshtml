@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/dropZone")
     <link href="~/Content/DataTables-1.10.0/plugins/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
 
@@ -21,11 +22,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Graduate Hub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="#" class="navbar-brand"><span class="glyphicon glyphicon-leaf"></span> Graduate Hub</a>
+                
+ 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-ok"></span> Check List
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-question-sign"></span> FAQ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-calendar"></span> Important Dates
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user"></span> Information Sheet
+                        </a>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
