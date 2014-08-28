@@ -81,7 +81,7 @@ namespace GraduationHub.Web.Controllers
                 Student = _currentUser.User,
                 Text = model.Text,
                 DateSubmitted = DateTime.Now,
-                Type = model.Type
+        
             };
 
             _context.StudentExpressions.Add(studentExpression);

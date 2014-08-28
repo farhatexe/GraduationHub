@@ -380,6 +380,7 @@
     <Content Include="Content\datepicker3.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\female_silhoutte.png" />
+    <Content Include="Content\Images\KEYS logo.jpg" />
     <Content Include="Content\Images\male_silhouette.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
@@ -709,6 +710,8 @@
     <Content Include="Views\CheckList\SecondYouthfulPicture.cshtml" />
     <Content Include="Views\CheckList\ThirdYouthfulPicture.cshtml" />
     <Content Include="Views\CheckList\FourthYouthfulPicture.cshtml" />
+    <Content Include="Views\CheckList\ImportantDates.cshtml" />
+    <Content Include="Views\CheckList\Faqs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

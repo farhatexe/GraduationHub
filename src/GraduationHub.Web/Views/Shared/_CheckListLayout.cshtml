@@ -1,0 +1,34 @@
+﻿@using GraduationHub.Web.Controllers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><span class="glyphicon glyphicon-ok"></span> Check List</div>
+
+
+            <!-- List group -->
+            <ul class="list-group">
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.Biography(), "Biography"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.ExpressionOfThanks(), "Expressions of Thanks"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.SlideShowCaption(), "Slideshow Caption"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.SeniorPortrait(), "Senior Portrait"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.BabyPicture(), "Baby Picture"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.FirstYouthfulPicture(), "A Youthful Picture"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.SecondYouthfulPicture(), "Another Youthful Picture"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.ThirdYouthfulPicture(), "One More Youthful Picture"))</li>
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.FourthYouthfulPicture(), "Last Youthful Picture"))</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-8">
+        @RenderBody()
+    </div>
+</div>
+
+@section scripts
+{
+    @RenderSection("scripts", false)
+}

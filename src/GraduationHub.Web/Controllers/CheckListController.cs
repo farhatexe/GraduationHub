@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using GraduationHub.Web.Models.StudentExpressions;
 
 namespace GraduationHub.Web.Controllers
 {
     public class CheckListController : Controller
     {
+        
+
         public ActionResult Biography()
         {
             return View();
@@ -15,7 +14,7 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult ExpressionOfThanks()
         {
-            return View();
+            return View(new StudentExpressionCreateModel{TextMaxLength = 100 });
         }
 
         public ActionResult SlideShowCaption()
@@ -49,6 +48,16 @@ namespace GraduationHub.Web.Controllers
         }
 
         public ActionResult FourthYouthfulPicture()
+        {
+            return View();
+        }
+
+        public ActionResult ImportantDates()
+        {
+            return View();
+        }
+
+        public ActionResult Faqs()
         {
             return View();
         }
