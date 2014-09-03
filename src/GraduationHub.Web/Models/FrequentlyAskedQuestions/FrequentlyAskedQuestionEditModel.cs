@@ -19,7 +19,7 @@ namespace GraduationHub.Web.Models.FrequentlyAskedQuestions
         public string Question { get; set; }
 
         [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Answer),
-            DataType(DataType.MultilineText)]
+            DataType(DataType.MultilineText), AllowHtml]
         public string Answer { get; set; } 
     }
 }

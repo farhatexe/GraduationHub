@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using GraduationHub.Web.Models.CheckList
+@model dynamic
 
 @{
     ViewBag.Title = "Important Dates";
@@ -12,6 +13,19 @@
 </div>
 
 <hr/>
+
+@foreach(CheckListImportantDate importantDate in Model)
+{
+    <div class="media">
+        <div class="media-body">
+            <h4 class="media-heading">@importantDate.DueDate.ToImportantDate()</h4>
+           @Html.Raw(importantDate.Comments)
+        </div>
+    </div>
+}
+
+@*
+
 <div class="media" >
 
     <div class="media-body">
@@ -94,3 +108,4 @@
         <strong><em>GRADUATION!</em></strong> Set up boards at 5:00 & Senior Class Picture at 5:40 in the Fellowship Hall. Ceremony begins at 6:00 and a reception will follow.
     </div>
 </div>
+*@

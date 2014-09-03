@@ -246,6 +246,7 @@
     <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\CurrentUser.cs" />
     <Compile Include="Infrastructure\DataTablesRequestExtensions.cs" />
+    <Compile Include="Infrastructure\DateTimeExtensions.cs" />
     <Compile Include="Infrastructure\ICurrentUser.cs" />
     <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
@@ -285,6 +286,8 @@
     <Compile Include="Models\Account\ManageUserViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\CheckList\Faq.cs" />
+    <Compile Include="Models\CheckList\ImportantDate.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionCreateModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionDeleteModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionEditModel.cs" />

@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using GraduationHub.Web.Models.CheckList
+@model dynamic
 
 @{
     ViewBag.Title = "Frequently Asked Questions";
@@ -11,6 +12,21 @@
 </div>
 
 <hr />
+
+@foreach (Faq faq in Model)
+{
+    <div class="media">
+
+        <div class="media-body">
+            <h4 class="media-heading">@faq.Question</h4>
+            <p>
+                @Html.Raw(faq.Answer)
+            </p>
+        </div>
+    </div>
+}
+
+@*
 <div class="media">
 
     <div class="media-body">
@@ -55,4 +71,4 @@
             A display board is a way to show others special pictures or memories you have had growing up. Each person will have about 3’x3’ to display pictures and other memorabilia. Some students even leave a guest book or their yearbook for people to sign. Guests may also use this as a way to leave graduates gifts or cards. Yes, we would like everyone to participate in this special exhibit.
         </p>
     </div>
-</div>
+</div>*@
