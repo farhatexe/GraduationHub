@@ -24,8 +24,8 @@ namespace GraduationHub.Web
                    "~/Scripts/dropzone/dropzone.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-                "~/Scripts/DataTables-1.10.0/media/js/jquery.dataTables.js",
-                "~/Scripts/DataTables-1.10.0/plugins/dataTables.bootstrap.js"
+                "~/Scripts/DataTables-1.10.2/media/js/jquery.dataTables.js",
+                "~/Scripts/DataTables-1.10.2/plugins/dataTables.bootstrap.js"
                 ));
 
 
@@ -38,7 +38,8 @@ namespace GraduationHub.Web
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/bootstrap-datepicker.js",
                 "~/Scripts/respond.js",
-                "~/Scripts/jasny-bootstrap.js"));
+                "~/Scripts/jasny-bootstrap.js",
+                "~/Scripts/bootstrap3-wysihtml5.all.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular")
                 .Include("~/Scripts/angular.js")
@@ -53,7 +54,8 @@ namespace GraduationHub.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/datepicker3.css",
-                "~/Content/DataTables-1.10.0/plugins/dataTables.bootstrap.css",
+                "~/Content/DataTables-1.10.2/plugins/dataTables.bootstrap.css",
+                "~/Content/bootstrap3-wysihtml5.css",
                 "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/dropZone").Include(

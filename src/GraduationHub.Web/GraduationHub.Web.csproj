@@ -121,13 +121,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="StructureMap, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\structuremap.3.1.0.133\lib\net40\StructureMap.dll</HintPath>
+      <HintPath>..\..\packages\structuremap.3.1.1.134\lib\net40\StructureMap.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap.Net4, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="StructureMap.Net4, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\structuremap.3.1.0.133\lib\net40\StructureMap.Net4.dll</HintPath>
+      <HintPath>..\..\packages\structuremap.3.1.1.134\lib\net40\StructureMap.Net4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -144,27 +144,27 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -319,13 +319,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap3-wysihtml5.css" />
     <Content Include="Content\bootstrap\variables.css">
       <DependentUpon>variables.less</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
-    <Content Include="Content\DataTables-1.10.0\plugins\dataTables.bootstrap.css" />
     <Content Include="Content\DataTables-1.10.2\extensions\AutoFill\css\dataTables.autoFill.css" />
     <Content Include="Content\DataTables-1.10.2\extensions\AutoFill\css\dataTables.autoFill.min.css" />
     <Content Include="Content\DataTables-1.10.2\extensions\AutoFill\images\filler.png" />
@@ -360,6 +360,17 @@
     <Content Include="Content\DataTables-1.10.2\extensions\TableTools\images\print_hover.png" />
     <Content Include="Content\DataTables-1.10.2\extensions\TableTools\images\xls.png" />
     <Content Include="Content\DataTables-1.10.2\extensions\TableTools\images\xls_hover.png" />
+    <Content Include="Content\DataTables-1.10.2\images\back_disabled.png" />
+    <Content Include="Content\DataTables-1.10.2\images\back_enabled.png" />
+    <Content Include="Content\DataTables-1.10.2\images\back_enabled_hover.png" />
+    <Content Include="Content\DataTables-1.10.2\images\forward_disabled.png" />
+    <Content Include="Content\DataTables-1.10.2\images\forward_enabled.png" />
+    <Content Include="Content\DataTables-1.10.2\images\forward_enabled_hover.png" />
+    <Content Include="Content\DataTables-1.10.2\images\sort_asc.png" />
+    <Content Include="Content\DataTables-1.10.2\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables-1.10.2\images\sort_both.png" />
+    <Content Include="Content\DataTables-1.10.2\images\sort_desc.png" />
+    <Content Include="Content\DataTables-1.10.2\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables-1.10.2\media\css\jquery.dataTables.css" />
     <Content Include="Content\DataTables-1.10.2\media\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables-1.10.2\media\css\jquery.dataTables_themeroller.css" />
@@ -376,11 +387,13 @@
     <Content Include="Content\DataTables-1.10.2\media\images\sort_both.png" />
     <Content Include="Content\DataTables-1.10.2\media\images\sort_desc.png" />
     <Content Include="Content\DataTables-1.10.2\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables-1.10.2\plugins\dataTables.bootstrap.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker3.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\female_silhoutte.png" />
     <Content Include="Content\Images\KEYS logo.jpg" />
+    <Content Include="Content\Images\keys_logo.png" />
     <Content Include="Content\Images\male_silhouette.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
@@ -397,19 +410,8 @@
     </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\DataTables-1.10.2\images\Sorting icons.psd" />
     <None Include="Content\Site.less" />
-    <Content Include="Content\DataTables-1.10.0\images\back_disabled.png" />
-    <Content Include="Content\DataTables-1.10.0\images\back_enabled.png" />
-    <Content Include="Content\DataTables-1.10.0\images\back_enabled_hover.png" />
-    <Content Include="Content\DataTables-1.10.0\images\forward_disabled.png" />
-    <Content Include="Content\DataTables-1.10.0\images\forward_enabled.png" />
-    <Content Include="Content\DataTables-1.10.0\images\forward_enabled_hover.png" />
-    <Content Include="Content\DataTables-1.10.0\images\sort_asc.png" />
-    <Content Include="Content\DataTables-1.10.0\images\sort_asc_disabled.png" />
-    <Content Include="Content\DataTables-1.10.0\images\sort_both.png" />
-    <Content Include="Content\DataTables-1.10.0\images\sort_desc.png" />
-    <Content Include="Content\DataTables-1.10.0\images\sort_desc_disabled.png" />
-    <Content Include="Content\DataTables-1.10.0\images\Sorting icons.psd" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -418,6 +420,7 @@
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap3-wysihtml5.all.min.js" />
     <Content Include="Scripts\DataTables-1.10.2\extensions\AutoFill\js\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\extensions\AutoFill\js\dataTables.autoFill.min.js" />
     <Content Include="Scripts\DataTables-1.10.2\extensions\AutoFill\Readme.txt" />
@@ -449,11 +452,11 @@
     <Content Include="Scripts\DataTables-1.10.2\media\js\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables-1.10.2\media\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables-1.10.2\media\js\jquery.js" />
+    <Content Include="Scripts\DataTables-1.10.2\plugins\dataTables.bootstrap.js" />
     <Content Include="Scripts\dropzone\css\basic.css" />
     <Content Include="Scripts\dropzone\css\dropzone.css" />
     <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
     <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
-    <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\DataTables-1.10.2\extensions\Responsive\Readme.md" />
     <Content Include="Content\DataTables-1.10.2\media\images\Sorting icons.psd" />
     <Content Include="Content\DataTables-1.10.2\extensions\TableTools\images\psd\printer.psd" />
@@ -538,6 +541,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\app\controllers\addInvitationController.js" />
     <Content Include="Scripts\app\graduateHubApp.js" />
@@ -545,7 +549,6 @@
     <Content Include="Scripts\app\services\exceptionOverride.js" />
     <Content Include="Scripts\app\utilities\bootstrapAlerts.js" />
     <Content Include="Scripts\app\utilities\bootstrapDatePicker.js" />
-    <Content Include="Scripts\DataTables-1.10.0\plugins\dataTables.bootstrap.js" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
     <Content Include="Scripts\dropzone\dropzone.js" />

@@ -69,7 +69,7 @@ namespace GraduationHub.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var frequentlyAskedQuestion = new FrequentlyAskedQuestion {Number = model.Number, Question = model.Question, Answer = model.Answer};
+            var frequentlyAskedQuestion = new FrequentlyAskedQuestion { Order = model.Order, Question = model.Question, Answer = model.Answer};
 
             _context.FrequentlyAskedQuestions.Add(frequentlyAskedQuestion);
 
@@ -113,9 +113,9 @@ namespace GraduationHub.Web.Controllers
                     .WithError("Could not load the Frequently Asked Question");
             }
 
-            faq.Number = model.Number;
             faq.Question = model.Question;
             faq.Answer = model.Answer;
+            faq.Order = model.Order;
 
             await _context.SaveChangesAsync();
 

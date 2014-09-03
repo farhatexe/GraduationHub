@@ -11,7 +11,7 @@ namespace GraduationHub.Web.Models.FrequentlyAskedQuestions
         // Note: This is a datatables property for setting the Row Id.
         public int DT_RowId { get; set; }
 
-        public int Number { get; set; }
+        public int Order { get; set; }
 
         [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Question)]
         public string Question { get; set; }

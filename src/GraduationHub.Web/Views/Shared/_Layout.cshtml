@@ -4,14 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - KEYS Graduate Hub</title>
+    <title>@ViewBag.Title - K.E.Y.S. Graduate Hub</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/dropZone")
-    <link href="~/Content/DataTables-1.10.0/plugins/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
-
+    @RenderSection("styles", false)
 </head>
 <body ng-app="graduateHubApp">
     <div class="navbar navbar-inverse navbar-fixed-top">

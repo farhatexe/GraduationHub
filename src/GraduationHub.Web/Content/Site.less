@@ -16,9 +16,14 @@ body {
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
+
+}
+
+textarea{
+    max-width:560px;
+    resize: none;
 }
 
 .alert-container {
@@ -37,11 +42,4 @@ textarea {
         text-align: center;
         color: white;
     }
-
-textarea {
-      resize: none;
-    width: 100%;
-    padding: 10px;
-    border: 3px solid #999;
-}
 

@@ -12,7 +12,7 @@
 <table class="table table-striped table-bordered" id="dataTable">
     <thead>
         <tr>
-            <th>Number</th>
+            <th>Order</th>
             <th>Question</th>
             <th>Answer</th>
             <th></th>
@@ -43,11 +43,11 @@
                     }
                 ],
                 columns: [
-                    { data: 'number' },
-                    { data: 'question' },
-                    { data: 'answer'},
+                    { data: 'order', width: '10%' },
+                    { data: 'question', width: '40%' },
+                    { data: 'answer', width: '40%' },
                     {
-                        width:'5%',
+                        width:'10%',
                         orderable: false,
                         render: function(data, type, row) {
 

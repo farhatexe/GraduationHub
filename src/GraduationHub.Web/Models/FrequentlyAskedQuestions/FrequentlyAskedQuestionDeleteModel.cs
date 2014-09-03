@@ -11,7 +11,7 @@ namespace GraduationHub.Web.Models.FrequentlyAskedQuestions
         [HiddenInput]
         public int Id { get; set; }
 
-        public int Number { get; set; }
+        public int Order { get; set; }
 
         [Required, StringLength(FieldLengths.FrequentlyAskedQuestion.Question),
             DataType(DataType.MultilineText)]
