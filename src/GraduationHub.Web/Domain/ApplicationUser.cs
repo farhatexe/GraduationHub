@@ -16,6 +16,19 @@ namespace GraduationHub.Web.Domain
         [Required, StringLength(FieldLengths.ApplicationUser.LastName)]
         public string LastName { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(FirstName))
+                {
+                    return string.Format("{0} {1}", FirstName, LastName);
+                }
+
+                return Email;
+            }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

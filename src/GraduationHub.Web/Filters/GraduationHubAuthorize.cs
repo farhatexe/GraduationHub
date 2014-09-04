@@ -1,18 +1,12 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using GraduationHub.Web.Data;
-using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GraduationHub.Web.Filters
 {
     public class GraduationHubAuthorize : AuthorizeAttribute
     {
-        public ApplicationDbContext Context { get; set; }
-        public ICurrentUser CurrentUser { get; set; }
-
+        public IRoleService RoleService { get; set; }
 
         /// <summary>
         ///     If the User is a Student, Redirect UnAuth to Student Home.
@@ -22,12 +16,13 @@ namespace GraduationHub.Web.Filters
         /// <param name="filterContext"></param>
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(Context));
+            if (RoleService == null || !RoleService.IsAuthenticated())
+            {
+                base.HandleUnauthorizedRequest(filterContext);
+                return;
+            }
 
-            bool isTeacher = um.IsInRole(CurrentUser.User.Id, SecurityConstants.Roles.Teacher);
-            bool isStudent = um.IsInRole(CurrentUser.User.Id, SecurityConstants.Roles.Student);
-
-            if (isTeacher)
+            if (RoleService.IsTeacher())
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(
@@ -37,7 +32,7 @@ namespace GraduationHub.Web.Filters
                             action = "Teacher"
                         }));
             }
-            else if (isStudent)
+            else if (RoleService.IsStudent())
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(
@@ -52,6 +47,7 @@ namespace GraduationHub.Web.Filters
             {
                 base.HandleUnauthorizedRequest(filterContext);
             }
+
         }
     }
 }

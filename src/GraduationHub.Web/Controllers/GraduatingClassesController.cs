@@ -16,6 +16,7 @@ using GraduationHub.Web.Models.GraduatingClass;
 
 namespace GraduationHub.Web.Controllers
 {
+    [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Teacher)]
     public class GraduatingClassesController : AppBaseController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();

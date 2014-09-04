@@ -16,6 +16,7 @@ using GraduationHub.Web.Models.ImportantDates;
 
 namespace GraduationHub.Web.Controllers
 {
+    [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Teacher)]
     public class ImportantDatesController : AppBaseController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();

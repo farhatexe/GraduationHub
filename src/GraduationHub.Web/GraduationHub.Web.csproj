@@ -209,12 +209,8 @@
     <Compile Include="Controllers\GraduateInformationController.cs" />
     <Compile Include="Controllers\GraduatingClassesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ImportantDatesController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\StudentExpressionsController.cs" />
-    <Compile Include="Controllers\StudentWidgetsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\FieldLengths.cs" />
     <Compile Include="Domain\Address.cs" />
@@ -249,6 +245,7 @@
     <Compile Include="Infrastructure\DataTablesRequestExtensions.cs" />
     <Compile Include="Infrastructure\DateTimeExtensions.cs" />
     <Compile Include="Infrastructure\ICurrentUser.cs" />
+    <Compile Include="Infrastructure\IRoleService.cs" />
     <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Infrastructure\ModelMetadata\ExtensibleModelMetadataProvider.cs" />
@@ -266,6 +263,7 @@
     <Compile Include="Infrastructure\ModelMetadata\RenderAttribute.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
     <Compile Include="Infrastructure\RoleConstants.cs" />
+    <Compile Include="Infrastructure\RoleService.cs" />
     <Compile Include="Infrastructure\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\StructureMapFilterProvider.cs" />
@@ -643,8 +641,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
@@ -697,17 +693,7 @@
     <Content Include="Views\FrequentlyAskedQuestions\Delete.cshtml" />
     <Content Include="Views\FrequentlyAskedQuestions\Edit.cshtml" />
     <Content Include="Views\FrequentlyAskedQuestions\Index.cshtml" />
-    <Content Include="Views\Images\Index.cshtml" />
-    <Content Include="Views\Images\GetUploadedFiles.cshtml" />
-    <Content Include="Views\StudentExpressions\Create.cshtml" />
-    <Content Include="Views\StudentExpressions\Delete.cshtml" />
-    <Content Include="Views\StudentExpressions\Edit.cshtml" />
-    <Content Include="Views\StudentExpressions\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StudentExpressionType.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Student\MyBiography.cshtml" />
-    <Content Include="Views\Student\MySeniorPicture.cshtml" />
-    <Content Include="Views\StudentWidgets\ActivityList.cshtml" />
     <Content Include="Views\Shared\_CheckListLayout.cshtml" />
     <Content Include="Views\CheckList\ExpressionOfThanks.cshtml" />
     <Content Include="Views\CheckList\Biography.cshtml" />
@@ -721,6 +707,9 @@
     <Content Include="Views\CheckList\ImportantDates.cshtml" />
     <Content Include="Views\CheckList\Faqs.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
+    <Content Include="Views\Home\_NavigationStudent.cshtml" />
+    <Content Include="Views\Home\_NavigationTeacher.cshtml" />
+    <Content Include="Views\Home\_NavigationUnauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

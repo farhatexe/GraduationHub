@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using GraduationHub.Web.Filters;
 
 namespace GraduationHub.Web
 {
@@ -8,7 +9,7 @@ namespace GraduationHub.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new AuthorizeAttribute());
+/*            filters.Add(new GraduationHubAuthorize());*/
         }
     }
 }
