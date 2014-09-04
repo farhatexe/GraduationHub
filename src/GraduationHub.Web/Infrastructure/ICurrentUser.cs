@@ -5,5 +5,6 @@ namespace GraduationHub.Web.Infrastructure
     public interface ICurrentUser
     {
         ApplicationUser User { get; }
+        bool IsAuthenticated();
     }
 }

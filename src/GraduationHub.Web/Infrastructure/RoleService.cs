@@ -1,4 +1,5 @@
-﻿using GraduationHub.Web.Data;
+﻿using System.Web;
+using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -9,17 +10,19 @@ namespace GraduationHub.Web.Infrastructure
     {
         private readonly ApplicationDbContext _context;
         private readonly ICurrentUser _currentUser;
+        private readonly HttpContextBase _httpContext;
 
 
-        public RoleService(ApplicationDbContext context, ICurrentUser currentUser)
+        public RoleService(ApplicationDbContext context, ICurrentUser currentUser, HttpContextBase httpContext)
         {
             _context = context;
             _currentUser = currentUser;
+            _httpContext = httpContext;
         }
 
         public bool IsAuthenticated()
         {
-            return _currentUser.User != null;
+            return _httpContext.Request.IsAuthenticated;
         }
 
         public bool IsInRole(string role)
