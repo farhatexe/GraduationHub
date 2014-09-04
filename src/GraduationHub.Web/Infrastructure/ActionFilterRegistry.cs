@@ -15,7 +15,7 @@ namespace GraduationHub.Web.Infrastructure
 
             Policies.SetAllProperties(x =>
                 x.Matching(p =>
-                    p.DeclaringType.CanBeCastTo(typeof(ActionFilterAttribute)) &&
+                    p.DeclaringType.CanBeCastTo(typeof(ActionFilterAttribute)) || p.DeclaringType.CanBeCastTo(typeof(AuthorizeAttribute)) &&
                     p.DeclaringType.Namespace.StartsWith("GraduationHub") &&
                     !p.PropertyType.IsPrimitive &&
                     p.PropertyType != typeof(string)));

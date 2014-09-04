@@ -229,6 +229,7 @@
     <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Domain\StudentExpression.cs" />
     <Compile Include="Domain\StudentPictureType.cs" />
+    <Compile Include="Filters\GraduationHubAuthorize.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -264,6 +265,7 @@
     <Compile Include="Infrastructure\ModelMetadata\ModelMetadataRegistry.cs" />
     <Compile Include="Infrastructure\ModelMetadata\RenderAttribute.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
+    <Compile Include="Infrastructure\RoleConstants.cs" />
     <Compile Include="Infrastructure\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\StructureMapFilterProvider.cs" />
@@ -718,6 +720,7 @@
     <Content Include="Views\CheckList\FourthYouthfulPicture.cshtml" />
     <Content Include="Views\CheckList\ImportantDates.cshtml" />
     <Content Include="Views\CheckList\Faqs.cshtml" />
+    <Content Include="Views\Home\Teacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
