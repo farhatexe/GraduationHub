@@ -1,17 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
+using GraduationHub.Web.Domain;
 using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
+using GraduationHub.Web.Infrastructure.Alerts;
 using GraduationHub.Web.Models.CheckList;
-using GraduationHub.Web.Models.StudentExpressions;
 
 namespace GraduationHub.Web.Controllers
 {
     [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Student)]
-    public class CheckListController : Controller
+    public class CheckListController : AppBaseController
     {
         private readonly ICurrentUser _currentUser;
         private readonly ApplicationDbContext _dbContext;
@@ -27,9 +32,47 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-        public ActionResult ExpressionOfThanks()
+        public  ActionResult ExpressionOfThanks()
         {
-            return View(new StudentExpressionCreateModel {TextMaxLength = 100});
+            StudentExpressionModel studentExpression = _dbContext.StudentExpressions
+                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .Where(e => e.Type == StudentExpressionType.ThankYou).Project().To<StudentExpressionModel>()
+                .SingleOrDefault() ?? new StudentExpressionModel();
+
+            studentExpression.TextMaxLength = 100;
+
+            return View(studentExpression);
+        }
+
+        // POST: FrequentlyAskedQuestions/Create
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult ExpressionOfThanks(StudentExpressionModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            StudentExpression studentExpression =  _dbContext.StudentExpressions
+                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .SingleOrDefault(e => e.Type == StudentExpressionType.ThankYou) ?? new StudentExpression {Type = StudentExpressionType.ThankYou};
+
+            studentExpression.StudentId = _currentUser.User.Id;
+            studentExpression.Text = model.Text;
+
+            if (studentExpression.Id == default(int))
+            {
+                _dbContext.StudentExpressions.Add(studentExpression);
+            }
+            else
+            {
+                ObjectStateManager objectStateManager =
+                    ((IObjectContextAdapter) _dbContext).ObjectContext.ObjectStateManager;
+                _dbContext.StudentExpressions.Attach(studentExpression);
+                objectStateManager.ChangeObjectState(studentExpression, EntityState.Modified);
+            }
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
+                .WithSuccess("Your Expression of Thanks was Saved.");
         }
 
         public ActionResult SlideShowCaption()

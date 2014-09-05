@@ -1,4 +1,4 @@
-﻿@model GraduationHub.Web.Models.StudentExpressions.StudentExpressionCreateModel
+﻿@model GraduationHub.Web.Models.CheckList.StudentExpressionModel
 
     @{
         ViewBag.Title = "Expression of Thanks";
@@ -13,7 +13,7 @@
 </div>
 <hr />
 <div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("ExpressionOfThanks", "CheckList", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
@@ -45,6 +45,8 @@
                 countDirection: 'down',
                 strictMax: true
             });
+
+            
         })
     </script>
 }

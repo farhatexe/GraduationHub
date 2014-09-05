@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using GraduationHub.Web.Domain;
+using GraduationHub.Web.Infrastructure.Mapping;
 
-namespace GraduationHub.Web.Models.StudentExpressions
+namespace GraduationHub.Web.Models.CheckList
 {
-    public class StudentExpressionCreateModel
+    public class StudentExpressionModel : IMapFrom<StudentExpression>
     {
-        public int Id { get; set; }
-
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.MultilineText), Required]
         public string Text { get; set; }
 
         [HiddenInput]

@@ -6312,12 +6312,11 @@ textarea {
   padding-left: 3em;
   padding-right: 3em;
 }
-#dropZone {
-  background: gray;
-  border: black dashed 3px;
-  width: 200px;
-  padding: 50px;
-  text-align: center;
-  color: white;
+.gravatar {
+  margin-top: 9px;
+  margin-right: 2px;
+  background-color: white;
+  border-radius: 7px;
+  border: 1px solid black;
 }
 /*# sourceMappingURL=Site.css.map */

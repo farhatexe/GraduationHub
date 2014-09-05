@@ -65,6 +65,9 @@
     <Reference Include="FluentValidation.Mvc">
       <HintPath>..\..\packages\FluentValidation.MVC5.5.4.0.0\lib\Net45\FluentValidation.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="GravatarHelper">
+      <HintPath>..\..\packages\GravatarHelper.3.2.3\lib\Net40\GravatarHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -288,6 +291,7 @@
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\CheckList\Faq.cs" />
     <Compile Include="Models\CheckList\ImportantDate.cs" />
+    <Compile Include="Models\CheckList\StudentExpressionModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionCreateModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionDeleteModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionEditModel.cs" />
@@ -627,8 +631,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -653,7 +657,6 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Scripts\underscore-min.map" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Angular\MultilineText.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Angular\Object.cshtml" />
@@ -710,6 +713,7 @@
     <Content Include="Views\Home\_NavigationStudent.cshtml" />
     <Content Include="Views\Home\_NavigationTeacher.cshtml" />
     <Content Include="Views\Home\_NavigationUnauthorized.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,6 +8,11 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
+                <div class="gravatar">
+                    @Html.Gravatar("swampyfox@gmail.com", 32, GravatarHelper.DefaultImageMysteryMan)
+                </div>
+            </li>
+            <li>
                 @Html.ActionLink(@Model, "Manage", "Account", null, new {title = "Manage"})
 
             </li>
