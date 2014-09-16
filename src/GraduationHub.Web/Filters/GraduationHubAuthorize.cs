@@ -22,7 +22,7 @@ namespace GraduationHub.Web.Filters
                 return;
             }
 
-            if (RoleService.IsTeacher())
+            if (RoleService.IsTeacher() || RoleService.IsAdmin())
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(

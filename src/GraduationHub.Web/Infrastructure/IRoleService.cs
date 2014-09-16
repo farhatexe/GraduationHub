@@ -9,5 +9,7 @@
         bool IsTeacher();
 
         bool IsStudent();
+
+        bool IsAdmin();
     }
 }

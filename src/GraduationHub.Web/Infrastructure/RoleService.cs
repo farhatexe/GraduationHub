@@ -22,11 +22,16 @@ namespace GraduationHub.Web.Infrastructure
 
         public bool IsAuthenticated()
         {
-            return _httpContext.Request.IsAuthenticated;
+            return _httpContext.Request.IsAuthenticated && _currentUser.User !=null;
         }
 
         public bool IsInRole(string role)
         {
+            if (!IsAuthenticated())
+            {
+                return false;
+            }
+
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
             return userManager.IsInRole(_currentUser.User.Id, role);
         }
@@ -39,6 +44,11 @@ namespace GraduationHub.Web.Infrastructure
         public bool IsStudent()
         {
             return IsInRole(SecurityConstants.Roles.Student);
+        }
+
+        public bool IsAdmin()
+        {
+            return IsInRole(SecurityConstants.Roles.Admin);
         }
     }
 }

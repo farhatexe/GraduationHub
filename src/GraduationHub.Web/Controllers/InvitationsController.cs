@@ -17,7 +17,7 @@ using GraduationHub.Web.Models.Invitations;
 
 namespace GraduationHub.Web.Controllers
 {
-    [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Teacher)]
+   [GraduationHubAuthorize(Roles = "Teachers, Admin")]
     public class InvitationsController : AppBaseController
     {
         private readonly ApplicationDbContext _context;

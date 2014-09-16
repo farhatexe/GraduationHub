@@ -16,7 +16,7 @@ using GraduationHub.Web.Models.FrequentlyAskedQuestions;
 
 namespace GraduationHub.Web.Controllers
 {
-    [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Teacher)]
+    [GraduationHubAuthorize(Roles = "Teachers, Admin")]
     public class FrequentlyAskedQuestionsController : AppBaseController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();

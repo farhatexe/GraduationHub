@@ -21,7 +21,7 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-        [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Teacher)]
+       [GraduationHubAuthorize(Roles = "Teachers, Admin")]
         public ActionResult Teacher()
         {
             return RedirectToAction("Index", "Invitations");
@@ -34,7 +34,7 @@ namespace GraduationHub.Web.Controllers
             if (!_roleService.IsAuthenticated())
                 return PartialView("_NavigationUnauthorized");
 
-            return PartialView(_roleService.IsTeacher() ? "_NavigationTeacher" : "_NavigationStudent");
+            return PartialView(_roleService.IsTeacher() || _roleService.IsAdmin() ? "_NavigationTeacher" : "_NavigationStudent");
         }
 
         [ChildActionOnly]
@@ -42,7 +42,7 @@ namespace GraduationHub.Web.Controllers
         {
             string userName = string.Empty;
 
-            if (_currentUser.IsAuthenticated())
+            if (_roleService.IsAuthenticated())
             {
                 userName = _currentUser.User.FullName;
             }

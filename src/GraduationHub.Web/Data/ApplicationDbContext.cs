@@ -1,6 +1,5 @@
 using System.Data.Entity;
 using GraduationHub.Web.Domain;
-using GraduationHub.Web.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GraduationHub.Web.Data
@@ -11,7 +10,7 @@ namespace GraduationHub.Web.Data
             : base("DefaultConnection", false)
         {
         }
-        
+
         public DbSet<FrequentlyAskedQuestion> FrequentlyAskedQuestions { get; set; }
 
         public DbSet<GraduatingClass> GraduatingClasses { get; set; }
@@ -27,7 +26,7 @@ namespace GraduationHub.Web.Data
         public DbSet<StudentExpression> StudentExpressions { get; set; }
 
         public DbSet<StudentPicture> StudentPictures { get; set; }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
