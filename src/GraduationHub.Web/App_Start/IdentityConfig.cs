@@ -69,9 +69,9 @@ namespace GraduationHub.Web
         /// Students registering with the site must have been sent an invitation.
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> HasValidInvitationAsync(string email, int graduatingClassId, string inviteCode)
+        public async Task<bool> HasValidInvitationAsync(string email, string inviteCode)
         {
-            Invitation invitation = await _invitationManager.GetInvitation(email, graduatingClassId, inviteCode);
+            Invitation invitation = await _invitationManager.GetInvitation(email, inviteCode);
 
             return invitation != null;
         }

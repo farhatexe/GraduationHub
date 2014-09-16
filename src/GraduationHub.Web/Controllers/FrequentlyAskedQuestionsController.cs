@@ -65,7 +65,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: FrequentlyAskedQuestions/Create
-        [HttpPost, ValidateAntiForgeryToken, Log("Create Frequently Asked Question")]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(FrequentlyAskedQuestionCreateModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -100,7 +100,7 @@ namespace GraduationHub.Web.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken, Log("Edit Frequently Asked Question")]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(FrequentlyAskedQuestionEditModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -145,7 +145,7 @@ namespace GraduationHub.Web.Controllers
 
         // POST: FrequentlyAskedQuestions/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken, Log("Frequently Asked Question Deleted")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             FrequentlyAskedQuestion frequentlyAskedQuestion = await _context.FrequentlyAskedQuestions.FindAsync(id);

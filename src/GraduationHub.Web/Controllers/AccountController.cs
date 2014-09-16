@@ -80,7 +80,7 @@ namespace GraduationHub.Web.Controllers
 
             /*Validate*/
             bool hasValidInvitation =
-                await _userManager.HasValidInvitationAsync(model.Email, model.GraduatingClassId, model.InviteCode);
+                await _userManager.HasValidInvitationAsync(model.Email, model.InviteCode);
 
             // Invitation could not be found.
             if (!hasValidInvitation)

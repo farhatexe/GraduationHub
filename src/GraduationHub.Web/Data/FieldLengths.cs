@@ -15,11 +15,6 @@
             public const int Description = 125;
         }
 
-        public class GraduatingClass
-        {
-            public const int Description = 75;
-        }
-
         public class ApplicationUser
         {
             public const int FirstName = 50;

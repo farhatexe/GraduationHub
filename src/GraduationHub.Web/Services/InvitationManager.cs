@@ -15,18 +15,17 @@ namespace GraduationHub.Web.Services
             _dbContext = dbContext;
         }
 
-        public async Task<Invitation> GetInvitation(string email, int graduatingClassId, string inviteCode)
+        public async Task<Invitation> GetInvitation(string email, string inviteCode)
         {
             return await
                 _dbContext.Invitations
                     .SingleOrDefaultAsync(i => i.InviteCode == new Guid(inviteCode) &&
-                                               i.Email == email &&
-                                               i.GraduatingClassId == graduatingClassId);
+                                               i.Email == email);
         }
     }
 
     public interface IInvitationManager
     {
-        Task<Invitation> GetInvitation(string email, int graduatingClassId, string inviteCode);
+        Task<Invitation> GetInvitation(string email, string inviteCode);
     }
 }

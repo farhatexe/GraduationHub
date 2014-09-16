@@ -12,9 +12,6 @@ namespace GraduationHub.Web.Models.ImportantDates
         [HiddenInput]
         public int Id { get; set; }
         
-        [Display(Name = "Graduating Class")]
-        public int GraduatingClassId { get; set; }
-
         public DateTime DueDate { get; set; }
 
         [Required, StringLength(FieldLengths.ImportantDate.Description), AllowHtml]

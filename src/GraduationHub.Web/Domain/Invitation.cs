@@ -11,10 +11,6 @@ namespace GraduationHub.Web.Domain
         [StringLength(FieldLengths.Invitation.InviteeName)]
         public string InviteeName { get; set; }
 
-        public int GraduatingClassId { get; set; }
-
-        public virtual GraduatingClass GraduatingClass { get; set; }
-
         [StringLength(FieldLengths.Invitation.Email)]
         public string Email { get; set; }
 

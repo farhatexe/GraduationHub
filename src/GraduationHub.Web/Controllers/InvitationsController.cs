@@ -70,7 +70,7 @@ namespace GraduationHub.Web.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken, Log("Create Invitation")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(InvitationCreateFormModel formModel)
         {
             if (!ModelState.IsValid) return View(formModel);
@@ -87,9 +87,7 @@ namespace GraduationHub.Web.Controllers
             }
             // if there is an invitation for the same year, same email, this is invalid.
             bool invitationExists = await _context.Invitations.AnyAsync(i =>
-                i.Email.Equals(formModel.Email, StringComparison.OrdinalIgnoreCase)
-                && i.GraduatingClassId == formModel.GraduatingClassId)
-                ;
+                i.Email.Equals(formModel.Email, StringComparison.OrdinalIgnoreCase));
 
             if (invitationExists)
             {
@@ -101,7 +99,6 @@ namespace GraduationHub.Web.Controllers
             var invitation = new Invitation
             {
                 InviteeName = formModel.InviteeName,
-                GraduatingClassId = formModel.GraduatingClassId,
                 Email = formModel.Email,
                 IsTeacher = formModel.IsTeacher
             };
@@ -136,7 +133,7 @@ namespace GraduationHub.Web.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken, Log("Edited Invitation")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(InvitationEditFormModel editModel)
         {
             if (!ModelState.IsValid) return View(editModel);
@@ -155,7 +152,6 @@ namespace GraduationHub.Web.Controllers
             // if there is an invitation for the same year, same email, this is invalid.
             bool invitationExists = await _context.Invitations.AnyAsync(i =>
                 i.Email.Equals(editModel.Email, StringComparison.OrdinalIgnoreCase)
-                && i.GraduatingClassId == editModel.GraduatingClassId
                 && i.Id != editModel.Id);
 
             if (invitationExists)
@@ -170,8 +166,6 @@ namespace GraduationHub.Web.Controllers
                 return RedirectToAction<InvitationsController>(c => c.Index())
                     .WithError("Could not load the Invitation.");
             }
-
-            invitation.GraduatingClassId = editModel.GraduatingClassId;
             invitation.InviteeName = editModel.InviteeName;
             invitation.Email = editModel.Email;
             invitation.IsTeacher = editModel.IsTeacher;
@@ -202,7 +196,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: Invitations/Delete/5
-        [HttpPost, ActionName("Delete"), Log("Deleted Invitation")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {

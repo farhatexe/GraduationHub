@@ -216,8 +216,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckListController.cs" />
     <Compile Include="Controllers\FrequentlyAskedQuestionsController.cs" />
-    <Compile Include="Controllers\GraduateInformationController.cs" />
-    <Compile Include="Controllers\GraduatingClassesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportantDatesController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
@@ -227,16 +225,13 @@
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\FrequentlyAskedQuestion.cs" />
     <Compile Include="Domain\GraduateInformation.cs" />
-    <Compile Include="Domain\GraduatingClass.cs" />
     <Compile Include="Domain\StudentExpressionType.cs" />
     <Compile Include="Domain\StudentPictures.cs" />
     <Compile Include="Domain\ImportantDates.cs" />
     <Compile Include="Domain\Invitation.cs" />
-    <Compile Include="Domain\LogAction.cs" />
     <Compile Include="Domain\StudentExpression.cs" />
     <Compile Include="Domain\StudentPictureType.cs" />
     <Compile Include="Filters\GraduationHubAuthorize.cs" />
-    <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -303,12 +298,6 @@
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionDeleteModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionEditModel.cs" />
     <Compile Include="Models\FrequentlyAskedQuestions\FrequentlyAskedQuestionIndexModel.cs" />
-    <Compile Include="Models\GraduateInformation\AddressModel.cs" />
-    <Compile Include="Models\GraduateInformation\GraduateInformationCreateFormModel.cs" />
-    <Compile Include="Models\GraduatingClass\GraduatingClassCreateModel.cs" />
-    <Compile Include="Models\GraduatingClass\GraduatingClassDeleteModel.cs" />
-    <Compile Include="Models\GraduatingClass\GraduatingClassEditModel.cs" />
-    <Compile Include="Models\GraduatingClass\GraduatingClassIndexListModel.cs" />
     <Compile Include="Models\Images\UploadedFilesModel.cs" />
     <Compile Include="Models\ImportantDates\ImporantDateIndexModel.cs" />
     <Compile Include="Models\ImportantDates\ImportantDateCreateModel.cs" />
@@ -701,20 +690,10 @@
     <Content Include="Views\Invitations\Edit.cshtml" />
     <Content Include="Views\Invitations\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\GraduatingClassId.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\YesNo.cshtml" />
-    <Content Include="Views\GraduateInformation\Create.cshtml" />
-    <Content Include="Views\GraduateInformation\Delete.cshtml" />
-    <Content Include="Views\GraduateInformation\Details.cshtml" />
-    <Content Include="Views\GraduateInformation\Edit.cshtml" />
-    <Content Include="Views\GraduateInformation\Index.cshtml" />
-    <Content Include="Views\GraduatingClasses\Create.cshtml" />
-    <Content Include="Views\GraduatingClasses\Delete.cshtml" />
-    <Content Include="Views\GraduatingClasses\Edit.cshtml" />
-    <Content Include="Views\GraduatingClasses\Index.cshtml" />
     <Content Include="Views\ImportantDates\Create.cshtml" />
     <Content Include="Views\ImportantDates\Delete.cshtml" />
     <Content Include="Views\ImportantDates\Edit.cshtml" />

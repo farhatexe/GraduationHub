@@ -14,9 +14,6 @@ namespace GraduationHub.Web.Models.Invitations
         public string InviteeName { get; set; }
 
         [Required]
-        public int GraduatingClassId { get; set; }
-
-        [Required]
         public string Email { get; set; }
 
         public bool HasBeenRedeemed { get; set; }

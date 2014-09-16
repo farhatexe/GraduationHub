@@ -25,10 +25,6 @@ namespace GraduationHub.Web.Models.StudentExpressions
             configuration.CreateMap<StudentExpression, StudentExpressionIndexModel>()
                 .ForMember(d=> d.Student, o=> o.MapFrom(s=> s.Student.LastName + ", " + s.Student.FirstName))
                 .ForMember(d => d.DT_RowId, o => o.MapFrom(s => s.Id));
-
-/*            configuration.CreateMap<StudentExpression, StudentExpressionIndexModel>()
-                .ForMember(d => d.Student, o => o.MapFrom(s =>string.Format("{0}, {1}", s.Student.LastName, s.Student.FirstName)))
-                .ForMember(d => d.DT_RowId, o => o.MapFrom(s => s.Id));*/
         }
     }
 }

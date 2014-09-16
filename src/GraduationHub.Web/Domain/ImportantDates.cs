@@ -15,6 +15,5 @@ namespace GraduationHub.Web.Domain
 
         public int GraduatingClassId { get; set; }
 
-        public virtual GraduatingClass GraduatingClass { get; set; }
     }
 }

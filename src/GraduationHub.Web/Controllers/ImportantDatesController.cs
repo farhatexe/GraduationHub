@@ -64,7 +64,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: ImportantDates/Create
-        [HttpPost, ValidateAntiForgeryToken, Log("Create Important Date")]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ImportantDateCreateModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -72,8 +72,7 @@ namespace GraduationHub.Web.Controllers
             var importantDate = new ImportantDate
             {
                 DueDate = model.DueDate,
-                Comments = model.Comments,
-                GraduatingClassId = model.GraduatingClassId
+                Comments = model.Comments
             };
 
             _context.ImportantDates.Add(importantDate);
@@ -104,7 +103,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: ImportantDates/Edit/5
-        [HttpPost, ValidateAntiForgeryToken, Log("Edit Important Date")]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ImportantDateEditModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -119,7 +118,6 @@ namespace GraduationHub.Web.Controllers
 
             importantDate.DueDate = model.DueDate;
             importantDate.Comments = model.Comments;
-            importantDate.GraduatingClassId = model.GraduatingClassId;
 
             await _context.SaveChangesAsync();
 
@@ -146,7 +144,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // POST: ImportantDates/Delete/5
-        [HttpPost, ActionName("Delete"), Log("Deleted Important Date")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {

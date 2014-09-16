@@ -13,8 +13,6 @@ namespace GraduationHub.Web.Models.ImportantDates
         public DateTime DueDate { get; set; }
 
         public string Comments { get; set; }
-        
-        public string GraduatingClassDescription { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

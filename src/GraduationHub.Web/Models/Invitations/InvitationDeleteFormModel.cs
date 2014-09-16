@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure.Mapping;
 
@@ -11,9 +10,6 @@ namespace GraduationHub.Web.Models.Invitations
         public int Id { get; set; }
 
         public string InviteeName { get; set; }
-
-        [Display(Name="Graduating Class")]
-        public string GraduatingClassDescription { get; set; }
 
         public string Email { get; set; }
 

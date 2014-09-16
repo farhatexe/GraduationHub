@@ -9,9 +9,6 @@ namespace GraduationHub.Web.Models.ImportantDates
 {
     public class ImportantDateCreateModel : IMapFrom<ImportantDate>
     {
-        [Display(Name = "Graduating Class")]
-        public int GraduatingClassId { get; set; }
-
         [Required]
         public DateTime DueDate { get; set; }
 

@@ -13,8 +13,6 @@ namespace GraduationHub.Web.Models.Invitations
 
         public string Email { get; set; }
 
-        public string GraduatingClassDescription { get; set; }
-
         public bool HasBeenRedeemed { get; set; }
 
         public bool HasBeenSent { get; set; }
