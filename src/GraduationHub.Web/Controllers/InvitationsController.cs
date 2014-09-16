@@ -35,8 +35,7 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-        public async Task<ActionResult> IndexTable(
-            [ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
+        public async Task<ActionResult> IndexTable([ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
         {
             // Query
             IQueryable<InvitationIndexViewModel> query = _context.Invitations

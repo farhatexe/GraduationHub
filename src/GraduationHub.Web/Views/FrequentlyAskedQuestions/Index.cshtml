@@ -54,9 +54,9 @@
                             var template = _.template("<a title='Edit Frequently Asked Question' data-toggle='tooltip' data-placement='top' href='/FrequentlyAskedQuestions/Edit/<%= dT_RowId %>'>" +
                                 "<span class='glyphicon glyphicon-pencil'/></a>&nbsp;&nbsp;&nbsp;" +
                                 "<a title='Delete Frequently Asked Question' data-toggle='tooltip' data-placement='top' href='/FrequentlyAskedQuestions/Delete/<%= dT_RowId %>'>" +
-                                "<span class='glyphicon glyphicon-remove'/></a>", { dT_RowId: row.dT_RowId });
+                                "<span class='glyphicon glyphicon-remove'/></a>");
 
-                            return template;
+                            return template( { dT_RowId: row.dT_RowId });
 
                         }
                     }

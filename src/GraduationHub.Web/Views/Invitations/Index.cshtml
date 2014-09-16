@@ -23,9 +23,6 @@
                 Email
             </th>
             <th>
-                Class
-            </th>
-            <th>
                 Is Teacher
             </th>
             <th>
@@ -55,13 +52,13 @@
                 },
                 columnDefs: [
                     {
-                        targets: [3, 4, 5],
+                        targets: [2, 3, 4],
                         render: function(data, type, row) {
                             return data === true ? 'Yes' : 'No';
                         }
                     },
                     {
-                        targets: [2, 3, 4, 5, 6],
+                        targets: [2, 3, 4, 5],
                         searchable: false,
                         className: 'text-center',
                     }
@@ -69,7 +66,6 @@
                 columns: [
                     { data: 'inviteeName' },
                     { data: 'email' },
-                    { data: 'graduatingClassDescription' },
                     { data: 'isTeacher' },
                     { data: 'hasBeenRedeemed' },
                     { data: 'hasBeenSent' },
@@ -80,9 +76,9 @@
                             var template = _.template("<a title='Edit Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Edit/<%= dT_RowId %>'>" +
                                 "<span class='glyphicon glyphicon-pencil'/></a>&nbsp;&nbsp;&nbsp;" +
                                 "<a title='Delete Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Delete/<%= dT_RowId %>'>" +
-                                "<span class='glyphicon glyphicon-remove'/></a>", { dT_RowId: row.dT_RowId });
+                                "<span class='glyphicon glyphicon-remove'/></a>");
 
-                            return template;
+                            return template({ dT_RowId: row.dT_RowId });
 
                         }
                     }
