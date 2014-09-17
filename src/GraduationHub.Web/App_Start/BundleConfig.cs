@@ -20,9 +20,6 @@ namespace GraduationHub.Web
             bundles.Add(new ScriptBundle("~/bundles/simplyCountable").Include(
                 "~/Scripts/jquery.simplyCountable.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
-                   "~/Scripts/dropzone/dropzone.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                 "~/Scripts/DataTables-1.10.2/media/js/jquery.dataTables.js",
                 "~/Scripts/DataTables-1.10.2/plugins/dataTables.bootstrap.js"
@@ -57,10 +54,6 @@ namespace GraduationHub.Web
                 "~/Content/DataTables-1.10.2/plugins/dataTables.bootstrap.css",
                 "~/Content/bootstrap3-wysihtml5.css",
                 "~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/dropZone").Include(
-                                 "~/Scripts/dropzone/css/basic.css",
-                                 "~/Scripts/dropzone/css/dropzone.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

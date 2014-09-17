@@ -76,7 +76,9 @@
                             var template = _.template("<a title='Edit Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Edit/<%= dT_RowId %>'>" +
                                 "<span class='glyphicon glyphicon-pencil'/></a>&nbsp;&nbsp;&nbsp;" +
                                 "<a title='Delete Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Delete/<%= dT_RowId %>'>" +
-                                "<span class='glyphicon glyphicon-remove'/></a>");
+                                "<span class='glyphicon glyphicon-remove'/></a>&nbsp;&nbsp;&nbsp;" + 
+                                "<a title='Send Invitation' data-toggle='tooltip' data-placement='top' href='/Invitations/Send/<%= dT_RowId %>'>" + 
+                                "<span class='fa fa-envelope-o'/></a>");
 
                             return template({ dT_RowId: row.dT_RowId });
 

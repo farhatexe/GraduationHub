@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
@@ -14,6 +15,7 @@ using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
 using GraduationHub.Web.Models.Invitations;
+using Postal;
 
 namespace GraduationHub.Web.Controllers
 {
@@ -99,7 +101,9 @@ namespace GraduationHub.Web.Controllers
             {
                 InviteeName = formModel.InviteeName,
                 Email = formModel.Email,
-                IsTeacher = formModel.IsTeacher
+                IsTeacher = formModel.IsTeacher,
+                InviteCode = Guid.NewGuid()
+                
             };
 
             _context.Invitations.Add(invitation);
@@ -204,5 +208,24 @@ namespace GraduationHub.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+       public async Task<ActionResult> Send(int id)
+       {
+           // get the invite:
+           var invitation = await _context.Invitations.SingleAsync(i => i.Id == id);
+
+           dynamic email = invitation.IsTeacher ? new Email("TeacherInvitation"): new Email("StudentInvitation");
+
+           email.To = invitation.Email;
+           email.InviteeName = invitation.InviteeName;
+           email.InviteCode = invitation.InviteCode;
+           email.Send();
+
+           invitation.HasBeenSent = true;
+           _context.Entry(invitation).State = EntityState.Modified;
+           await _context.SaveChangesAsync();
+
+           return RedirectToAction("Index").WithSuccess("Invitation has been sent.");
+       }
     }
 }

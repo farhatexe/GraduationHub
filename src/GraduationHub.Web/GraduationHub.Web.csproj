@@ -125,7 +125,13 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Postal">
+      <HintPath>..\..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -415,6 +421,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\DataTables-1.10.2\images\Sorting icons.psd" />
     <None Include="Properties\PublishProfiles\GraduateHub %282%29.pubxml" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\StudentInvitation.cshtml" />
+    <Content Include="Views\Emails\TeacherInvitation.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -434,8 +447,6 @@
     <None Include="Content\Site.less" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\controllers\seniorPictureController.js" />
     <Content Include="Scripts\app\controllers\studentBiographyController.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -474,10 +485,6 @@
     <Content Include="Scripts\DataTables-1.10.2\media\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables-1.10.2\media\js\jquery.js" />
     <Content Include="Scripts\DataTables-1.10.2\plugins\dataTables.bootstrap.js" />
-    <Content Include="Scripts\dropzone\css\basic.css" />
-    <Content Include="Scripts\dropzone\css\dropzone.css" />
-    <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
-    <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
     <Content Include="Scripts\DataTables-1.10.2\extensions\Responsive\Readme.md" />
     <Content Include="Content\DataTables-1.10.2\media\images\Sorting icons.psd" />
     <Content Include="Content\DataTables-1.10.2\extensions\TableTools\images\psd\printer.psd" />
@@ -562,7 +569,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Properties\PublishProfiles\graduatehub.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\app\controllers\addInvitationController.js" />
@@ -571,12 +577,6 @@
     <Content Include="Scripts\app\services\exceptionOverride.js" />
     <Content Include="Scripts\app\utilities\bootstrapAlerts.js" />
     <Content Include="Scripts\app\utilities\bootstrapDatePicker.js" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
-    <Content Include="Scripts\dropzone\dropzone.js" />
-    <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <Content Include="Scripts\dropzone\images\spritemap%402x.png" />
-    <Content Include="Scripts\dropzone\images\spritemap.png" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
