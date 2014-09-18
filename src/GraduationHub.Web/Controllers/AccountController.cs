@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Models.Account;
+using GraduationHub.Web.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -13,14 +14,16 @@ namespace GraduationHub.Web.Controllers
     [Authorize]
     public class AccountController : AppBaseController
     {
+        private readonly IInvitationManager _invitationManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+/*        public AccountController()
         {
-        }
+        }*/
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager)
         {
+            _invitationManager = invitationManager;
             UserManager = userManager;
         }
 
@@ -79,23 +82,40 @@ namespace GraduationHub.Web.Controllers
             if (!ModelState.IsValid) return View(model);
 
             /*Validate*/
-            bool hasValidInvitation =
-                await _userManager.HasValidInvitationAsync(model.Email, model.InviteCode);
+            Invitation invitation =
+                await _invitationManager.GetInvitation(model.Email, model.InviteCode);
 
             // Invitation could not be found.
-            if (!hasValidInvitation)
+            if (invitation == null)
             {
                 ModelState.AddModelError("",
                     "Could not locate Invitation. Please check your invitation email for the correct values.");
                 return View(model);
             }
 
-            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+            var user = new ApplicationUser
+            {
+                UserName = invitation.Email,
+                Email = invitation.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            };
+
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
+                if (invitation.IsTeacher)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Teacher);
+                }
+                else
+                {
+                    await UserManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Student);
+                }
+
+
                 await SignInAsync(user, false);
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

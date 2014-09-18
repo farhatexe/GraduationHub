@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using GraduationHub.Web.Infrastructure.ModelMetadata;
 
 namespace GraduationHub.Web.Models.Account
 {
@@ -11,10 +12,10 @@ namespace GraduationHub.Web.Models.Account
         [Required, StringLength(50)]
         public string LastName { get; set; }
         
-        [Required]
+        [Required, Help("The email address in the Invitation Email.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required, Help("The code from the Invitation Email.")]
         public string InviteCode { get; set; }
 
         [Required]

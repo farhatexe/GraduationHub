@@ -20,14 +20,9 @@ namespace GraduationHub.Web
         {
         }
 
-        private InvitationManager _invitationManager;
-
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+   public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()))
-            {
-                _invitationManager = new InvitationManager(context.Get<ApplicationDbContext>())
-            };
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
 
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
@@ -65,16 +60,6 @@ namespace GraduationHub.Web
             return manager;
         }
 
-        /// <summary>
-        /// Students registering with the site must have been sent an invitation.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> HasValidInvitationAsync(string email, string inviteCode)
-        {
-            Invitation invitation = await _invitationManager.GetInvitation(email, inviteCode);
-
-            return invitation != null;
-        }
     }
 
     public class EmailService : IIdentityMessageService

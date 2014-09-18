@@ -1,5 +1,7 @@
+using System.Security.Permissions;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
+using GraduationHub.Web.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -15,6 +17,7 @@ namespace GraduationHub.Web.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(GraduationHub.Web.Data.ApplicationDbContext context)
@@ -39,7 +42,10 @@ namespace GraduationHub.Web.Migrations
             IdentityResult ir;
             var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            ir = rm.Create(new IdentityRole("Admin"));
+            ir = rm.Create(new IdentityRole(SecurityConstants.Roles.Admin));
+            ir = rm.Create(new IdentityRole(SecurityConstants.Roles.Student));
+            ir = rm.Create(new IdentityRole(SecurityConstants.Roles.Teacher));
+
             var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             var user = new ApplicationUser()
@@ -56,7 +62,7 @@ namespace GraduationHub.Web.Migrations
                 return ir.Succeeded;
             }
 
-            ir = um.AddToRole(user.Id, "Admin");
+            ir = um.AddToRole(user.Id, SecurityConstants.Roles.Admin);
             return ir.Succeeded;
         }
     }

@@ -20,7 +20,7 @@ namespace GraduationHub.Web.Services
             return await
                 _dbContext.Invitations
                     .SingleOrDefaultAsync(i => i.InviteCode == new Guid(inviteCode) &&
-                                               i.Email == email);
+                                   i.Email == email);
         }
     }
 
