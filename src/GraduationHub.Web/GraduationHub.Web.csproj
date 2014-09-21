@@ -404,6 +404,8 @@
     <Content Include="Content\Images\KEYS logo.jpg" />
     <Content Include="Content\Images\keys_logo.png" />
     <Content Include="Content\Images\male_silhouette.png" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -420,10 +422,14 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\DataTables-1.10.2\images\Sorting icons.psd" />
+    <Content Include="Content\jasny-bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\GraduateHub %282%29.pubxml" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\holder.js" />
+    <Content Include="Scripts\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\StudentInvitation.cshtml" />
