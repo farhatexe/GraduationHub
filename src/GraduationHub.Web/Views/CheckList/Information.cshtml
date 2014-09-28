@@ -1,0 +1,172 @@
+﻿@model GraduationHub.Web.Models.CheckList.InformationModel
+
+@{
+    ViewBag.Title = "KEYS Graduate Information Sheet";
+    Layout = "~/Views/Shared/_CheckListLayout.cshtml";
+}
+<div>
+    <i class="fa fa-graduation-cap fa-5x pull-left "></i>
+    <h2>KEYS Graduate Information Sheet</h2>
+    <p>Please provide the information.</p>
+
+</div>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input class="form-control" data-val="true" data-val-length="The field Name must be a string with a maximum length of 75." data-val-length-max="75" id="Name" name="Name" placeholder="Name..." type="text" value="">
+            <p class="help-block">Full given name as you waould like it to appear on your diploma.</p>
+            <div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="form-group  col-md-4">
+            <label for="AddressStreet">Address</label>
+
+            <input class="form-control" data-val="true" data-val-length="The field Address must be a string with a maximum length of 75." data-val-length-max="75" id="AddressStreet" name="AddressStreet" placeholder="Address..." type="text" value="">
+            <div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="AddressStreet" data-valmsg-replace="true"></span>
+            </div>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label for="AddressCity">City</label>
+
+            <input class="form-control" data-val="true" data-val-length="The field City must be a string with a maximum length of 75." data-val-length-max="75" id="AddressCity" name="AddressCity" placeholder="City..." type="text" value="">
+            <div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="AddressCity" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="StudentEmail">Student's Email</label>
+
+            <input class="form-control" data-val="true" data-val-length="The field Student Email must be a string with a maximum length of 75." data-val-length-max="75" id="StudentEmail" name="StudentEmail" placeholder="Student Email..." type="email" value="">
+            <div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="StudentEmail" data-valmsg-replace="true"></span>
+            </div>
+
+
+        </div>
+        <div class="form-group  col-md-4">
+            <label for="ParentEmail">Parent's Email</label>
+
+            <input class="form-control" data-val="true" data-val-length="The field Parent Email must be a string with a maximum length of 75." data-val-length-max="75" id="ParentEmail" name="ParentEmail" placeholder="Parent Email..." type="email" value="">
+            <div>
+                <span class="field-validation-valid text-danger" data-valmsg-for="ParentEmail" data-valmsg-replace="true"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-inline">
+        <label for="StudentEmail">During my studies at KEYS, I have enrolled in:</label>
+        <div class="checkbox">
+            <label>
+                <input data-val="true" data-val-required="The Enrolled Fine Arts field is required." id="EnrolledFineArts" name="EnrolledFineArts" type="checkbox" value="true"><input name="EnrolledFineArts" type="hidden" value="false"> Fine Arts
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input data-val="true" data-val-required="The Enrolled Academic Classes field is required." id="EnrolledAcademicClasses" name="EnrolledAcademicClasses" type="checkbox" value="true"><input name="EnrolledAcademicClasses" type="hidden" value="false"> Academic Classes
+            </label>
+        </div>
+    </div>
+    <div class="form-inline">
+        <label for="StudentEmail">Will you particpate in the KEYS Graduation ceremony?</label>
+        <div class="radio">
+            <label>
+                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
+            </label>
+        </div>
+    </div>
+
+    <div class="well well-sm">
+        <em>if you stated above that you <strong>are</strong> graduating with KEYS, please answer the following questions:</em>
+        <ol>
+            <li>
+                <div class="form-inline">
+                    I have taken or am currently taking Worldview Analysis at KEYS:
+                    <div class="radio">
+                        <label>
+                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-inline">
+                    If you selected NO, you have a letter on file with KEYS office that you are taking a Worldview class at home that has been approved by KEYS?
+                    <div class="radio">
+                        <label>
+                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-inline">
+                    I will secure my own graduation announcements:
+                    <div class="radio">
+                        <label>
+                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="form-inline">
+                        Do you need a black cap and gown?
+                        <div class="radio">
+                            <label>
+                                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        If YES, what is your height with *shoes?
+                        <input type="text"/>
+
+                    </div>
+                    <em>(*please measure according to the type of shoe you would wear with your gown)</em>
+                </div>
+            </li>
+
+        </ol>
+    </div>
+    <button type="submit" class="btn btn-success">
+        <span class="fa fa-save fa-fw fa-lg"></span> Save
+    </button>
+
+}

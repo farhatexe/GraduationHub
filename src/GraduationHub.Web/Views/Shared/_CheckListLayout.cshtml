@@ -11,6 +11,7 @@
 
             <!-- List group -->
             <ul class="list-group">
+                <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.Information(), "Graduate Information"))</li>
                 <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.Biography(), "Biography"))</li>
                 <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.ExpressionOfThanks(), "Expressions of Thanks"))</li>
                 <li class="list-group-item">@(Html.ActionLink<CheckListController>(c => c.SlideShowCaption(), "Slideshow Caption"))</li>

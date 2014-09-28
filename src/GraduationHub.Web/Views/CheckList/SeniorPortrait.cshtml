@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model GraduationHub.Web.Models.CheckList.ImageModel
 
 @{
     ViewBag.Title = "Senior Portrait";
@@ -12,5 +12,12 @@
 </div>
 <hr />
 
-@Html.Partial("_PhotoUpload")
+@using (Html.BeginForm("SeniorPortrait", "CheckList", FormMethod.Post, new{enctype="multipart/form-data"}))
+{
+    @Html.Partial("_PhotoUpload", Model)
+
+
+}
+
+
 

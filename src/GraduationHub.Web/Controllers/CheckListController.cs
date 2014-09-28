@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
@@ -32,7 +34,7 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-        public  ActionResult ExpressionOfThanks()
+        public ActionResult ExpressionOfThanks()
         {
             StudentExpressionModel studentExpression = _dbContext.StudentExpressions
                 .Where(e => e.StudentId.Equals(_currentUser.User.Id))
@@ -50,9 +52,10 @@ namespace GraduationHub.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            StudentExpression studentExpression =  _dbContext.StudentExpressions
+            StudentExpression studentExpression = _dbContext.StudentExpressions
                 .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-                .SingleOrDefault(e => e.Type == StudentExpressionType.ThankYou) ?? new StudentExpression {Type = StudentExpressionType.ThankYou};
+                .SingleOrDefault(e => e.Type == StudentExpressionType.ThankYou) ??
+                                                  new StudentExpression {Type = StudentExpressionType.ThankYou};
 
             studentExpression.StudentId = _currentUser.User.Id;
             studentExpression.Text = model.Text;
@@ -82,8 +85,58 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult SeniorPortrait()
         {
-            return View();
+            StudentPicture studentPicture = _dbContext.StudentPictures
+            .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+            .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait);
+
+
+            var viewModel = ImageModel.Create(studentPicture);
+     
+
+            return View(viewModel);
         }
+
+        [HttpPost]
+        public ActionResult SeniorPortrait(UploadedFile model)
+        {
+            if (!ModelState.IsValid) return View();
+
+            StudentPicture studentPicture = _dbContext.StudentPictures
+                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait) ?? new StudentPicture
+                {ImageType = StudentPictureType.SeniorPortrait};
+
+
+            byte[] imageData;
+
+            using (var binaryReader = new BinaryReader(model.File.InputStream))
+            {
+                imageData = binaryReader.ReadBytes(model.File.ContentLength);
+            }
+
+            studentPicture.StudentId = _currentUser.User.Id;
+            studentPicture.DateSubmitted = DateTime.Now;
+            studentPicture.ImageName = model.File.FileName;
+            studentPicture.ImageData = imageData;
+
+            if (studentPicture.Id == default(int))
+            {
+                _dbContext.StudentPictures.Add(studentPicture);
+            }
+            else
+            {
+                ObjectStateManager objectStateManager =
+                    ((IObjectContextAdapter)_dbContext).ObjectContext.ObjectStateManager;
+                _dbContext.StudentPictures.Attach(studentPicture);
+                objectStateManager.ChangeObjectState(studentPicture, EntityState.Modified);
+            }
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction<CheckListController>(c => c.SeniorPortrait())
+                .WithSuccess("Your Senior Portrait was Saved.");
+        }
+
 
         public ActionResult BabyPicture()
         {
@@ -124,6 +177,11 @@ namespace GraduationHub.Web.Controllers
             List<Faq> faqs = _dbContext.FrequentlyAskedQuestions.OrderBy(x => x.Order).Project().To<Faq>().ToList();
 
             return View(faqs);
+        }
+
+        public ActionResult Information()
+        {
+            return View();
         }
     }
 }

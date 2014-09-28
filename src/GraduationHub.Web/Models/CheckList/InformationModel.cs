@@ -1,29 +1,38 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using GraduationHub.Web.Data;
+using GraduationHub.Web.Infrastructure.ModelMetadata;
 
-namespace GraduationHub.Web.Domain
+namespace GraduationHub.Web.Models.CheckList
 {
-    [Table("GraduateInformation")]
-    public class GraduateInformation
+    public class InformationModel
     {
-        public int Id { get; set; }
-
         [StringLength(FieldLengths.GraduateInformation.Name)]
+        [Help("Full given name as you waould like it to appear on your diploma.")]
         public string Name { get; set; }
 
-        public Address Address { get; set; }
+        [StringLength(FieldLengths.Address.Street)]
+        [Display(Name = "Address")]
+        public string AddressStreet { get; set; }
+
+        [StringLength(FieldLengths.Address.City)]
+        [Display(Name = "City")]
+        public string AddressCity { get; set; }
+
+        [StringLength(FieldLengths.Address.State)]
+        [Display(Name = "State")]
+        public string AddressState { get; set; }
+
+        [StringLength(FieldLengths.Address.Zipcode)]
+        [Display(Name = "Zip code")]
+        public string AddressZipcode { get; set; }
 
         [StringLength(FieldLengths.GraduateInformation.StudentEmail)]
+        [Display(Name = "Student's Email")]
         public string StudentEmail { get; set; }
 
         [StringLength(FieldLengths.GraduateInformation.ParentEmail)]
+        [Display(Name = "Parent's Email")]
         public string ParentEmail { get; set; }
-
-        public string StudentId { get; set; }
-
-        [ForeignKey("StudentId")]
-        public virtual ApplicationUser Student { get; set; }
 
         public bool EnrolledFineArts { get; set; }
 
