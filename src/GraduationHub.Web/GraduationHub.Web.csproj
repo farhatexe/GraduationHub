@@ -723,10 +723,10 @@
     <Content Include="Views\CheckList\SlideShowCaption.cshtml" />
     <Content Include="Views\CheckList\SeniorPortrait.cshtml" />
     <Content Include="Views\CheckList\BabyPicture.cshtml" />
-    <Content Include="Views\CheckList\FirstYouthfulPicture.cshtml" />
-    <Content Include="Views\CheckList\SecondYouthfulPicture.cshtml" />
-    <Content Include="Views\CheckList\ThirdYouthfulPicture.cshtml" />
-    <Content Include="Views\CheckList\FourthYouthfulPicture.cshtml" />
+    <Content Include="Views\CheckList\ToddlerPicture.cshtml" />
+    <Content Include="Views\CheckList\MiddleSchoolPicture.cshtml" />
+    <Content Include="Views\CheckList\HighSchoolPicture.cshtml" />
+    <Content Include="Views\CheckList\ElementaryPicture.cshtml" />
     <Content Include="Views\CheckList\ImportantDates.cshtml" />
     <Content Include="Views\CheckList\Faqs.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />

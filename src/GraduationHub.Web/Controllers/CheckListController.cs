@@ -140,32 +140,32 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult BabyPicture()
         {
-            return View();
+            return View(new ImageModel());
         }
 
-        public ActionResult FirstYouthfulPicture()
+        public ActionResult ToddlerPicture()
         {
-            return View();
+            return View(new ImageModel());
         }
 
-        public ActionResult SecondYouthfulPicture()
+        public ActionResult ElementaryPicture()
         {
-            return View();
+            return View(new ImageModel());
         }
 
-        public ActionResult ThirdYouthfulPicture()
+        public ActionResult MiddleSchoolPicture()
         {
-            return View();
+            return View(new ImageModel());
         }
 
-        public ActionResult FourthYouthfulPicture()
+        public ActionResult HighSchoolPicture()
         {
-            return View();
+            return View(new ImageModel());
         }
 
         public ActionResult ImportantDates()
         {
-            // TODO: Add Student's Graduating Class in case we need to split large groups
+
             List<CheckListImportantDate> dueDates =
                 _dbContext.ImportantDates.Project().To<CheckListImportantDate>().OrderBy(x => x.DueDate).ToList();
 
