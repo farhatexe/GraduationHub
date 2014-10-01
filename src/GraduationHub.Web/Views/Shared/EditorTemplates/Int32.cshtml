@@ -1,4 +1,4 @@
 ﻿@model Int32?
 
 @Html.TextBox("", Model.HasValue? ViewData.TemplateInfo.FormattedModelValue : "",
-            new { @class = "form-control", placeholder = ViewData.ModelMetadata.Watermark, type = "number" })
+                new { @class = "form-control input-sm", placeholder = ViewData.ModelMetadata.Watermark, type = "number" })

@@ -1,36 +1,18 @@
 ﻿@model Boolean?
 
-@{
-    bool value = false;
+<div class="form-group">
+    @ViewData.ModelMetadata.DisplayName
 
-    if (Model != null)
-    {
-        value = Model.Value;
-    }
-}
+        <div class="radio-inline">
+            <label style="font-weight: normal">
+                @Html.RadioButton("", true, Model.HasValue && Model.Value, new { id = @ViewData.ModelMetadata.PropertyName + "_Yes" }) Yes
+            </label>
+        </div>
+        <div class="radio-inline">
+            <label style="font-weight: normal">
+                @Html.RadioButton("", false, Model.HasValue && Model.Value == false, new { id = @ViewData.ModelMetadata.PropertyName + "_No" }) No
+            </label>
+        </div>
+        <div></div>
 
-<div class="radio-inline">
-    <label>
-        @Html.RadioButton("", value, value) Yes
-    </label>
 </div>
-<div class="radio-inline">
-    <label>
-        @Html.RadioButton("", value, value) No
-    </label>
-</div>
-
-@*
-
-<div class="radio-inline">
-    <label>
-        @Html.RadioButton("", Model.HasValue && !Model.Value) Yes
-    </label>
-</div>
-<div class="radio-inline">
-    <label>
-        @Html.RadioButton("", Model.HasValue && Model.Value) No
-    </label>
-</div>
-*@
-

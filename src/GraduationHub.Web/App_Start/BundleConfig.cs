@@ -15,7 +15,9 @@ namespace GraduationHub.Web
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.validate*"));
+                "~/Scripts/jquery.validate*",
+                 "~/Scripts/mvcfoolproof.unobtrusive.min.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/simplyCountable").Include(
                 "~/Scripts/jquery.simplyCountable.js"));
@@ -24,6 +26,7 @@ namespace GraduationHub.Web
                 "~/Scripts/DataTables-1.10.2/media/js/jquery.dataTables.js",
                 "~/Scripts/DataTables-1.10.2/plugins/dataTables.bootstrap.js"
                 ));
+
             bundles.Add(new ScriptBundle("~/bundles/holder").Include(
              "~/Scripts/holder.js"
              ));

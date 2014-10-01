@@ -123,6 +123,9 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.Futures.5.0.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="MVC Foolproof Validation">
+      <HintPath>..\..\packages\foolproof.0.9.4517\lib\MVC Foolproof Validation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -227,7 +230,6 @@
     <Compile Include="Controllers\InvitationsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\FieldLengths.cs" />
-    <Compile Include="Domain\Address.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\FrequentlyAskedQuestion.cs" />
     <Compile Include="Domain\GraduateInformation.cs" />
@@ -272,6 +274,7 @@
     <Compile Include="Infrastructure\ModelMetadata\IModelMetadataFilter.cs" />
     <Compile Include="Infrastructure\ModelMetadata\ModelMetadataRegistry.cs" />
     <Compile Include="Infrastructure\ModelMetadata\RenderAttribute.cs" />
+    <Compile Include="Infrastructure\ModelMetadata\WatermarkAttribute.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
     <Compile Include="Infrastructure\RoleConstants.cs" />
     <Compile Include="Infrastructure\RoleService.cs" />
@@ -435,6 +438,9 @@
     <Content Include="Scripts\holder.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Scripts\MvcFoolproofValidation.min.js" />
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\StudentInvitation.cshtml" />

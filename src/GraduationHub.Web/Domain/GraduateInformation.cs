@@ -12,7 +12,11 @@ namespace GraduationHub.Web.Domain
         [StringLength(FieldLengths.GraduateInformation.Name)]
         public string Name { get; set; }
 
-        public Address Address { get; set; }
+        [StringLength(FieldLengths.Address.Street)]
+        public string Street { get; set; }
+
+        [StringLength(FieldLengths.Address.City)]
+        public string City { get; set; }
 
         [StringLength(FieldLengths.GraduateInformation.StudentEmail)]
         public string StudentEmail { get; set; }
@@ -25,19 +29,19 @@ namespace GraduationHub.Web.Domain
         [ForeignKey("StudentId")]
         public virtual ApplicationUser Student { get; set; }
 
-        public bool EnrolledFineArts { get; set; }
+        public bool FineArts { get; set; }
 
-        public bool EnrolledAcademicClasses { get; set; }
+        public bool AcademicClasses { get; set; }
 
         public bool WillParticipateInGraduation { get; set; }
 
-        public bool TakenKeysWorldView { get; set; }
+        public bool? TakenKeysWorldView { get; set; }
 
         public bool? TakenApprovedWorldView { get; set; }
 
-        public bool WillSecureAnnouncements { get; set; }
+        public bool? WillSecureAnnouncements { get; set; }
 
-        public bool NeedCapAndGown { get; set; }
+        public bool? NeedCapAndGown { get; set; }
 
         [StringLength(FieldLengths.GraduateInformation.Height)]
         public string Height { get; set; }

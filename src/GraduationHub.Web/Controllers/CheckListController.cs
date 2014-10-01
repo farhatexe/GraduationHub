@@ -181,7 +181,57 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult Information()
         {
-            return View();
+
+            var model = _dbContext.GraduateInformation
+                .Where(i => i.StudentId.Equals(_currentUser.User.Id)).Project().To<InformationModel>()
+                .SingleOrDefault() ?? new InformationModel();
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Information(InformationModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+
+            var information = _dbContext.GraduateInformation
+                .SingleOrDefault(i => i.StudentId == _currentUser.User.Id)
+                              ?? new GraduateInformation {StudentId = _currentUser.User.Id};
+
+            information.Name = model.Name;
+            information.Street = model.Street;
+            information.City = model.City;
+            information.StudentEmail = model.StudentEmail;
+            information.ParentEmail = model.ParentEmail;
+            information.FineArts = model.FineArts;
+            information.AcademicClasses = model.AcademicClasses;
+            information.WillParticipateInGraduation = model.WillParticipateInGraduation.Value;
+            information.TakenKeysWorldView = model.TakenKeysWorldView;
+            information.TakenApprovedWorldView = model.TakenApprovedWorldView;
+            information.WillSecureAnnouncements = model.WillSecureAnnouncements;
+            information.NeedCapAndGown = model.NeedCapAndGown;
+            information.Height = model.Height;
+
+            if (information.Id == default(int))
+            {
+                _dbContext.GraduateInformation.Add(information);
+            }
+            else
+            {
+                ObjectStateManager objectStateManager =
+                    ((IObjectContextAdapter)_dbContext).ObjectContext.ObjectStateManager;
+                _dbContext.GraduateInformation.Attach(information);
+                objectStateManager.ChangeObjectState(information, EntityState.Modified);
+            }
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction<CheckListController>(c => c.Information())
+                .WithSuccess("Your Graduation Information has been saved.");
+
+
         }
     }
 }

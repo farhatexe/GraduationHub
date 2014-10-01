@@ -1,4 +1,5 @@
-﻿@model GraduationHub.Web.Models.CheckList.InformationModel
+﻿@using GraduationHub.Web.Data
+@model GraduationHub.Web.Models.CheckList.InformationModel
 
 @{
     ViewBag.Title = "KEYS Graduate Information Sheet";
@@ -11,162 +12,188 @@
 
 </div>
 <hr />
-@using (Html.BeginForm())
+@using (Html.BeginForm("Information", "CheckList", FormMethod.Post, new {id = "info"}))
 {
     @Html.AntiForgeryToken()
+    <div class="form-horizontal">
         <div class="form-group">
-            <label for="Name">Name</label>
-            <input class="form-control" data-val="true" data-val-length="The field Name must be a string with a maximum length of 75." data-val-length-max="75" id="Name" name="Name" placeholder="Name..." type="text" value="">
-            <p class="help-block">Full given name as you waould like it to appear on your diploma.</p>
-            <div>
-                <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            @Html.BootstrapLabelFor(m => m.Name, 3)
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.Name)
             </div>
+            <div class="col-md-3"></div>
         </div>
-
-    <div class="row">
-        <div class="form-group  col-md-4">
-            <label for="AddressStreet">Address</label>
-
-            <input class="form-control" data-val="true" data-val-length="The field Address must be a string with a maximum length of 75." data-val-length-max="75" id="AddressStreet" name="AddressStreet" placeholder="Address..." type="text" value="">
-            <div>
-                <span class="field-validation-valid text-danger" data-valmsg-for="AddressStreet" data-valmsg-replace="true"></span>
+        <div class="form-group">
+            @Html.BootstrapLabelFor(m => m.Street, 3)
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.Street)
             </div>
-
+            <div class="col-md-3"></div>
         </div>
-        <div class="form-group col-md-4">
-            <label for="AddressCity">City</label>
-
-            <input class="form-control" data-val="true" data-val-length="The field City must be a string with a maximum length of 75." data-val-length-max="75" id="AddressCity" name="AddressCity" placeholder="City..." type="text" value="">
-            <div>
-                <span class="field-validation-valid text-danger" data-valmsg-for="AddressCity" data-valmsg-replace="true"></span>
+        <div class="form-group">
+            @Html.BootstrapLabelFor(m => m.City, 3)
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.City)
             </div>
+            <div class="col-md-3"></div>
         </div>
-        
-    </div>
-    <div class="row">
-        <div class="form-group col-md-4">
-            <label for="StudentEmail">Student's Email</label>
-
-            <input class="form-control" data-val="true" data-val-length="The field Student Email must be a string with a maximum length of 75." data-val-length-max="75" id="StudentEmail" name="StudentEmail" placeholder="Student Email..." type="email" value="">
-            <div>
-                <span class="field-validation-valid text-danger" data-valmsg-for="StudentEmail" data-valmsg-replace="true"></span>
+        <div class="form-group">
+            @Html.BootstrapLabelFor(m => m.StudentEmail, 3)
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.StudentEmail)
             </div>
-
-
+            <div class="col-md-3"></div>
         </div>
-        <div class="form-group  col-md-4">
-            <label for="ParentEmail">Parent's Email</label>
-
-            <input class="form-control" data-val="true" data-val-length="The field Parent Email must be a string with a maximum length of 75." data-val-length-max="75" id="ParentEmail" name="ParentEmail" placeholder="Parent Email..." type="email" value="">
-            <div>
-                <span class="field-validation-valid text-danger" data-valmsg-for="ParentEmail" data-valmsg-replace="true"></span>
+        <div class="form-group">
+            @Html.BootstrapLabelFor(m => m.ParentEmail, 3)
+            <div class="col-md-6">
+                @Html.EditorFor(m => m.ParentEmail)
             </div>
-
-        </div>
-    </div>
-    <div class="form-inline">
-        <label for="StudentEmail">During my studies at KEYS, I have enrolled in:</label>
-        <div class="checkbox">
-            <label>
-                <input data-val="true" data-val-required="The Enrolled Fine Arts field is required." id="EnrolledFineArts" name="EnrolledFineArts" type="checkbox" value="true"><input name="EnrolledFineArts" type="hidden" value="false"> Fine Arts
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input data-val="true" data-val-required="The Enrolled Academic Classes field is required." id="EnrolledAcademicClasses" name="EnrolledAcademicClasses" type="checkbox" value="true"><input name="EnrolledAcademicClasses" type="hidden" value="false"> Academic Classes
-            </label>
-        </div>
-    </div>
-    <div class="form-inline">
-        <label for="StudentEmail">Will you particpate in the KEYS Graduation ceremony?</label>
-        <div class="radio">
-            <label>
-                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
-            </label>
+            <div class="col-md-3"></div>
         </div>
     </div>
 
-    <div class="well well-sm">
-        <em>if you stated above that you <strong>are</strong> graduating with KEYS, please answer the following questions:</em>
-        <ol>
-            <li>
+    <ol>
+        <li>
+            <div class="form-inline">
+                During my studies at KEYS, I have enrolled in:
+
+                @Html.EditorFor(m => m.FineArts)
+                @Html.EditorFor(m => m.AcademicClasses)
+
+            </div>
+        </li>
+        <li>
+            @Html.EditorFor(m => m.WillParticipateInGraduation)
+            
+        </li>
+    </ol>
+    <em>If you stated above that you <strong>are</strong> graduating with KEYS, please answer the following questions:</em>
+    <ol >
+        <li>
+          
+            @Html.EditorFor(m => m.TakenKeysWorldView)
+        </li>
+        <li>
+            @Html.EditorFor(m => m.TakenApprovedWorldView)
+        </li>
+        <li>
+            @Html.EditorFor(m => m.WillSecureAnnouncements)
+        </li>
+        <li>
+      
+                @Html.EditorFor(m => m.NeedCapAndGown)
                 <div class="form-inline">
-                    I have taken or am currently taking Worldview Analysis at KEYS:
-                    <div class="radio">
-                        <label>
-                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
-                        </label>
-                    </div>
+                    If YES, what is your height with *shoes?
+                    @Html.EditorFor(m => m.Height)
+                    <div></div>
                 </div>
-            </li>
-            <li>
-                <div class="form-inline">
-                    If you selected NO, you have a letter on file with KEYS office that you are taking a Worldview class at home that has been approved by KEYS?
-                    <div class="radio">
-                        <label>
-                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
-                        </label>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="form-inline">
-                    I will secure my own graduation announcements:
-                    <div class="radio">
-                        <label>
-                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
-                        </label>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <div class="form-inline">
-                        Do you need a black cap and gown?
-                        <div class="radio">
-                            <label>
-                                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input data-val="true" data-val-required="The Will Participate In Graduation field is required." id="WillParticipateInGraduation" name="WillParticipateInGraduation" type="radio" value="true"><input name="WillParticipateInGraduation" type="hidden" value="false"> No
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-inline">
-                        If YES, what is your height with *shoes?
-                        <input type="text"/>
+                
+            <em>(*please measure according to the type of shoe you would wear with your gown)</em>
+        </li>
 
-                    </div>
-                    <em>(*please measure according to the type of shoe you would wear with your gown)</em>
-                </div>
-            </li>
+    </ol>
 
-        </ol>
-    </div>
     <button type="submit" class="btn btn-success">
         <span class="fa fa-save fa-fw fa-lg"></span> Save
     </button>
+}
 
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+
+        $('#info').validate({
+            errorElement: 'div',
+            messages: {
+                WillParticipateInGraduation: {
+                    required: 'We need to know if you are participating in the KEYS Gradunation ceremony.'
+                },
+                TakenKeysWorldView: {
+                    required: 'Answer required if you are participating in the KEYS Graduation ceremony.'
+                },
+                TakenApprovedWorldView: {
+                    required: 'Answer required if you have not taken Worldview Analysis at KEYS.'
+                },
+                WillSecureAnnouncements: {
+                    required: 'Answer required if you are participating in the KEYS Graduation ceremony.'
+                },
+                NeedCapAndGown: {
+                    required: 'Answer required if you are participating in the KEYS Graduation ceremony.'
+                },
+                Height: {
+                    required: 'Answer required if you need a black cap and gown.'
+                }
+            },
+            rules: {
+                Name: {
+                    required: true,
+                    maxlength: '@FieldLengths.GraduateInformation.Name'
+                },
+                Street: {
+                    required: true,
+                    maxlength: '@FieldLengths.Address.Street'
+                },
+                City: {
+                    required: true,
+                    maxlength: '@FieldLengths.Address.City'
+                },
+                StudentEmail: {
+                    required: true,
+                    maxlength: '@FieldLengths.GraduateInformation.StudentEmail',
+                    email: true
+                },
+                ParentEmail: {
+                    required: true,
+                    maxlength: '@FieldLengths.GraduateInformation.ParentEmail',
+                    email: true
+                },
+                WillParticipateInGraduation: {
+                    required: true
+                },
+
+                TakenApprovedWorldView: {
+                    required: function(element) {
+                        return $("#TakenKeysWorldView_No").prop('checked');
+                    }
+                },
+
+                TakenKeysWorldView: {
+                    required: function(element) {
+                        return $("#WillParticipateInGraduation_Yes").prop('checked');
+                    }
+                },
+                WillSecureAnnouncements: {
+                    required: function(element) {
+                        return $("#WillParticipateInGraduation_Yes").prop('checked');
+                    }
+                },
+                NeedCapAndGown: {
+                    required: function(element) {
+                        return $("#WillParticipateInGraduation_Yes").prop('checked');
+                    }
+                },
+                Height: {
+                    required: function(element) {
+                        return $("#NeedCapAndGown_Yes").prop('checked');
+                    }
+                },
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr('type') == 'checkbox' || element.attr('type') == 'radio' ) {
+                    element.closest('.form-group').children(':last').append(error);
+
+                } else if (element.attr('id') == 'Height') {
+                    error.appendTo(element.next());
+                } else {
+            error.appendTo(element.parent().next());
+        }
+        }
+    });
+    </script>
 }

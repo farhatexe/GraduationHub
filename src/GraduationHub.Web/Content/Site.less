@@ -15,12 +15,13 @@ body {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
+/*
 input,
 select {
     max-width: 280px;
 
 }
-
+    */
 textarea{
     max-width:560px;
     resize: none;
@@ -32,6 +33,7 @@ textarea{
 	right:0; 
 	padding-left: 3em;
 	padding-right: 3em;
+    z-index:100
 }
 
 .gravatar {
@@ -40,4 +42,9 @@ textarea{
     background-color: white;
     border-radius: 7px;
     border: 1px solid black;
+}
+
+.error{
+    color:@btn-danger-bg;
+
 }
