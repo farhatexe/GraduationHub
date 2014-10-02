@@ -83,15 +83,18 @@
         <li>
       
                 @Html.EditorFor(m => m.NeedCapAndGown)
-                <div class="form-inline">
-                    If YES, what is your height with *shoes?
-                    @Html.EditorFor(m => m.Height)
-                    <div></div>
-                </div>
-                
-            <em>(*please measure according to the type of shoe you would wear with your gown)</em>
-        </li>
 
+           
+        </li>
+        <li>
+            <div class="form-inline">
+                What is your height with *shoes?
+                @Html.EditorFor(m => m.Height)
+                <div></div>
+                <em>(*please measure according to the type of shoe you would wear with your gown)</em>
+            </div>
+
+        </li>
     </ol>
 
     <button type="submit" class="btn btn-success">
@@ -123,7 +126,7 @@
                     required: 'Answer required if you are participating in the KEYS Graduation ceremony.'
                 },
                 Height: {
-                    required: 'Answer required if you need a black cap and gown.'
+                    required: 'Answer required if you are participating in the KEYS Graduation ceremony.'
                 }
             },
             rules: {
@@ -175,8 +178,8 @@
                     }
                 },
                 Height: {
-                    required: function(element) {
-                        return $("#NeedCapAndGown_Yes").prop('checked');
+                    required: function (element) {
+                        return $("#WillParticipateInGraduation_Yes").prop('checked');
                     }
                 },
             },

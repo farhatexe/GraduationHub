@@ -32,7 +32,7 @@ namespace GraduationHub.Web.Models.CheckList
 
         [DataType("YesNo"), Display(
             Name =
-                "If you selected NO, do you have a letter on file with KEYS office that you are taking a Worldview class at home that has been approved by KEYS?"
+                "If you selected NO, do you have a letter on file with the KEYS office that you are taking a Worldview class at home that has been approved by KEYS?"
             )]
         public bool? TakenApprovedWorldView { get; set; }
 
@@ -42,8 +42,8 @@ namespace GraduationHub.Web.Models.CheckList
         [DataType("YesNo"), Display(Name = "Do you need a black cap and gown?")]
         public bool? NeedCapAndGown { get; set; }
 
-        [Display(Name = "If YES, what is your height with *shoes?")]
-        [Watermark(PlaceHolder = "Height Example: 5'6\"")]
+        [Display(Name = "What is your height with *shoes?")]
+        [Watermark(PlaceHolder = "Height Example: 5' 6\"")]
         public string Height { get; set; }
     }
 }
