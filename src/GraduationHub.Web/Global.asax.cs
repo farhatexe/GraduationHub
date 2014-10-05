@@ -33,7 +33,7 @@ namespace GraduationHub.Web
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
 
             DependencyResolver.SetResolver(
-                new StructureMapDependencyResolver(() => Container ?? ObjectFactory.Container));
+                new StructureMapResolver(() => Container ?? ObjectFactory.Container));
 
             ObjectFactory.Configure(cfg =>
             {
@@ -44,6 +44,7 @@ namespace GraduationHub.Web
                 cfg.AddRegistry(new MvcRegistry(() => Container ?? ObjectFactory.Container));
                 cfg.AddRegistry(new TaskRegistry());
                 cfg.AddRegistry(new ModelMetadataRegistry());
+                cfg.AddRegistry(new MediatorRegistry(() => Container ?? ObjectFactory.Container));
             });
 
 

@@ -6,11 +6,11 @@ using StructureMap;
 
 namespace GraduationHub.Web.Infrastructure
 {
-    public class StructureMapDependencyResolver : IDependencyResolver
+    public class StructureMapResolver : IDependencyResolver
     {
         private readonly Func<IContainer> _factory;
 
-        public StructureMapDependencyResolver(Func<IContainer> factory)
+        public StructureMapResolver(Func<IContainer> factory)
         {
             _factory = factory;
         }

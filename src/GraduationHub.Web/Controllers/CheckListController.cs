@@ -5,7 +5,6 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
@@ -14,6 +13,9 @@ using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
 using GraduationHub.Web.Models.CheckList;
+using GraduationHub.Web.Notifications;
+using GraduationHub.Web.Requests;
+using ShortBus;
 
 namespace GraduationHub.Web.Controllers
 {
@@ -22,11 +24,13 @@ namespace GraduationHub.Web.Controllers
     {
         private readonly ICurrentUser _currentUser;
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMediator _mediator;
 
-        public CheckListController(ApplicationDbContext dbContext, ICurrentUser currentUser)
+        public CheckListController(ApplicationDbContext dbContext, ICurrentUser currentUser, IMediator mediator)
         {
             _dbContext = dbContext;
             _currentUser = currentUser;
+            _mediator = mediator;
         }
 
         public ActionResult Biography()
@@ -36,14 +40,9 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult ExpressionOfThanks()
         {
-            StudentExpressionModel studentExpression = _dbContext.StudentExpressions
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-                .Where(e => e.Type == StudentExpressionType.ThankYou).Project().To<StudentExpressionModel>()
-                .SingleOrDefault() ?? new StudentExpressionModel();
+            var response = _mediator.Request(new GetExpression { MaxLength = 100, Type = StudentExpressionType.ThankYou });
 
-            studentExpression.TextMaxLength = 100;
-
-            return View(studentExpression);
+            return View(response.Data);
         }
 
         // POST: FrequentlyAskedQuestions/Create
@@ -52,30 +51,22 @@ namespace GraduationHub.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            StudentExpression studentExpression = _dbContext.StudentExpressions
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-                .SingleOrDefault(e => e.Type == StudentExpressionType.ThankYou) ??
-                                                  new StudentExpression {Type = StudentExpressionType.ThankYou};
-
-            studentExpression.StudentId = _currentUser.User.Id;
-            studentExpression.Text = model.Text;
-
-            if (studentExpression.Id == default(int))
+            try
             {
-                _dbContext.StudentExpressions.Add(studentExpression);
+                _mediator.Notify(new SaveExpression
+                {
+                    Text = model.Text,
+                    Type = StudentExpressionType.ThankYou
+                });
+
+                return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
+                    .WithSuccess("Your \"Expression of Thanks\" was Saved.");
             }
-            else
+            catch (Exception)
             {
-                ObjectStateManager objectStateManager =
-                    ((IObjectContextAdapter) _dbContext).ObjectContext.ObjectStateManager;
-                _dbContext.StudentExpressions.Attach(studentExpression);
-                objectStateManager.ChangeObjectState(studentExpression, EntityState.Modified);
+                return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
+                    .WithError("There was a problem. Your \"Expression of Thanks\" has not been Saved.");
             }
-
-            _dbContext.SaveChanges();
-
-            return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
-                .WithSuccess("Your Expression of Thanks was Saved.");
         }
 
         public ActionResult SlideShowCaption()
@@ -86,12 +77,12 @@ namespace GraduationHub.Web.Controllers
         public ActionResult SeniorPortrait()
         {
             StudentPicture studentPicture = _dbContext.StudentPictures
-            .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-            .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait);
+                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait);
 
 
-            var viewModel = ImageModel.Create(studentPicture);
-     
+            ImageModel viewModel = ImageModel.Create(studentPicture);
+
 
             return View(viewModel);
         }
@@ -126,7 +117,7 @@ namespace GraduationHub.Web.Controllers
             else
             {
                 ObjectStateManager objectStateManager =
-                    ((IObjectContextAdapter)_dbContext).ObjectContext.ObjectStateManager;
+                    ((IObjectContextAdapter) _dbContext).ObjectContext.ObjectStateManager;
                 _dbContext.StudentPictures.Attach(studentPicture);
                 objectStateManager.ChangeObjectState(studentPicture, EntityState.Modified);
             }
@@ -165,7 +156,6 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult ImportantDates()
         {
-
             List<CheckListImportantDate> dueDates =
                 _dbContext.ImportantDates.Project().To<CheckListImportantDate>().OrderBy(x => x.DueDate).ToList();
 
@@ -181,8 +171,7 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult Information()
         {
-
-            var model = _dbContext.GraduateInformation
+            InformationModel model = _dbContext.GraduateInformation
                 .Where(i => i.StudentId.Equals(_currentUser.User.Id)).Project().To<InformationModel>()
                 .SingleOrDefault() ?? new InformationModel();
 
@@ -196,9 +185,9 @@ namespace GraduationHub.Web.Controllers
             if (!ModelState.IsValid) return View(model);
 
 
-            var information = _dbContext.GraduateInformation
+            GraduateInformation information = _dbContext.GraduateInformation
                 .SingleOrDefault(i => i.StudentId == _currentUser.User.Id)
-                              ?? new GraduateInformation {StudentId = _currentUser.User.Id};
+                                              ?? new GraduateInformation {StudentId = _currentUser.User.Id};
 
             information.Name = model.Name;
             information.Street = model.Street;
@@ -221,7 +210,7 @@ namespace GraduationHub.Web.Controllers
             else
             {
                 ObjectStateManager objectStateManager =
-                    ((IObjectContextAdapter)_dbContext).ObjectContext.ObjectStateManager;
+                    ((IObjectContextAdapter) _dbContext).ObjectContext.ObjectStateManager;
                 _dbContext.GraduateInformation.Attach(information);
                 objectStateManager.ChangeObjectState(information, EntityState.Modified);
             }
@@ -230,8 +219,6 @@ namespace GraduationHub.Web.Controllers
 
             return RedirectToAction<CheckListController>(c => c.Information())
                 .WithSuccess("Your Graduation Information has been saved.");
-
-
         }
     }
 }
