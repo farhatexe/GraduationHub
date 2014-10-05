@@ -1,4 +1,4 @@
-﻿@model GraduationHub.Web.Models.CheckList.ImageModel
+﻿@model GraduationHub.Web.Domain.StudentPictureType
 
 @{
     ViewBag.Title = "A Youthful Picture";
@@ -13,7 +13,4 @@
 </div>
 <hr />
 
-@using (Html.BeginForm("MiddleSchoolPicture", "CheckList", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.Partial("_PhotoUpload", Model)
-}
+@Html.Partial("_PhotoUpload", Model)

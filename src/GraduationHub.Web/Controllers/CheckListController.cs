@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
-using System.Web.Hosting;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
@@ -25,6 +20,7 @@ namespace GraduationHub.Web.Controllers
     [GraduationHubAuthorize(Roles = SecurityConstants.Roles.Student)]
     public class CheckListController : AppBaseController
     {
+
         private readonly ICurrentUser _currentUser;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMediator _mediator;
@@ -38,7 +34,8 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult Biography()
         {
-            var response = _mediator.Request(new GetExpression { MaxLength = 200, Type = StudentExpressionType.Biography });
+            Response<StudentExpressionModel> response =
+                _mediator.Request(new GetExpression {MaxLength = 200, Type = StudentExpressionType.Biography});
 
             return View(response.Data);
         }
@@ -68,7 +65,8 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult ExpressionOfThanks()
         {
-            var response = _mediator.Request(new GetExpression { MaxLength = 100, Type = StudentExpressionType.ThankYou });
+            Response<StudentExpressionModel> response =
+                _mediator.Request(new GetExpression {MaxLength = 100, Type = StudentExpressionType.ThankYou});
 
             return View(response.Data);
         }
@@ -99,7 +97,8 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult SlideShowCaption()
         {
-            var response = _mediator.Request(new GetExpression { MaxLength = 35, Type = StudentExpressionType.SlideshowCaption });
+            Response<StudentExpressionModel> response =
+                _mediator.Request(new GetExpression {MaxLength = 35, Type = StudentExpressionType.SlideshowCaption});
 
             return View(response.Data);
         }
@@ -126,103 +125,58 @@ namespace GraduationHub.Web.Controllers
                     .WithError("There was a problem. Your \"Slide Show Caption\" was not Saved.");
             }
         }
+
         public ActionResult SeniorPortrait()
         {
-
-            return View();
+            return View(StudentPictureType.SeniorPortrait);
         }
 
         [HttpPost]
-        public ActionResult SeniorPortrait(HttpPostedFileBase file)
+        public ActionResult UploadPicture(HttpPostedFileBase file, StudentPictureType type)
         {
-            if (!ModelState.IsValid) return View();
-
-            StudentPicture studentPicture = _dbContext.StudentPictures
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-                .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait) ?? new StudentPicture
-                {ImageType = StudentPictureType.SeniorPortrait};
-
-            if (file != null && file.ContentLength > 0)
+            try
             {
-                byte[] imageData = null;
+                _mediator.Notify(new SavePicture(file, type));
 
-                using (var binaryReader = new BinaryReader(file.InputStream))
-                {
-                    imageData = binaryReader.ReadBytes(file.ContentLength);
-                }
-
-                studentPicture.StudentId = _currentUser.User.Id;
-                studentPicture.DateSubmitted = DateTime.Now;
-                studentPicture.ImageName = file.FileName;
-                studentPicture.ImageData = imageData;
-                studentPicture.MimeType = MimeMapping.GetMimeMapping(file.FileName);
+                return RedirectToAction(type.ToString()).WithSuccess("Your Picture has been saved.");
             }
-
-
-            if (studentPicture.Id == default(int))
+            catch (Exception)
             {
-                _dbContext.StudentPictures.Add(studentPicture);
+                return RedirectToAction(type.ToString()).WithError("There was a problem uploading your file. Your picture has not been saved.");
             }
-            else
-            {
-                ObjectStateManager objectStateManager =
-                    ((IObjectContextAdapter) _dbContext).ObjectContext.ObjectStateManager;
-                _dbContext.StudentPictures.Attach(studentPicture);
-                objectStateManager.ChangeObjectState(studentPicture, EntityState.Modified);
-            }
-  
-            _dbContext.SaveChanges();
-
-            return RedirectToAction<CheckListController>(c => c.SeniorPortrait())
-                .WithSuccess("Your Senior Portrait was Saved.");
         }
 
-        public void GetSeniorPortrait()
+        public void GetPicture(StudentPictureType type)
         {
-                        StudentPicture studentPicture = _dbContext.StudentPictures
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-                .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait);
+            Response<WebImage> response =
+                _mediator.Request(new GetPicture {Type = type});
 
-            if (studentPicture == null)
-            {
-                new WebImage(HostingEnvironment.MapPath(@"~/Content/images/male_silhouette.png")).Resize(350, 400, true, true).Write();
-                return;
-            }
-                
-
-            var webImage = new WebImage(studentPicture.ImageData);
-
-            int height = webImage.Height;
-            int width = webImage.Width;
-
-            webImage.Resize(Convert.ToInt32(height * .50), Convert.ToInt32(width * .50), true, true)
-                .Crop(1, 1)
-                .Write();
+            response.Data.Write();
         }
 
         public ActionResult BabyPicture()
         {
-            return View(new ImageModel());
+            return View(StudentPictureType.BabyPicture);
         }
 
         public ActionResult ToddlerPicture()
         {
-            return View(new ImageModel());
+            return View(StudentPictureType.ToddlerPicture);
         }
 
         public ActionResult ElementaryPicture()
         {
-            return View(new ImageModel());
+            return View(StudentPictureType.ElementaryPicture);
         }
 
         public ActionResult MiddleSchoolPicture()
         {
-            return View(new ImageModel());
+            return View(StudentPictureType.MiddleSchoolPicture);
         }
 
         public ActionResult HighSchoolPicture()
         {
-            return View(new ImageModel());
+            return View(StudentPictureType.HighSchoolPicture);
         }
 
         public ActionResult ImportantDates()
@@ -255,41 +209,33 @@ namespace GraduationHub.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-
-            GraduateInformation information = _dbContext.GraduateInformation
-                .SingleOrDefault(i => i.StudentId == _currentUser.User.Id)
-                                              ?? new GraduateInformation {StudentId = _currentUser.User.Id};
-
-            information.Name = model.Name;
-            information.Street = model.Street;
-            information.City = model.City;
-            information.StudentEmail = model.StudentEmail;
-            information.ParentEmail = model.ParentEmail;
-            information.FineArts = model.FineArts;
-            information.AcademicClasses = model.AcademicClasses;
-            information.WillParticipateInGraduation = model.WillParticipateInGraduation.Value;
-            information.TakenKeysWorldView = model.TakenKeysWorldView;
-            information.TakenApprovedWorldView = model.TakenApprovedWorldView;
-            information.WillSecureAnnouncements = model.WillSecureAnnouncements;
-            information.NeedCapAndGown = model.NeedCapAndGown;
-            information.Height = model.Height;
-
-            if (information.Id == default(int))
+            try
             {
-                _dbContext.GraduateInformation.Add(information);
+                _mediator.Notify(new SaveGradInfo
+                {
+                    Name = model.Name,
+                    Street = model.Street,
+                    City = model.City,
+                    StudentEmail = model.StudentEmail,
+                    ParentEmail = model.ParentEmail,
+                    FineArts = model.FineArts,
+                    AcademicClasses = model.AcademicClasses,
+                    WillParticipateInGraduation = model.WillParticipateInGraduation.Value,
+                    TakenKeysWorldView = model.TakenKeysWorldView,
+                    TakenApprovedWorldView = model.TakenApprovedWorldView,
+                    WillSecureAnnouncements = model.WillSecureAnnouncements,
+                    NeedCapAndGown = model.NeedCapAndGown,
+                    Height = model.Height
+                });
+
+                return RedirectToAction<CheckListController>(c => c.Information())
+                    .WithSuccess("Your Graduation Information has been saved.");
             }
-            else
+            catch (Exception)
             {
-                ObjectStateManager objectStateManager =
-                    ((IObjectContextAdapter) _dbContext).ObjectContext.ObjectStateManager;
-                _dbContext.GraduateInformation.Attach(information);
-                objectStateManager.ChangeObjectState(information, EntityState.Modified);
+                return RedirectToAction<CheckListController>(c => c.Information())
+                    .WithError("There was a problem. Your Graduation Information has been saved.");
             }
-
-            _dbContext.SaveChanges();
-
-            return RedirectToAction<CheckListController>(c => c.Information())
-                .WithSuccess("Your Graduation Information has been saved.");
         }
     }
 }

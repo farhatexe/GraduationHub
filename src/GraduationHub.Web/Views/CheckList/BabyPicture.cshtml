@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model GraduationHub.Web.Domain.StudentPictureType
 
 @{
     ViewBag.Title = "Baby Picture";
@@ -12,4 +12,4 @@
 
 </div>
 <hr />
-@Html.Partial("_PhotoUpload")
+@Html.Partial("_PhotoUpload", Model)

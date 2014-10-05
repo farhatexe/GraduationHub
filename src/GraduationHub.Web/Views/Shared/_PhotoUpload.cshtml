@@ -1,18 +1,19 @@
-﻿@model GraduationHub.Web.Models.CheckList.ImageModel
+﻿@model GraduationHub.Web.Domain.StudentPictureType
 
-@{
-    string imageSource = Model.HasImage ? StructureMap.Query.Model.ImageString : @"\content\images\male_silhouette.png";
+@using (Html.BeginForm("UploadPicture", "CheckList", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("type", Model)
+
+    <div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="fileinput-new thumbnail" style="max-height: 350px; max-width: 400px;">
+
+            <img src="@Url.Action("GetPicture", "CheckList", new {type = @Model})" alt="" />
+
+        </div>
+        <div class="fileinput-preview fileinput-exists thumbnail" style="max-height: 350px; max-width: 400px;"></div>
+        <div>
+            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" accept='image/*' name="file"></span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> <button class="btn btn-success fileinput-exists" type="submit">Save</button>
+        </div>
+    </div>
 }
-
-<div class="fileinput fileinput-new" data-provides="fileinput">
-    <div class="fileinput-new thumbnail" style="height: 350px; width: 400px;">
-
-        <img src="@imageSource" alt="...">
-        
-    </div>
-    <div class="fileinput-preview fileinput-exists thumbnail" style="max-height: 350px; max-width: 400px;"></div>
-    <div>
-        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" accept='image/*' name="file"></span>
-        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> <button  class="btn btn-success fileinput-exists" type="submit">Save</button>
-    </div>
-</div>
