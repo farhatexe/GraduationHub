@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation.Attributes;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure.Mapping;
 using GraduationHub.Web.Infrastructure.ModelMetadata;
+using GraduationHub.Web.Validation;
 
 namespace GraduationHub.Web.Models.CheckList
 {
+
+    [Validator(typeof(InformationModelValidator))]
     public class InformationModel : IMapFrom<GraduateInformation>
     {
         [Display(Name = "Full Given Name"), Watermark(PlaceHolder = "As you would like it to appear on your diploma.")]

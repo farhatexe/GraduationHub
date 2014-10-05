@@ -101,7 +101,6 @@
         <span class="fa fa-save fa-fw fa-lg"></span> Save
     </button>
 }
-
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -111,7 +110,7 @@
             errorElement: 'div',
             messages: {
                 WillParticipateInGraduation: {
-                    required: 'We need to know if you are participating in the KEYS Gradunation ceremony.'
+                    required: 'We need to know if you are participating in the KEYS Graduation ceremony.'
                 },
                 TakenKeysWorldView: {
                     required: 'Answer required if you are participating in the KEYS Graduation ceremony.'
@@ -157,23 +156,23 @@
                 },
 
                 TakenApprovedWorldView: {
-                    required: function(element) {
+                    required: function (element) {
                         return $("#TakenKeysWorldView_No").prop('checked');
                     }
                 },
 
                 TakenKeysWorldView: {
-                    required: function(element) {
+                    required: function (element) {
                         return $("#WillParticipateInGraduation_Yes").prop('checked');
                     }
                 },
                 WillSecureAnnouncements: {
-                    required: function(element) {
+                    required: function (element) {
                         return $("#WillParticipateInGraduation_Yes").prop('checked');
                     }
                 },
                 NeedCapAndGown: {
-                    required: function(element) {
+                    required: function (element) {
                         return $("#WillParticipateInGraduation_Yes").prop('checked');
                     }
                 },
@@ -183,16 +182,16 @@
                     }
                 },
             },
-            errorPlacement: function(error, element) {
-                if (element.attr('type') == 'checkbox' || element.attr('type') == 'radio' ) {
+            errorPlacement: function (error, element) {
+                if (element.attr('type') == 'checkbox' || element.attr('type') == 'radio') {
                     element.closest('.form-group').children(':last').append(error);
 
                 } else if (element.attr('id') == 'Height') {
                     error.appendTo(element.next());
                 } else {
-            error.appendTo(element.parent().next());
-        }
-        }
-    });
+                    error.appendTo(element.parent().next());
+                }
+            }
+        });
     </script>
 }

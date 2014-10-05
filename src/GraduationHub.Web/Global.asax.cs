@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using FluentValidation.Mvc;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.ModelMetadata;
@@ -26,6 +27,8 @@ namespace GraduationHub.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+            FluentValidationModelValidatorProvider.Configure();
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
 

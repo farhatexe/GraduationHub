@@ -315,7 +315,6 @@
     <Compile Include="Models\ImportantDates\ImportantDateCreateModel.cs" />
     <Compile Include="Models\ImportantDates\ImportantDateDeleteModel.cs" />
     <Compile Include="Models\ImportantDates\ImportantDateEditModel.cs" />
-    <Compile Include="Models\Information\InformationIndexViewModel.cs" />
     <Compile Include="Models\Invitations\InvitationDeleteFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationEditFormModel.cs" />
     <Compile Include="Models\Invitations\InvitationIndexViewModel.cs" />
@@ -329,6 +328,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InvitationManager.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validation\InformationIndexViewModelValidator.cs" />
     <Compile Include="Validation\ValidateImageFileAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
