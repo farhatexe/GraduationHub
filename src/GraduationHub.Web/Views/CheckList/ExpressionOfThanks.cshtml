@@ -1,9 +1,9 @@
 ﻿@model GraduationHub.Web.Models.CheckList.StudentExpressionModel
 
-    @{
-        ViewBag.Title = "Expression of Thanks";
-        Layout = "~/Views/Shared/_CheckListLayout.cshtml";
-    }
+@{
+    ViewBag.Title = "Expression of Thanks";
+    Layout = "~/Views/Shared/_CheckListLayout.cshtml";
+}
 
 <div>
     <i class="fa fa-file-text-o fa-5x pull-left "></i>
@@ -15,23 +15,10 @@
 <div>
     @using (Html.BeginForm("ExpressionOfThanks", "CheckList", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @Html.EditorFor(m => m.Text)
-
-            <p>You have <span id="counter"></span> words left.</p>
-            
-            <button type="submit"  class="btn btn-success">
-                <span class="fa fa-save fa-fw fa-lg"></span> Save
-            </button>
-            
-        </div>
+        @Html.Partial("_StudentTextEditor", Model)
     }
 </div>
+
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/simplyCountable")
@@ -45,8 +32,6 @@
                 countDirection: 'down',
                 strictMax: true
             });
-
-            
         })
     </script>
 }

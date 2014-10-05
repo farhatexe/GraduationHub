@@ -35,7 +35,32 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult Biography()
         {
-            return View();
+            var response = _mediator.Request(new GetExpression { MaxLength = 200, Type = StudentExpressionType.Biography });
+
+            return View(response.Data);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Biography(StudentExpressionModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            try
+            {
+                _mediator.Notify(new SaveExpression
+                {
+                    Text = model.Text,
+                    Type = StudentExpressionType.Biography
+                });
+
+                return RedirectToAction<CheckListController>(c => c.Biography())
+                    .WithSuccess("Your \"Biography\" has been saved.");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction<CheckListController>(c => c.Biography())
+                    .WithError("There was a problem. Your \"Biography\" was not saved.");
+            }
         }
 
         public ActionResult ExpressionOfThanks()
@@ -60,20 +85,44 @@ namespace GraduationHub.Web.Controllers
                 });
 
                 return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
-                    .WithSuccess("Your \"Expression of Thanks\" was Saved.");
+                    .WithSuccess("Your \"Expression of Thanks\" has been saved.");
             }
             catch (Exception)
             {
                 return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
-                    .WithError("There was a problem. Your \"Expression of Thanks\" has not been Saved.");
+                    .WithError("There was a problem. Your \"Expression of Thanks\" was not saved.");
             }
         }
 
         public ActionResult SlideShowCaption()
         {
-            return View();
+            var response = _mediator.Request(new GetExpression { MaxLength = 35, Type = StudentExpressionType.SlideshowCaption });
+
+            return View(response.Data);
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult SlideShowCaption(StudentExpressionModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            try
+            {
+                _mediator.Notify(new SaveExpression
+                {
+                    Text = model.Text,
+                    Type = StudentExpressionType.SlideshowCaption
+                });
+
+                return RedirectToAction<CheckListController>(c => c.SlideShowCaption())
+                    .WithSuccess("Your \"Slide Show Caption\" has been saved.");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction<CheckListController>(c => c.SlideShowCaption())
+                    .WithError("There was a problem. Your \"Slide Show Caption\" was not Saved.");
+            }
+        }
         public ActionResult SeniorPortrait()
         {
             StudentPicture studentPicture = _dbContext.StudentPictures

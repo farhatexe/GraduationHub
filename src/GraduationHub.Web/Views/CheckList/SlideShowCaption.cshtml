@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model GraduationHub.Web.Models.CheckList.StudentExpressionModel
 
 @{
     ViewBag.Title = "Slide Show Caption";
@@ -12,3 +12,27 @@
     <p><em>You can see the slideshow from last year on our KEYS Facebook page. Please keep your Slideshow Caption between <strong>25 - 35</strong> words.</em></p>
 </div>
 <hr />
+
+<div>
+    @using (Html.BeginForm("SlideShowCaption", "CheckList", FormMethod.Post))
+    {
+        @Html.Partial("_StudentTextEditor", Model)
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/simplyCountable")
+
+    <script>
+        $(document).ready(function() {
+            $("#Text").simplyCountable({
+                counter: '#counter',
+                countType: 'words',
+                maxCount: @Model.TextMaxLength,
+                countDirection: 'down',
+                strictMax: true
+            });
+        })
+    </script>
+}
