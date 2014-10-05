@@ -12,12 +12,12 @@
 </div>
 <hr />
 
-@using (Html.BeginForm("SeniorPortrait", "CheckList", FormMethod.Post, new{enctype="multipart/form-data"}))
+<img src="@Url.Action("GetSeniorPortrait")" alt="" />
+
+
+
+@using (Html.BeginForm("SeniorPortrait", "CheckList", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
-    @Html.Partial("_PhotoUpload", Model)
-
-
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
 }
-
-
-

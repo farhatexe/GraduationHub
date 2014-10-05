@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
@@ -22,10 +24,23 @@ namespace GraduationHub.Web.Services
                     .SingleOrDefaultAsync(i => i.InviteCode == new Guid(inviteCode) &&
                                    i.Email == email);
         }
+
+        public async void RedeemCode(string inviteCode)
+        {
+            var invite = await _dbContext.Invitations
+                    .SingleOrDefaultAsync(i => i.InviteCode == new Guid(inviteCode));
+
+            if (invite == null) return;
+            
+            invite.HasBeenRedeemed = true;
+
+            _dbContext.SaveChanges();
+        }
     }
 
     public interface IInvitationManager
     {
         Task<Invitation> GetInvitation(string email, string inviteCode);
+        void RedeemCode(string inviteCode);
     }
 }

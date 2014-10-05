@@ -25,5 +25,7 @@ namespace GraduationHub.Web.Domain
         public Byte[] ImageData { get; set; }
 
         public DateTime DateSubmitted { get; set; }
+
+        public string MimeType { get; set; }
     }
 }

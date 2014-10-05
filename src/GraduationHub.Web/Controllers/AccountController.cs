@@ -106,6 +106,9 @@ namespace GraduationHub.Web.Controllers
 
             if (result.Succeeded)
             {
+                // Mark the Invitation as redeemed
+                _invitationManager.RedeemCode(model.InviteCode);
+
                 if (invitation.IsTeacher)
                 {
                     await UserManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Teacher);

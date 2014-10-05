@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Web.Helpers;
 using GraduationHub.Web.Domain;
 
 namespace GraduationHub.Web.Models.CheckList
@@ -14,17 +15,16 @@ namespace GraduationHub.Web.Models.CheckList
                 return new ImageModel();
             }
 
-            ImageModel model = new ImageModel();
 
-            string extension = string.Empty;
-            var s = Path.GetExtension(studentPicture.ImageName);
-            if (s != null)
+
+            var model = new ImageModel
             {
-                extension = s.Replace(".", "");
-            }
+                ImageString =
+                    string.Format("data:{0};base64,{1}", studentPicture.MimeType,
+                        Convert.ToBase64String(studentPicture.ImageData))
+            };
 
-            model.ImageString = string.Format("data:image/{0};base64,{1}", extension, Convert.ToBase64String(studentPicture.ImageData));
-            return new ImageModel();
+            return model;
         }
 
         public string ImageString { get; set; }

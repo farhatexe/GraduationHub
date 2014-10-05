@@ -1,7 +1,7 @@
 ﻿@model GraduationHub.Web.Models.CheckList.ImageModel
 
 @{
-    string imageSource = Model.HasImage ? Model.ImageString : @"\content\images\male_silhouette.png";
+    string imageSource = Model.HasImage ? StructureMap.Query.Model.ImageString : @"\content\images\male_silhouette.png";
 }
 
 <div class="fileinput fileinput-new" data-provides="fileinput">

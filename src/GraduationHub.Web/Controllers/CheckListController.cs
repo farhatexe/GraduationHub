@@ -5,6 +5,9 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
+using System.Web;
+using System.Web.Helpers;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
@@ -125,19 +128,12 @@ namespace GraduationHub.Web.Controllers
         }
         public ActionResult SeniorPortrait()
         {
-            StudentPicture studentPicture = _dbContext.StudentPictures
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
-                .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait);
 
-
-            ImageModel viewModel = ImageModel.Create(studentPicture);
-
-
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult SeniorPortrait(UploadedFile model)
+        public ActionResult SeniorPortrait(HttpPostedFileBase file)
         {
             if (!ModelState.IsValid) return View();
 
@@ -146,18 +142,22 @@ namespace GraduationHub.Web.Controllers
                 .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait) ?? new StudentPicture
                 {ImageType = StudentPictureType.SeniorPortrait};
 
-
-            byte[] imageData;
-
-            using (var binaryReader = new BinaryReader(model.File.InputStream))
+            if (file != null && file.ContentLength > 0)
             {
-                imageData = binaryReader.ReadBytes(model.File.ContentLength);
+                byte[] imageData = null;
+
+                using (var binaryReader = new BinaryReader(file.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(file.ContentLength);
+                }
+
+                studentPicture.StudentId = _currentUser.User.Id;
+                studentPicture.DateSubmitted = DateTime.Now;
+                studentPicture.ImageName = file.FileName;
+                studentPicture.ImageData = imageData;
+                studentPicture.MimeType = MimeMapping.GetMimeMapping(file.FileName);
             }
 
-            studentPicture.StudentId = _currentUser.User.Id;
-            studentPicture.DateSubmitted = DateTime.Now;
-            studentPicture.ImageName = model.File.FileName;
-            studentPicture.ImageData = imageData;
 
             if (studentPicture.Id == default(int))
             {
@@ -170,13 +170,35 @@ namespace GraduationHub.Web.Controllers
                 _dbContext.StudentPictures.Attach(studentPicture);
                 objectStateManager.ChangeObjectState(studentPicture, EntityState.Modified);
             }
-
+  
             _dbContext.SaveChanges();
 
             return RedirectToAction<CheckListController>(c => c.SeniorPortrait())
                 .WithSuccess("Your Senior Portrait was Saved.");
         }
 
+        public void GetSeniorPortrait()
+        {
+                        StudentPicture studentPicture = _dbContext.StudentPictures
+                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .SingleOrDefault(e => e.ImageType == StudentPictureType.SeniorPortrait);
+
+            if (studentPicture == null)
+            {
+                new WebImage(HostingEnvironment.MapPath(@"~/Content/images/male_silhouette.png")).Resize(350, 400, true, true).Write();
+                return;
+            }
+                
+
+            var webImage = new WebImage(studentPicture.ImageData);
+
+            int height = webImage.Height;
+            int width = webImage.Width;
+
+            webImage.Resize(Convert.ToInt32(height * .50), Convert.ToInt32(width * .50), true, true)
+                .Crop(1, 1)
+                .Write();
+        }
 
         public ActionResult BabyPicture()
         {
