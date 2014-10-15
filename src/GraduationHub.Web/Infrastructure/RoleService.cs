@@ -22,7 +22,7 @@ namespace GraduationHub.Web.Infrastructure
 
         public bool IsAuthenticated()
         {
-            return _httpContext.Request.IsAuthenticated && _currentUser.User !=null;
+            return _httpContext.Request.IsAuthenticated && _currentUser.User != null;
         }
 
         public bool IsInRole(string role)

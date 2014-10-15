@@ -1,11 +1,34 @@
 ﻿To: @ViewBag.InviteeName <@ViewBag.to>
 From: KEYS GradHub <gradhub@keysofva.org>
-Subject: Teacher Invitation to KEYS GradHub
+Subject: Welcome to KEYS GradHub!!
+Content-Type: text/html; charset=utf-8
 
-Hello @ViewBag.InviteeName,
 
-This email will need to be written out by KEYS. However, here is your invitation
-code: @ViewBag.InviteCode
-
-Sincerly,
-KEYS Grad Hub
+<html>
+    <head><title>Welcome to the KEYS GradHub</title></head>
+    <body>
+        <p>Dear @ViewBag.InviteeName,</p>
+        <p>
+            Welcome to the KEYS GradHub. This website has been custom designed for the purpose of having a
+            central location where students and parents can submit information that is required for the yearbook
+            and graduation ceremony, and at the same time, allows KEYS leadership and staff members to easily
+            access the information as it is needed.
+        </p>
+        <p>
+            Before using the site, you will need to Register for an account.
+            <ol>
+                <li>Click <a href="@Url.Action("Register", "Account", null, protocol: Request.Url.Scheme)">here</a> to Create a KEYS Gradhub Account.</li>
+                <li>Enter your First Name</li>
+                <li>Enter your Last Name</li>
+                <li>Enter this Email Address: @ViewBag.To <i>Note: this email will be the Email to be used to log into the site.</i></li>
+                <li>Copy and paste this Invite Code: @ViewBag.InviteCode</li>
+                <li>Enter a Password <i>Note: Please create a strong password</i></li>
+                <li>Confirm your password</li>
+            </ol>
+        </p>
+        <p>
+            Sincerely,
+        </p>
+        <p>GradHub Admin</p>
+    </body>
+</html>

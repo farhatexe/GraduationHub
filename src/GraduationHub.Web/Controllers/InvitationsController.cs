@@ -19,7 +19,7 @@ using Postal;
 
 namespace GraduationHub.Web.Controllers
 {
-   [GraduationHubAuthorize(Roles = "Teachers, Admin")]
+   [GraduationHubAuthorize(Roles = "Teacher, Admin")]
     public class InvitationsController : AppBaseController
     {
         private readonly ApplicationDbContext _context;

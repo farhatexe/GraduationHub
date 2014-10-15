@@ -21,7 +21,7 @@ namespace GraduationHub.Web.Controllers
             return View();
         }
 
-       [GraduationHubAuthorize(Roles = "Teachers, Admin")]
+       [GraduationHubAuthorize(Roles = "Teacher, Admin")]
         public ActionResult Teacher()
         {
             return RedirectToAction("Index", "Invitations");

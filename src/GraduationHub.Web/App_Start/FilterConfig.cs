@@ -9,7 +9,7 @@ namespace GraduationHub.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-/*            filters.Add(new GraduationHubAuthorize());*/
+            /*filters.Add(new GraduationHubAuthorize());*/
         }
     }
 }
