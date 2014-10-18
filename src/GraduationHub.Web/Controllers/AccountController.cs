@@ -65,9 +65,15 @@ namespace GraduationHub.Web.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string email = "", string inviteCode = "")
         {
-            return View();
+            var model = new RegisterViewModel()
+            {
+                Email = email,
+                InviteCode = inviteCode
+            };
+
+            return View(model);
         }
 
         //

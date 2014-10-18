@@ -9,21 +9,19 @@ Content-Type: text/html; charset=utf-8
     <body>
         <p>Dear @ViewBag.InviteeName,</p>
         <p>
-            Welcome to the KEYS GradHub. This website has been custom designed for the purpose of having a
+            Welcome to the <a href="https://gradhub.keysofva.org">KEYS GradHub</a>. This website has been custom designed for the purpose of having a
             central location where students and parents can submit information that is required for the yearbook
             and graduation ceremony, and at the same time, allows KEYS leadership and staff members to easily
             access the information as it is needed.
         </p>
         <p>
-            Before using the site, you will need to Register for an account.
+            Before using the site, you will need to
             <ol>
-                <li>Click <a href="@Url.Action("Register", "Account", null, protocol: Request.Url.Scheme)">here</a> to Create a KEYS Gradhub Account.</li>
-                <li>Enter your First Name</li>
-                <li>Enter your Last Name</li>
-                <li>Enter this Email Address: @ViewBag.To <i>Note: this email will be the Email to be used to log into the site.</i></li>
+                <li><a href="@Url.Action("Register", "Account", new { email = @ViewBag.To, inviteCode = @ViewBag.InviteCode }, protocol: Request.Url.Scheme)">Create a KEYS Gradhub Account.</a>  </li>
                 <li>Copy and paste this Invite Code: @ViewBag.InviteCode</li>
-                <li>Enter a Password <i>Note: Please create a strong password</i></li>
-                <li>Confirm your password</li>
+                <li>Enter this Email Address: @ViewBag.To <i>Note: this email will used to log into the site.</i></li>
+                <li>Enter your first and last name</li>
+                <li>Enter and confirm a password <i>Note: Please create a strong password</i></li>
             </ol>
         </p>
         <p>
