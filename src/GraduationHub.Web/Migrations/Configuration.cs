@@ -51,6 +51,7 @@ namespace GraduationHub.Web.Migrations
             var user = new ApplicationUser()
             {
                 UserName = "gradhub@keysofva.org",
+                Email =  "gradhub@keysofva.org",
                 FirstName = "System",
                 LastName = "Admin"
             };
