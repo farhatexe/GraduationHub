@@ -9,14 +9,12 @@ namespace GraduationHub.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/libraries").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Scripts/jquery.validate*",
                 "~/Scripts/underscore.js",
                 "~/Scripts/moment.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.validate*",
-                 "~/Scripts/mvcfoolproof.unobtrusive.min.js"
+                "~/Scripts/jquery.validate*"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/simplyCountable").Include(
@@ -27,9 +25,6 @@ namespace GraduationHub.Web
                 "~/Scripts/DataTables-1.10.2/plugins/dataTables.bootstrap.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/holder").Include(
-             "~/Scripts/holder.js"
-             ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

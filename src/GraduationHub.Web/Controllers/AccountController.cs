@@ -17,21 +17,19 @@ namespace GraduationHub.Web.Controllers
         private readonly IInvitationManager _invitationManager;
         private ApplicationUserManager _userManager;
 
-/*        public AccountController()
-        {
-        }*/
 
-        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager)
+        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager, HttpContextBase httpContextBase)
         {
+            _userManager = httpContextBase.GetOwinContext().GetUserManager<ApplicationUserManager>();
             _invitationManager = invitationManager;
-            UserManager = userManager;
+            //UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager
+/*        public ApplicationUserManager UserManager
         {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            get { return _userManager; }
             private set { _userManager = value; }
-        }
+        }*/
 
         //
         // GET: /Account/Login
@@ -51,7 +49,7 @@ namespace GraduationHub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
+                ApplicationUser user = await _userManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -102,7 +100,7 @@ namespace GraduationHub.Web.Controllers
             };
 
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
@@ -111,11 +109,11 @@ namespace GraduationHub.Web.Controllers
 
                 if (invitation.IsTeacher)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Teacher);
+                    await _userManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Teacher);
                 }
                 else
                 {
-                    await UserManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Student);
+                    await _userManager.AddToRoleAsync(user.Id, SecurityConstants.Roles.Student);
                 }
 
 
@@ -145,7 +143,7 @@ namespace GraduationHub.Web.Controllers
                 return View("Error");
             }
 
-            IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
+            IdentityResult result = await _userManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
                 return View("ConfirmEmail");
@@ -171,8 +169,8 @@ namespace GraduationHub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                ApplicationUser user = await _userManager.FindByNameAsync(model.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
                     return View();
@@ -219,13 +217,13 @@ namespace GraduationHub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
+                ApplicationUser user = await _userManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "No user found.");
                     return View();
                 }
-                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+                IdentityResult result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("ResetPasswordConfirmation", "Account");
@@ -280,11 +278,11 @@ namespace GraduationHub.Web.Controllers
                 {
                     IdentityResult result =
                         await
-                            UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+                            _userManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                                 model.NewPassword);
                     if (result.Succeeded)
                     {
-                        ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
                         await SignInAsync(user, false);
                         return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
                     }
@@ -303,7 +301,7 @@ namespace GraduationHub.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     IdentityResult result =
-                        await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                        await _userManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Manage", new {Message = ManageMessageId.SetPasswordSuccess});
@@ -329,10 +327,10 @@ namespace GraduationHub.Web.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && UserManager != null)
+            if (disposing && _userManager != null)
             {
-                UserManager.Dispose();
-                UserManager = null;
+                _userManager.Dispose();
+                _userManager = null;
             }
             base.Dispose(disposing);
         }
@@ -357,7 +355,7 @@ namespace GraduationHub.Web.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent},
-                await user.GenerateUserIdentityAsync(UserManager));
+                await user.GenerateUserIdentityAsync(_userManager));
         }
 
         private void AddErrors(IdentityResult result)
@@ -370,7 +368,7 @@ namespace GraduationHub.Web.Controllers
 
         private bool HasPassword()
         {
-            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
                 return user.PasswordHash != null;

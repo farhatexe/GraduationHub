@@ -20,6 +20,7 @@ namespace GraduationHub.Web.Models.Account
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Help("Passwords must have at least one non letter or digit character, at least one lowercase ('a'-'z') and at least one uppercase ('A'-'Z').")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
