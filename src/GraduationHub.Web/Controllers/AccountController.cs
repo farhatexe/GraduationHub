@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Models.Account;
@@ -22,14 +24,7 @@ namespace GraduationHub.Web.Controllers
         {
             _userManager = httpContextBase.GetOwinContext().GetUserManager<ApplicationUserManager>();
             _invitationManager = invitationManager;
-            //UserManager = userManager;
         }
-
-/*        public ApplicationUserManager UserManager
-        {
-            get { return _userManager; }
-            private set { _userManager = value; }
-        }*/
 
         //
         // GET: /Account/Login
@@ -102,7 +97,8 @@ namespace GraduationHub.Web.Controllers
                 UserName = invitation.Email,
                 Email = invitation.Email,
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                EmailConfirmed = true
             };
 
 
@@ -184,10 +180,22 @@ namespace GraduationHub.Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+
+                StringBuilder messageText = new StringBuilder();
+                messageText.AppendLine("<p>Hello,</p>");
+                messageText.AppendLine(
+                    "<p>We received a request to reset the password associated with this email address. If you made this request, please follow the instructions below. If you did not request to have your password reset, you can safely ignore this email. We assure you that your account is safe.</p>");
+               
+                messageText.AppendLine("<p>Click this <a href=\"" + callbackUrl + "\">link</a> to reset your password.</p>");
+                messageText.AppendLine("<p>If clicking the link doesn't work, you can copy and paste the link into your browser's address window. Once you have returned to KEYS GradHub, we will give you instructions for resetting your password.</p>");
+                messageText.AppendLine("<p>Sincerely,<p>");
+                messageText.AppendLine("<p>GradHub Admin</p>");
+                
+                await _userManager.SendEmailAsync(user.Id, "Reset Password", messageText.ToString());
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

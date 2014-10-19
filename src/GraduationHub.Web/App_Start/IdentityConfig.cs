@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Mail;
+using System.Threading;
+using System.Threading.Tasks;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
 using Microsoft.AspNet.Identity;
@@ -6,6 +9,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
+using Postal;
+using SendGrid;
 
 namespace GraduationHub.Web
 {
@@ -65,8 +70,24 @@ namespace GraduationHub.Web
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+
+            // convert IdentityMessage to a MailMessage
+            var email =
+               new MailMessage(new MailAddress("gradhub@keysofva.org", "KEYS GradHub"),
+               new MailAddress(message.Destination))
+               {
+                   Subject = message.Subject,
+                   Body = message.Body,
+                   IsBodyHtml = true
+               };
+
+            var client = new SmtpClient();
+
+            client.SendCompleted += (s, e) => client.Dispose();
+
+            return client.SendMailAsync(email);
+
+
         }
     }
 
