@@ -194,7 +194,7 @@ namespace GraduationHub.Web.Controllers
             return View(faqs);
         }
 
-        public ActionResult Information()
+        public ActionResult GraduateInformation()
         {
             InformationModel model = _dbContext.GraduateInformation
                 .Where(i => i.StudentId.Equals(_currentUser.User.Id)).Project().To<InformationModel>()
@@ -205,7 +205,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Information(InformationModel model)
+        public ActionResult GraduateInformation(InformationModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -228,12 +228,12 @@ namespace GraduationHub.Web.Controllers
                     Height = model.Height
                 });
 
-                return RedirectToAction<CheckListController>(c => c.Information())
+                return RedirectToAction<CheckListController>(c => c.GraduateInformation())
                     .WithSuccess("Your Graduation Information has been saved.");
             }
             catch (Exception)
             {
-                return RedirectToAction<CheckListController>(c => c.Information())
+                return RedirectToAction<CheckListController>(c => c.GraduateInformation())
                     .WithError("There was a problem. Your Graduation Information has been saved.");
             }
         }

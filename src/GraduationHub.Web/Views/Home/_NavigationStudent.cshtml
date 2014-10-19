@@ -1,9 +1,14 @@
-﻿<li>
+﻿@{
+
+    string faqClass = ViewBag.CurrentAction.Equals("Faqs", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    string datesClass = ViewBag.CurrentAction.Equals("ImportantDates", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+<li class="@faqClass">
     <a href="@Url.Action("Faqs", "CheckList")">
         <span class="glyphicon glyphicon-question-sign"></span> FAQ
     </a>
 </li>
-<li>
+<li class="@datesClass">
     <a href="@Url.Action("ImportantDates", "CheckList")">
         <span class="glyphicon glyphicon-calendar"></span> Important Dates
     </a>

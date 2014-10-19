@@ -34,6 +34,10 @@ namespace GraduationHub.Web.Controllers
             if (!_roleService.IsAuthenticated())
                 return PartialView("_NavigationUnauthorized");
 
+            // NOTE: Because we are in a Child View "Action" from the View's POV will be "Menu"
+            var rd = ControllerContext.ParentActionViewContext.RouteData;
+            ViewBag.CurrentAction = rd.GetRequiredString("action");
+            
             return PartialView(_roleService.IsTeacher() || _roleService.IsAdmin() ? "_NavigationTeacher" : "_NavigationStudent");
         }
 

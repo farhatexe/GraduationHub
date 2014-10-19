@@ -447,6 +447,7 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\utilities\uploadValidator.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Views\Emails\Web.config" />
@@ -454,7 +455,7 @@
     <Content Include="Views\Emails\StudentInvitation.cshtml" />
     <Content Include="Views\Emails\TeacherInvitation.cshtml" />
     <Content Include="Views\Shared\_PhotoUpload.cshtml" />
-    <Content Include="Views\CheckList\Information.cshtml" />
+    <Content Include="Views\CheckList\GraduateInformation.cshtml" />
     <Content Include="Views\Shared\_StudentTextEditor.cshtml" />
     <None Include="Content\Site.less" />
     <Content Include="robots.txt" />
