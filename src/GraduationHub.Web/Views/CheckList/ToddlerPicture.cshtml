@@ -14,3 +14,37 @@
 <hr />
 
 @Html.Partial("_PhotoUpload", Model)
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $('#fileUpload').change(function() {
+
+                // Get the file upload control file extension
+                var ext = $(this).val().split('.').pop().toLowerCase();
+
+                // Create array with the files extensions to upload
+                var fileListToUpload = new Array('jpg', 'tiff');
+
+                //Check the file extension is in the array.
+                var isValidFile = $.inArray(ext, fileListToUpload);
+
+                // isValidFile gets the value -1 if the file extension is not in the list.
+                if (isValidFile == -1) {
+                    alerts.error('Please select a valid file of type jpg.');
+                    $(this).replaceWith($(this).val('').clone(true));
+                } else {
+
+
+                    if ($(this).get(0).files[0].size > (1024 * 1024 * 7)) {
+                        alerts.error('File size should not exceed 7 MB.');
+                        $(this).replaceWith($(this).val('').clone(true));
+                    } else {
+                        alerts.success('Thank you for selecting a valid file.');
+                    }
+                }
+            });
+        });
+    </script>
+}

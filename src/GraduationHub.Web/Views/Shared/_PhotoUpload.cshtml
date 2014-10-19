@@ -12,8 +12,16 @@
         </div>
         <div class="fileinput-preview fileinput-exists thumbnail" style="max-height: 350px; max-width: 400px;"></div>
         <div>
-            <span class="btn btn-primary btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" accept='image/*' name="file"></span>
-            <a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput">Remove</a> <button class="btn btn-success fileinput-exists" type="submit">Save</button>
+            <span class="btn btn-primary btn-file">
+                <span class="fileinput-new">Select image</span>
+                <span class="fileinput-exists">Change</span>
+                <input id="fileUpload" type="file" accept='image/jpg' name="file">
+            </span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+            <button class="btn btn-success fileinput-exists" type="submit">Save</button>
         </div>
     </div>
+    <p class="help-block">Please upload JPG Files that are not larger than 7mb.</p>
 }
+
+
