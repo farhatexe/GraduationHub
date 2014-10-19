@@ -1,14 +1,21 @@
-﻿<li>
+﻿@{
+
+    string invites = ViewBag.CurrentController.Equals("Invitations", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    string faqs = ViewBag.CurrentController.Equals("FrequentlyAskedQuestions", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    string dates = ViewBag.CurrentController.Equals("ImportantDates", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+
+<li class ="@invites">
     <a href="@Url.Action("Index", "Invitations")">
         <span class="fa fa-envelope-o"></span> Invitations
     </a>
 </li>
-<li>
+<li class="@faqs">
     <a href="@Url.Action("Index", "FrequentlyAskedQuestions")">
         <span class="glyphicon glyphicon-question-sign"></span> FAQ
     </a>
 </li>
-<li>
+<li class="@dates">
     <a href="@Url.Action("Index", "ImportantDates")">
         <span class="glyphicon glyphicon-calendar"></span> Important Dates
     </a>

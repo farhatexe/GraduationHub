@@ -37,7 +37,8 @@ namespace GraduationHub.Web.Controllers
             // NOTE: Because we are in a Child View "Action" from the View's POV will be "Menu"
             var rd = ControllerContext.ParentActionViewContext.RouteData;
             ViewBag.CurrentAction = rd.GetRequiredString("action");
-            
+            ViewBag.CurrentController = rd.GetRequiredString("controller");
+
             return PartialView(_roleService.IsTeacher() || _roleService.IsAdmin() ? "_NavigationTeacher" : "_NavigationStudent");
         }
 
