@@ -22,6 +22,7 @@
             <th>
                 Email
             </th>
+            <th>Invite Code</th>
             <th>
                 Is Teacher
             </th>
@@ -52,7 +53,7 @@
                 },
                 columnDefs: [
                     {
-                        targets: [2, 3, 4],
+                        targets: [3, 4, 5],
                         render: function(data, type, row) {
                             return data === true ? 'Yes' : 'No';
                         }
@@ -66,6 +67,7 @@
                 columns: [
                     { data: 'inviteeName' },
                     { data: 'email' },
+                    { data: 'inviteCode' },
                     { data: 'isTeacher' },
                     { data: 'hasBeenRedeemed' },
                     { data: 'hasBeenSent' },

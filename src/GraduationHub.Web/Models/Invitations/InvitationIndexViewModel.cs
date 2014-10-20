@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure.Mapping;
 
@@ -12,6 +13,8 @@ namespace GraduationHub.Web.Models.Invitations
         public string InviteeName { get; set; }
 
         public string Email { get; set; }
+
+        public Guid? InviteCode { get; set; }
 
         public bool HasBeenRedeemed { get; set; }
 
