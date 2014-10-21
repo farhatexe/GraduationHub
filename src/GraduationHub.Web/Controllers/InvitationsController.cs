@@ -101,8 +101,7 @@ namespace GraduationHub.Web.Controllers
             {
                 InviteeName = formModel.InviteeName,
                 Email = formModel.Email,
-                IsTeacher = formModel.IsTeacher,
-                InviteCode = Guid.NewGuid()
+                IsTeacher = formModel.IsTeacher
             };
 
             _context.Invitations.Add(invitation);
@@ -213,19 +212,15 @@ namespace GraduationHub.Web.Controllers
             // get the invite:
             Invitation invitation = await _context.Invitations.SingleAsync(i => i.Id == id);
 
-            if (!invitation.InviteCode.HasValue)
-            {
-                return
-                    RedirectToAction<InvitationsController>(x => x.Index())
-                        .WithSuccess("This invitation does not have an Invite Code.");
-            }
-
             if (invitation.HasBeenSent)
             {
                 return
                     RedirectToAction<InvitationsController>(x => x.Index())
                         .WithWarning("This invitation has already been sent.");
             }
+
+            // Generate an Invitation Code
+            invitation.InviteCode = Guid.NewGuid();
 
             dynamic email = invitation.IsTeacher ? new Email("TeacherInvitation") : new Email("StudentInvitation");
 
@@ -241,24 +236,5 @@ namespace GraduationHub.Web.Controllers
             return RedirectToAction("Index").WithSuccess("Invitation has been sent.");
         }
 
-        public async Task<ActionResult> RegenerateInviteCode(int id)
-        {
-            Invitation invitation = await _context.Invitations.SingleAsync(i => i.Id == id);
-
-            if (invitation.HasBeenRedeemed)
-            {
-                return RedirectToAction<InvitationsController>(x => x.Index())
-                    .WithInfo("Invitation has already been redeemed.");
-            }
-
-            invitation.InviteCode = Guid.NewGuid();
-            invitation.HasBeenSent = false;
-
-            _context.Entry(invitation).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return
-                RedirectToAction<InvitationsController>(x => x.Index())
-                    .WithSuccess("Invite code has been regenerated.");
-        }
     }
 }
