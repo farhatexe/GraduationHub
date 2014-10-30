@@ -26,6 +26,7 @@ namespace GraduationHub.Web
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
+                ExpireTimeSpan = TimeSpan.FromMinutes(30),
                 Provider = new CookieAuthenticationProvider
                 {
                     OnValidateIdentity =

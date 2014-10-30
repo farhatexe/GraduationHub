@@ -9,7 +9,7 @@ namespace GraduationHub.Web.Models.CheckList
 {
 
     [Validator(typeof(InformationModelValidator))]
-    public class InformationModel : IMapFrom<GraduateInformation>
+    public class InformationModel : IMapFrom<Domain.GraduateInformation>
     {
         [Display(Name = "Full Given Name"), Watermark(PlaceHolder = "As you would like it to appear on your diploma.")]
         public string Name { get; set; }

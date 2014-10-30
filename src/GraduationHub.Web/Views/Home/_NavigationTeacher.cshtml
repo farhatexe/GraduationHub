@@ -3,6 +3,7 @@
     string invites = ViewBag.CurrentController.Equals("Invitations", StringComparison.OrdinalIgnoreCase) ? "active" : "";
     string faqs = ViewBag.CurrentController.Equals("FrequentlyAskedQuestions", StringComparison.OrdinalIgnoreCase) ? "active" : "";
     string dates = ViewBag.CurrentController.Equals("ImportantDates", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    string gradInfo = ViewBag.CurrentController.Equals("GraduateInformation", StringComparison.OrdinalIgnoreCase) ? "active" : "";
 }
 
 <li class ="@invites">
@@ -18,6 +19,12 @@
 <li class="@dates">
     <a href="@Url.Action("Index", "ImportantDates")">
         <span class="glyphicon glyphicon-calendar"></span> Important Dates
+    </a>
+</li>
+
+<li class="@gradInfo">
+    <a href="@Url.Action("Index", "GraduateInformation")">
+        <span class="fa fa-graduation-cap"></span> Graduate Information
     </a>
 </li>
 

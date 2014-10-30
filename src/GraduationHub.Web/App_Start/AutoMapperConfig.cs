@@ -17,6 +17,7 @@ namespace GraduationHub.Web
             LoadStandardMappings(types);
 
             LoadCustomMappings(types);
+
         }
 
         private static void LoadCustomMappings(IEnumerable<Type> types)

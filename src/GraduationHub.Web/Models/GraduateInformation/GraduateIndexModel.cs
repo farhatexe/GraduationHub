@@ -1,0 +1,34 @@
+﻿using AutoMapper;
+using GraduationHub.Web.Domain;
+using GraduationHub.Web.Infrastructure.Mapping;
+using GraduationHub.Web.Models.Invitations;
+
+namespace GraduationHub.Web.Models.GraduateInformation
+{
+    public class GraduateIndexModel : IHaveCustomMappings
+    {
+        public string StudentName { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
+        public string StudentEmail { get; set; }
+        public string ParentEmail { get; set; }
+        public string StudentId { get; set; }
+        public bool FineArts { get; set; }
+        public bool AcademicClasses { get; set; }
+        public bool WillParticipateInGraduation { get; set; }
+        public bool? TakenKeysWorldView { get; set; }
+        public bool? TakenApprovedWorldView { get; set; }
+        public bool? WillSecureAnnouncements { get; set; }
+        public bool? NeedCapAndGown { get; set; }
+        public string Height { get; set; }
+
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<Domain.GraduateInformation, GraduateIndexModel>()
+                .ForMember(d => d.StudentName, o => o.MapFrom(s => s.Student.FirstName + " " + s.Student.LastName))
+                .ForMember(d => d.Address, o => o.MapFrom(s => s.Street+ ", " + s.City));
+        }
+    }
+
+}

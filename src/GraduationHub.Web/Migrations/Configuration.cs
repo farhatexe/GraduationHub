@@ -16,6 +16,7 @@ namespace GraduationHub.Web.Migrations
     {
         public Configuration()
         {
+            
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
         }

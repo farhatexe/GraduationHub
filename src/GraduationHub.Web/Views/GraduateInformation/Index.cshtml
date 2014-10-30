@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Graduate Information</h2>
+<p>
+    Use this page to view the Graduates response to the Graduate Questionaire.
+</p>
+
+<table class="table table-striped table-bordered table-condensed" id="dataTable">
+    <thead>
+        <tr>
+            <th rowspan="2"></th>
+            <th rowspan="2">StudentName</th>
+            <th colspan="2" class="text-center">KEYS Classes</th>
+            <th colspan="2" class="text-center">World View</th>
+            <th colspan="3" class="text-center">Graduation</th>
+        </tr>
+        <tr>
+            <th>Fine Arts</th>
+            <th>Academic</th>
+            <th>KEYS</th>
+            <th>Approved</th>
+            <th>Participate</th>
+            <th>Announcements</th>
+            <th>Gap & Gown</th>
+
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+        $(document).ready(function() {
+            var table = $('#dataTable').DataTable({
+                order: [[1, 'asc']],
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                ajax: {
+                    url: 'GraduateInformation/IndexTable'
+                },
+                columnDefs: [
+                    {
+                        targets: [2, 3, 4, 5, 6, 7, 8],
+                        className: 'text-center',
+                        render: function(data, type, row) {
+
+                            if (data === null) {
+                                return '';
+                            }
+
+                            return data === true ? 'Yes' : 'No';
+                        }
+                    }
+                ],
+                columns: [
+                    {
+                        "class": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ''
+                    },
+                    { data: 'studentName' },
+                    { data: 'fineArts' },
+                    { data: 'academicClasses' },
+                    { data: 'takenKeysWorldView' },
+                    { data: 'takenApprovedWorldView' },
+                    { data: 'willParticipateInGraduation' },
+                    { data: 'willSecureAnnouncements' },
+                    { data: 'needCapAndGown' }
+                ]
+            });
+
+            // Add event listener for opening and closing details
+            $('#dataTable tbody').on('click', 'td.details-control', function() {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+
+        function format(d) {
+            // `d` is the original data object for the row
+            return '<table class="table table-condensed " style="padding-left:50px;">' +
+                '<tr>' +
+                '<td>Diploma Name:</td>' +
+                '<td>' + d.name + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Address:</td>' +
+                '<td>' + d.address + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Student Email:</td>' +
+                '<td>' + d.studentEmail + '</td>' + +
+                '</tr>' +
+                '<tr>' +
+                '<td>Parent Email:</td>' +
+                '<td>' + d.parentEmail + '</td>' + +
+                '</tr>' +
+                '<tr>' +
+                '<td>Height:</td>' +
+                '<td>' + d.height + '</td>' + +
+                '</tr>' +
+                '</table>';
+        }
+    </script>
+}

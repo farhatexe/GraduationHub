@@ -4,6 +4,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GraduationHub.Web.Data
 {
+    public class MyConfiguration : DbConfiguration
+    {
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

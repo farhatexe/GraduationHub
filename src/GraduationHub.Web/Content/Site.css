@@ -6287,14 +6287,28 @@ button.close {
 .panel-info .panel-title {
   color: #fff;
 }
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   padding-top: 70px;
   padding-bottom: 20px;
+  background: url('images/fresh_snow.png') repeat 0 0;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
+  background-color: white;
   padding-left: 15px;
   padding-right: 15px;
+  padding-top: 15px;
+  min-height: 100%;
+  -webkit-box-shadow: 0 0 20px #888888;
+  -moz-box-shadow: 0 0 20px #888888;
+  -ms-box-shadow: 0 0 20px #888888;
+  box-shadow: 0 0 20px #888888;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
 }
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -6322,5 +6336,12 @@ textarea {
 }
 .error {
   color: #c71c22;
+}
+td.details-control {
+  background: url('/Content/Images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('/Content/Images/details_close.png') no-repeat center center;
 }
 /*# sourceMappingURL=Site.css.map */
