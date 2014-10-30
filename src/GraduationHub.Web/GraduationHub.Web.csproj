@@ -432,8 +432,6 @@
     <Content Include="Content\Images\KEYS logo.jpg" />
     <Content Include="Content\Images\keys_logo.png" />
     <Content Include="Content\Images\male_silhouette.png" />
-    <Content Include="Content\Images\school.png" />
-    <Content Include="Content\Images\swirl_pattern.png" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Site.css">
