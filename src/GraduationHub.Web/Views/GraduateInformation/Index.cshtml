@@ -34,6 +34,32 @@
     @Scripts.Render("~/bundles/datatables")
 
     <script>
+        function format(d) {
+            // `d` is the original data object for the row
+            return '<table class="table table-condensed" >' +
+                '<tr>' +
+                '<td>Diploma Name:</td>' +
+                '<td>' + d.name + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Address:</td>' +
+                '<td>' + d.address + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Student Email:</td>' +
+                '<td>' + d.studentEmail + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Parent Email:</td>' +
+                '<td>' + d.parentEmail + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>Height:</td>' +
+                '<td>' + d.height + '</td>' +
+                '</tr>' +
+                '</table>';
+        }
+
         $(document).ready(function() {
             var table = $('#dataTable').DataTable({
                 order: [[1, 'asc']],
@@ -92,30 +118,6 @@
             });
         });
 
-        function format(d) {
-            // `d` is the original data object for the row
-            return '<table class="table table-condensed " style="padding-left:50px;">' +
-                '<tr>' +
-                '<td>Diploma Name:</td>' +
-                '<td>' + d.name + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Address:</td>' +
-                '<td>' + d.address + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Student Email:</td>' +
-                '<td>' + d.studentEmail + '</td>' + +
-                '</tr>' +
-                '<tr>' +
-                '<td>Parent Email:</td>' +
-                '<td>' + d.parentEmail + '</td>' + +
-                '</tr>' +
-                '<tr>' +
-                '<td>Height:</td>' +
-                '<td>' + d.height + '</td>' + +
-                '</tr>' +
-                '</table>';
-        }
+
     </script>
 }
