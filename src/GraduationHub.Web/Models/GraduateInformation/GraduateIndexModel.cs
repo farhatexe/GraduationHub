@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure.Mapping;
 using GraduationHub.Web.Models.Invitations;
@@ -22,6 +23,7 @@ namespace GraduationHub.Web.Models.GraduateInformation
         public bool? NeedCapAndGown { get; set; }
         public string Height { get; set; }
 
+        
 
         public void CreateMappings(IConfiguration configuration)
         {

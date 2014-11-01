@@ -22,9 +22,10 @@ namespace GraduationHub.Web
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                 "~/Scripts/DataTables-1.10.2/media/js/jquery.dataTables.js",
+                "~/Scripts/DataTables-1.10.2/extensions/TableTools/js/dataTables.tableTools.js",
                 "~/Scripts/DataTables-1.10.2/plugins/dataTables.bootstrap.js"
-                ));
 
+                ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -52,6 +53,7 @@ namespace GraduationHub.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/datepicker3.css",
                 "~/Content/DataTables-1.10.2/plugins/dataTables.bootstrap.css",
+                "~/Content/DataTables-1.10.2/extensions/TableTools/css/dataTables.tableTools.css",
                 "~/Content/jasny-bootstrap.css",
                 "~/Content/bootstrap3-wysihtml5.css",
                 "~/Content/site.css"));

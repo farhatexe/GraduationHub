@@ -11,10 +11,10 @@
     <thead>
         <tr>
             <th rowspan="2"></th>
-            <th rowspan="2">StudentName</th>
+            <th rowspan="2">Student</th>
             <th colspan="2" class="text-center">KEYS Classes</th>
             <th colspan="2" class="text-center">World View</th>
-            <th colspan="3" class="text-center">Graduation</th>
+            <th colspan="4" class="text-center">Graduation</th>
         </tr>
         <tr>
             <th>Fine Arts</th>
@@ -24,7 +24,11 @@
             <th>Participate</th>
             <th>Announcements</th>
             <th>Gap & Gown</th>
-
+            <th>Height</th>
+            <th>Diploma Name</th>
+            <th>Address</th>
+            <th>Student Email</th>
+            <th>Parent Email</th>
         </tr>
     </thead>
 </table>
@@ -53,19 +57,29 @@
                 '<td>Parent Email:</td>' +
                 '<td>' + d.parentEmail + '</td>' +
                 '</tr>' +
-                '<tr>' +
-                '<td>Height:</td>' +
-                '<td>' + d.height + '</td>' +
-                '</tr>' +
                 '</table>';
         }
 
         $(document).ready(function() {
             var table = $('#dataTable').DataTable({
                 order: [[1, 'asc']],
+                dom: 'T<"clear">lfrtip',
+                dom: "<'row'<'col-xs-6'T><'col-xs-6'f>>" +
+                    "<'row'<'col-xs-12't>>" +
+                    "<'row'<'col-xs-6'i><'col-xs-6'p>>",
                 processing: true,
                 serverSide: true,
+                paging: false,
                 stateSave: true,
+                tableTools: {
+                    "sSwfPath": "/Scripts/DataTables-1.10.2/extensions/TableTools/swf/copy_csv_xls.swf",
+                    aButtons: [  {
+                        sExtends: 'xls',
+                        mColumns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+                        sTitle: 'KEYS Graduate Information',
+                        sButtonText :'Export to Excel'
+                    }]
+                },
                 ajax: {
                     url: 'GraduateInformation/IndexTable'
                 },
@@ -73,6 +87,7 @@
                     {
                         targets: [2, 3, 4, 5, 6, 7, 8],
                         className: 'text-center',
+                        searchable: false,
                         render: function(data, type, row) {
 
                             if (data === null) {
@@ -87,17 +102,23 @@
                     {
                         "class": 'details-control',
                         "orderable": false,
+                        searchable: false,
                         "data": null,
                         "defaultContent": ''
                     },
                     { data: 'studentName' },
-                    { data: 'fineArts' },
-                    { data: 'academicClasses' },
-                    { data: 'takenKeysWorldView' },
-                    { data: 'takenApprovedWorldView' },
-                    { data: 'willParticipateInGraduation' },
-                    { data: 'willSecureAnnouncements' },
-                    { data: 'needCapAndGown' }
+                    { data: 'fineArts', searchable: false },
+                    { data: 'academicClasses', searchable: false },
+                    { data: 'takenKeysWorldView', searchable: false },
+                    { data: 'takenApprovedWorldView', searchable: false },
+                    { data: 'willParticipateInGraduation', searchable: false },
+                    { data: 'willSecureAnnouncements', searchable: false },
+                    { data: 'needCapAndGown', searchable: false },
+                    { data: 'height', searchable: false, className: 'text-center', },
+                    { data: 'name', searchable: false, visible: false, },
+                    { data: 'address', searchable: false, visible: false, },
+                    { data: 'studentEmail', searchable: false, visible: false, },
+                    { data: 'parentEmail', searchable: false, visible: false, }
                 ]
             });
 

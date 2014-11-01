@@ -1,9 +1,23 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@model HandleErrorInfo
 
 @{
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
+@section styles{
+    <style>
+        .col-centered {
+            float: none;
+            margin: 0 auto;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-lg-5 col-centered well">
+        
+        <i class="fa fa-graduation-cap fa-5x pull-left fa-border"></i>
+        <h3 >Oh no, something completely unexpected has happened.</h3>
+        <p>Although the error has been logged and an email has been sent to the squirrels, they may be outside playing and doing squirrel things.</p>
+        <p>If the site continues to produce the error, please contact Mrs. Bryan so she can round up the squirrels and get the error resolved.</p>
+    </div>
+</div>

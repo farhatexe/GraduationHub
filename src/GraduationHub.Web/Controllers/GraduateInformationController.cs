@@ -36,12 +36,17 @@ namespace GraduationHub.Web.Controllers
                         .Project()
                         .To<GraduateIndexModel>().OrderBy(requestModel.Sort());
 
+                if (requestModel.HasSearchValues())
+                {
+                    data = data.Where(requestModel.SearchValues(), requestModel.Search.Value);
+                }
+
                 int totalRecords = data.Count();
 
-                IQueryable<GraduateIndexModel> paged =
-                    data.Skip(requestModel.Start).Take(requestModel.Length);
+/*                IQueryable<GraduateIndexModel> paged =
+                    data.Skip(requestModel.Start).Take(requestModel.Length);*/
 
-                var response = new DataTablesResponse(requestModel.Draw, paged, totalRecords, totalRecords);
+                var response = new DataTablesResponse(requestModel.Draw, data, totalRecords, totalRecords);
 
                 return JsonSuccess(response, JsonRequestBehavior.AllowGet);
             }

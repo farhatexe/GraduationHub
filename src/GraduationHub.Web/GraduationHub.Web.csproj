@@ -451,6 +451,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\DataTables-1.10.2\images\Sorting icons.psd" />
     <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Content\Files\gradannouncement.pdf" />
     <None Include="Properties\PublishProfiles\GraduateHub %282%29.pubxml" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />

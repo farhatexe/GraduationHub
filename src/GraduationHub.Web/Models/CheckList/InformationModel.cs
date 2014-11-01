@@ -49,5 +49,10 @@ namespace GraduationHub.Web.Models.CheckList
         [Display(Name = "What is your height with *shoes?")]
         [Watermark(PlaceHolder = "Height Example: 5' 6\"")]
         public string Height { get; set; }
+
+        [Display(Name = "What is your height with *shoes?")]
+        public int HeightFeet { get; set; }
+
+        public int HeightInches { get; set; }
     }
 }

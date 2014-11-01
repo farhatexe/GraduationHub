@@ -135,7 +135,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 if ( DataTable.TableTools ) {
 	// Set the classes that TableTools uses to something suitable for Bootstrap
 	$.extend( true, DataTable.TableTools.classes, {
-		"container": "DTTT btn-group",
+		"container": "DTTT btn-group btn-group-sm",
 		"buttons": {
 			"normal": "btn btn-default",
 			"disabled": "disabled"
