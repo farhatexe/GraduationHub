@@ -38,9 +38,11 @@ namespace GraduationHub.Web
                 "~/Scripts/respond.js",
                 "~/Scripts/jasny-bootstrap.js",
                 "~/Scripts/bootstrap3-wysihtml5.all.min.js"));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/angular")
                 .Include("~/Scripts/angular.js")
+                .Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js")
+                .Include("~/Scripts/angular-ui/ui-bootstrap.js")
                 );
 
             bundles.Add(new ScriptBundle("~/bundles/app")

@@ -459,6 +459,10 @@
     <Content Include="Content\Files\gradannouncement.pdf" />
     <None Include="Properties\PublishProfiles\GraduateHub %282%29.pubxml" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\utilities\uploadValidator.js" />
@@ -473,8 +477,6 @@
     <Content Include="Views\Shared\_StudentTextEditor.cshtml" />
     <None Include="Content\Site.less" />
     <Content Include="robots.txt" />
-    <Content Include="Scripts\app\controllers\seniorPictureController.js" />
-    <Content Include="Scripts\app\controllers\studentBiographyController.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

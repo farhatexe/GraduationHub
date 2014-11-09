@@ -11,11 +11,12 @@
 
     var id = 'graduateHubApp';
 
-    var graduateHubApp = angular.module(id, []);
+    var graduateHubApp = angular.module(id, ['ui.bootstrap']);
 
     graduateHubApp.run([
 		function () {
-		    //Startup code goes here!
+		    //Startup code goes here
+
 		}
     ]);
 })();
