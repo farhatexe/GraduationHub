@@ -31,5 +31,20 @@ namespace GraduationHub.Web.Data
         {
             return new ApplicationDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(t => t.StudentExpressions)
+                .WithRequired(m => m.Student)
+                .HasForeignKey(m => m.StudentId);
+            
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(t => t.StudentPictures)
+                .WithRequired(m => m.ApplicationUser)
+                .HasForeignKey(m => m.StudentId);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using AutoMapper;
-using GraduationHub.Web.Domain;
+﻿using AutoMapper;
 using GraduationHub.Web.Infrastructure.Mapping;
-using GraduationHub.Web.Models.Invitations;
 
 namespace GraduationHub.Web.Models.GraduateInformation
 {
@@ -23,14 +20,12 @@ namespace GraduationHub.Web.Models.GraduateInformation
         public bool? NeedCapAndGown { get; set; }
         public string Height { get; set; }
 
-        
 
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Domain.GraduateInformation, GraduateIndexModel>()
                 .ForMember(d => d.StudentName, o => o.MapFrom(s => s.Student.FirstName + " " + s.Student.LastName))
-                .ForMember(d => d.Address, o => o.MapFrom(s => s.Street+ ", " + s.City));
+                .ForMember(d => d.Address, o => o.MapFrom(s => s.Street + ", " + s.City));
         }
     }
-
 }

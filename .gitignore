@@ -216,3 +216,6 @@ pip-log.txt
 .mr.developer.cfg
 *.mdf
 *.ldf
+src/GraduationHub.Web/App_Data/aspnet-GraduationHub.Web-20140706115700.mdf
+*.mdf
+*.ldf

@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using DataTables.Mvc;
@@ -7,8 +8,6 @@ using GraduationHub.Web.Data;
 using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Models.GraduateInformation;
-using System.Data.Entity;
-using System.Linq.Dynamic;
 
 namespace GraduationHub.Web.Controllers
 {
@@ -29,33 +28,21 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult IndexTable([ModelBinder(typeof (DataTablesBinder))] IDataTablesRequest requestModel)
         {
-            try
+            IQueryable<GraduateIndexModel> data =
+                _dbContext.GraduateInformation.Include(i => i.Student)
+                    .Project()
+                    .To<GraduateIndexModel>().OrderBy(requestModel.Sort());
+
+            if (requestModel.HasSearchValues())
             {
-                IQueryable<GraduateIndexModel> data =
-                    _dbContext.GraduateInformation.Include(i => i.Student)
-                        .Project()
-                        .To<GraduateIndexModel>().OrderBy(requestModel.Sort());
-
-                if (requestModel.HasSearchValues())
-                {
-                    data = data.Where(requestModel.SearchValues(), requestModel.Search.Value);
-                }
-
-                int totalRecords = data.Count();
-
-/*                IQueryable<GraduateIndexModel> paged =
-                    data.Skip(requestModel.Start).Take(requestModel.Length);*/
-
-                var response = new DataTablesResponse(requestModel.Draw, data, totalRecords, totalRecords);
-
-                return JsonSuccess(response, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                data = data.Where(requestModel.SearchValues(), requestModel.Search.Value);
             }
 
-            return null;
+            int totalRecords = data.Count();
+
+            var response = new DataTablesResponse(requestModel.Draw, data, totalRecords, totalRecords);
+
+            return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

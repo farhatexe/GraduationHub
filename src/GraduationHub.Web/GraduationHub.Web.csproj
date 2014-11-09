@@ -236,6 +236,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportantDatesController.cs" />
     <Compile Include="Controllers\InvitationsController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\FieldLengths.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Infrastructure\DataTablesRequestExtensions.cs" />
     <Compile Include="Infrastructure\DateTimeExtensions.cs" />
     <Compile Include="Infrastructure\ICurrentUser.cs" />
+    <Compile Include="Infrastructure\IEntityConfiguration.cs" />
     <Compile Include="Infrastructure\IRoleService.cs" />
     <Compile Include="Infrastructure\Mapping\CustomResolvers.cs" />
     <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
@@ -304,6 +306,10 @@
     <Compile Include="Migrations\201409062207339_Initial.Designer.cs">
       <DependentUpon>201409062207339_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411040013351_AddExpressionAndPicturesToApplicationUser.cs" />
+    <Compile Include="Migrations\201411040013351_AddExpressionAndPicturesToApplicationUser.Designer.cs">
+      <DependentUpon>201411040013351_AddExpressionAndPicturesToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
@@ -334,8 +340,7 @@
     <Compile Include="Models\StudentExpressions\StudentExpressionDeleteModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionEditModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionIndexModel.cs" />
-    <Compile Include="Models\Students\SeniorPictureModel.cs" />
-    <Compile Include="Models\Students\StudentExpressionModel.cs" />
+    <Compile Include="Models\Students\StudentIndexModel.cs" />
     <Compile Include="Notifications\SaveExpression.cs" />
     <Compile Include="Notifications\SaveGradInfo.cs" />
     <Compile Include="Notifications\SavePicture.cs" />
@@ -746,6 +751,7 @@
     <Content Include="Views\GraduateInformation\Index.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\_NotFound.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -756,6 +762,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409062207339_Initial.resx">
       <DependentUpon>201409062207339_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411040013351_AddExpressionAndPicturesToApplicationUser.resx">
+      <DependentUpon>201411040013351_AddExpressionAndPicturesToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

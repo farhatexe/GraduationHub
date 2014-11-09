@@ -4,6 +4,7 @@
     string faqs = ViewBag.CurrentController.Equals("FrequentlyAskedQuestions", StringComparison.OrdinalIgnoreCase) ? "active" : "";
     string dates = ViewBag.CurrentController.Equals("ImportantDates", StringComparison.OrdinalIgnoreCase) ? "active" : "";
     string gradInfo = ViewBag.CurrentController.Equals("GraduateInformation", StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    string student = ViewBag.CurrentController.Equals("Students", StringComparison.OrdinalIgnoreCase) ? "active" : "";
 }
 
 <li class ="@invites">
@@ -28,4 +29,9 @@
     </a>
 </li>
 
+<li class="@student">
+    <a href="@Url.Action("Index", "Students")">
+        <span class="fa fa-group"></span> Students
+    </a>
+</li>
 

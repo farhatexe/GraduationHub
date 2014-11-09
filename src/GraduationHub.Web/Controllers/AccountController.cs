@@ -1,8 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Models.Account;
@@ -20,7 +20,8 @@ namespace GraduationHub.Web.Controllers
         private ApplicationUserManager _userManager;
 
 
-        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager, HttpContextBase httpContextBase)
+        public AccountController(ApplicationUserManager userManager, IInvitationManager invitationManager,
+            HttpContextBase httpContextBase)
         {
             _userManager = httpContextBase.GetOwinContext().GetUserManager<ApplicationUserManager>();
             _invitationManager = invitationManager;
@@ -44,13 +45,20 @@ namespace GraduationHub.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await _userManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                try
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    ApplicationUser user = await _userManager.FindAsync(model.Email, model.Password);
+                    if (user != null)
+                    {
+                        await SignInAsync(user, model.RememberMe);
+                        return RedirectToLocal(returnUrl);
+                    }
+                    ModelState.AddModelError("", "Invalid username or password.");
                 }
-                ModelState.AddModelError("", "Invalid username or password.");
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -62,7 +70,7 @@ namespace GraduationHub.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register(string email = "", string inviteCode = "")
         {
-            var model = new RegisterViewModel()
+            var model = new RegisterViewModel
             {
                 Email = email,
                 InviteCode = inviteCode
@@ -181,19 +189,22 @@ namespace GraduationHub.Web.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                string callbackUrl = Url.Action("ResetPassword", "Account", new {userId = user.Id, code},
+                    Request.Url.Scheme);
 
 
-                StringBuilder messageText = new StringBuilder();
+                var messageText = new StringBuilder();
                 messageText.AppendLine("<p>Hello,</p>");
                 messageText.AppendLine(
                     "<p>We received a request to reset the password associated with this email address. If you made this request, please follow the instructions below. If you did not request to have your password reset, you can safely ignore this email. We assure you that your account is safe.</p>");
-               
-                messageText.AppendLine("<p>Click this <a href=\"" + callbackUrl + "\">link</a> to reset your password.</p>");
-                messageText.AppendLine("<p>If clicking the link doesn't work, you can copy and paste the link into your browser's address window. Once you have returned to KEYS GradHub, we will give you instructions for resetting your password.</p>");
+
+                messageText.AppendLine("<p>Click this <a href=\"" + callbackUrl +
+                                       "\">link</a> to reset your password.</p>");
+                messageText.AppendLine(
+                    "<p>If clicking the link doesn't work, you can copy and paste the link into your browser's address window. Once you have returned to KEYS GradHub, we will give you instructions for resetting your password.</p>");
                 messageText.AppendLine("<p>Sincerely,<p>");
                 messageText.AppendLine("<p>GradHub Admin</p>");
-                
+
                 await _userManager.SendEmailAsync(user.Id, "Reset Password", messageText.ToString());
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }

@@ -1,4 +1,4 @@
-using System.Security.Permissions;
+using System.Data.Entity.Migrations;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
 using GraduationHub.Web.Infrastructure;
@@ -7,21 +7,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GraduationHub.Web.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<GraduationHub.Web.Data.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
-            
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(GraduationHub.Web.Data.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -49,10 +43,10 @@ namespace GraduationHub.Web.Migrations
 
             var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            var user = new ApplicationUser()
+            var user = new ApplicationUser
             {
                 UserName = "gradhub@keysofva.org",
-                Email =  "gradhub@keysofva.org",
+                Email = "gradhub@keysofva.org",
                 FirstName = "System",
                 LastName = "Admin"
             };
