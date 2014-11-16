@@ -12,8 +12,7 @@ namespace GraduationHub.Web.Models.Account
         [Required, Help("The code from the Invitation Email.")]
         public string InviteCode { get; set; }
 
-        [Required, StringLength(50), Watermark(PlaceHolder = "Graduate's First Name")]
-        [Help("This should be the Graduate's First Name.")]
+        [Required, StringLength(50), Display(Name = "Graduate's First Name")]
         public string FirstName { get; set; }
 
         [Required, StringLength(50)]
