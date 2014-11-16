@@ -341,6 +341,7 @@
     <Compile Include="Models\StudentExpressions\StudentExpressionEditModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionIndexModel.cs" />
     <Compile Include="Models\Students\StudentIndexModel.cs" />
+    <Compile Include="Models\Students\StudentInformationModel.cs" />
     <Compile Include="Notifications\SaveExpression.cs" />
     <Compile Include="Notifications\SaveGradInfo.cs" />
     <Compile Include="Notifications\SavePicture.cs" />
@@ -756,6 +757,7 @@
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\_NotFound.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Students\StudentInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,11 +5,14 @@ using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using DataTables.Mvc;
 using GraduationHub.Web.Data;
+using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
+using GraduationHub.Web.Infrastructure.Alerts;
 using GraduationHub.Web.Models.Students;
 
 namespace GraduationHub.Web.Controllers
 {
+    [GraduationHubAuthorize(Roles = "Teacher, Admin")]
     public class StudentsController : AppBaseController
     {
         private readonly ApplicationDbContext _dbContext;
@@ -44,6 +47,36 @@ namespace GraduationHub.Web.Controllers
             var response = new DataTablesResponse(requestModel.Draw, data, totalRecords, totalRecords);
 
             return JsonSuccess(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult StudentInformation(string id)
+        {
+            var studentInfo = _dbContext.GraduateInformation.Project().To<StudentInformationModel>().Single(x => x.StudentId.Equals(id));
+
+            return View(studentInfo).WithInfo("This is to demonstrate what the final app will look like.");
+        }
+
+        public ActionResult GetSeniorPicture(string id)
+        {
+            return null;
+        }
+
+        [ChildActionOnly]
+        public ActionResult StudentPictures(string id)
+        {
+            return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetPicture(string id)
+        {
+            return null;
+        }
+
+        [ChildActionOnly]
+        public ActionResult StudenExpressions()
+        {
+            return View();
         }
     }
 }
