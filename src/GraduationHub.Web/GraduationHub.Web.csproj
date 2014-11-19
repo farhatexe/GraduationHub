@@ -347,7 +347,6 @@
     <Compile Include="Notifications\SavePicture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\GetExpression.cs" />
-    <Compile Include="Requests\GetGraduateInformation.cs" />
     <Compile Include="Requests\GetPicture.cs" />
     <Compile Include="Services\InvitationManager.cs" />
     <Compile Include="Startup.cs" />

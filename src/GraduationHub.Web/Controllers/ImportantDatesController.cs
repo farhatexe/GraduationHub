@@ -27,7 +27,7 @@ namespace GraduationHub.Web.Controllers
         }
 
         // GET: ImportantDates
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             return View();
         }
