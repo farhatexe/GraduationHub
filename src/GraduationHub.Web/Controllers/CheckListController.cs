@@ -149,7 +149,7 @@ namespace GraduationHub.Web.Controllers
         public void GetPicture(StudentPictureType type)
         {
             Response<WebImage> response =
-                _mediator.Request(new GetPicture {Type = type});
+                _mediator.Request(new GetPicture {Type = type, UserId = _currentUser.User.Id});
 
             response.Data.Write();
         }

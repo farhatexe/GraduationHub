@@ -1,0 +1,10 @@
+﻿@model StudentModel
+          
+<div class="row">
+    <div class="col-md-12">
+        <div class="thumbnail">
+            <img src="@Url.Action("GetPicture", "Students", new {@Model.StudentPictureType, Model.Id })" alt="" />
+        </div>
+    </div>
+</div>
+

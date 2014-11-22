@@ -3,7 +3,6 @@ using System.Web.Helpers;
 using System.Web.Hosting;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
-using GraduationHub.Web.Infrastructure;
 using ShortBus;
 
 namespace GraduationHub.Web.Requests
@@ -11,23 +10,22 @@ namespace GraduationHub.Web.Requests
     public class GetPicture : IRequest<WebImage>
     {
         public StudentPictureType Type { get; set; }
+        public string UserId { get; set; }
     }
 
     public class GetPictureHandler : IRequestHandler<GetPicture, WebImage>
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly ICurrentUser _currentUser;
 
-        public GetPictureHandler(ApplicationDbContext dbContext, ICurrentUser currentUser)
+        public GetPictureHandler(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _currentUser = currentUser;
         }
 
         public WebImage Handle(GetPicture request)
         {
             StudentPicture studentPicture = _dbContext.StudentPictures
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .Where(e => e.StudentId.Equals(request.UserId))
                 .SingleOrDefault(e => e.ImageType == request.Type);
 
             return studentPicture == null ? 

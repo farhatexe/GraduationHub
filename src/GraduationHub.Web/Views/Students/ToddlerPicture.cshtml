@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model StudentModel
 
 @{
     ViewBag.Title = "Toddler Picture";
@@ -11,3 +11,4 @@
     <p>If you do not have the capability to scan old photos that may not be in digital format, please write your name on the back of the photo and put them in an envelope in Cindy Bryan's mailbox in the KEYS office. <em>If you are not graduating with KEYS, this picture is not required.</em></p>
 
 </div>
+@Html.Partial("_Photo", Model)

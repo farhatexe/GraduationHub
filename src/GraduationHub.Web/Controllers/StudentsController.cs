@@ -1,15 +1,19 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using DataTables.Mvc;
 using GraduationHub.Web.Data;
+using GraduationHub.Web.Domain;
 using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
 using GraduationHub.Web.Models;
 using GraduationHub.Web.Models.Students;
+using GraduationHub.Web.Requests;
+using ShortBus;
 
 namespace GraduationHub.Web.Controllers
 {
@@ -17,10 +21,12 @@ namespace GraduationHub.Web.Controllers
     public class StudentsController : AppBaseController
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMediator _mediator;
 
-        public StudentsController(ApplicationDbContext dbContext)
+        public StudentsController(ApplicationDbContext dbContext, IMediator mediator)
         {
             _dbContext = dbContext;
+            _mediator = mediator;
         }
 
         public ActionResult Index()
@@ -52,6 +58,7 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult Biography(StudentModel model)
         {
+
             return View("Biography", model);
         }
 
@@ -67,32 +74,46 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult SeniorPortrait(StudentModel model)
         {
+            model.StudentPictureType = StudentPictureType.SeniorPortrait;
             return View(model);
         }
 
         public ActionResult BabyPicture(StudentModel model)
         {
+            model.StudentPictureType = StudentPictureType.BabyPicture;
             return View(model);
         }
 
         public ActionResult ToddlerPicture(StudentModel model)
         {
+            model.StudentPictureType = StudentPictureType.ToddlerPicture;
             return View(model);
         }
 
         public ActionResult ElementaryPicture(StudentModel model)
         {
+            model.StudentPictureType = StudentPictureType.ElementaryPicture;
             return View(model);
         }
 
         public ActionResult MiddleSchoolPicture(StudentModel model)
         {
+            model.StudentPictureType = StudentPictureType.MiddleSchoolPicture;
             return View(model);
         }
 
         public ActionResult HighSchoolPicture(StudentModel model)
         {
+            model.StudentPictureType = StudentPictureType.HighSchoolPicture;
             return View(model);
+        }
+
+        public void GetPicture(StudentModel model)
+        {
+            Response<WebImage> response =
+                _mediator.Request(new GetPicture { Type = model.StudentPictureType, UserId = model.Id});
+
+            response.Data.Write();
         }
     }
 }
