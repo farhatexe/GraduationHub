@@ -340,6 +340,7 @@
     <Compile Include="Models\StudentExpressions\StudentExpressionDeleteModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionEditModel.cs" />
     <Compile Include="Models\StudentExpressions\StudentExpressionIndexModel.cs" />
+    <Compile Include="Models\StudentModel.cs" />
     <Compile Include="Models\Students\StudentIndexModel.cs" />
     <Compile Include="Models\Students\StudentInformationModel.cs" />
     <Compile Include="Notifications\SaveExpression.cs" />

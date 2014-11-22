@@ -1,41 +1,17 @@
-﻿@using GraduationHub.Web.Controllers
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    string currentAction = ViewContext.RouteData.Values["action"].ToString();
-}
-<div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading"><span class="glyphicon glyphicon-ok"></span> Check List</div>
-
-            <!-- List group -->
-            <div class="list-group">
-                @(Html.ActionLink<StudentsController>(c => c.Biography(), "Biography", new { @class = currentAction == "Biography" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.ExpressionOfThanks(), "Expressions of Thanks", new { @class = currentAction == "ExpressionOfThanks" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.SlideShowCaption(), "Slideshow Caption", new { @class = currentAction == "SlideShowCaption" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.SeniorPortrait(), "Senior Portrait", new { @class = currentAction == "SeniorPortrait" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.BabyPicture(), "Baby Picture", new { @class = currentAction == "BabyPicture" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.ToddlerPicture(), "Toddler Picture", new { @class = currentAction == "ToddlerPicture" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.ElementaryPicture(), "Elementary Picture", new { @class = currentAction == "ElementaryPicture" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.MiddleSchoolPicture(), "Middle School Picture", new { @class = currentAction == "MiddleSchoolPicture" ? "list-group-item active" : "list-group-item" }))
-                @(Html.ActionLink<StudentsController>(c => c.HighSchoolPicture(), "High School Picture", new { @class = currentAction == "HighSchoolPicture" ? "list-group-item active" : "list-group-item" }))
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-8">
-        @RenderBody()
-    </div>
-</div>
-
-@section scripts
+﻿@using GraduationHub.Web.Infrastructure.Alerts
+@if (TempData.GetAlerts().Any())
 {
-    @RenderSection("scripts", false)
-}
-
-@section styles
-{
-    @RenderSection("styles", false)
+    <script type="text/javascript">
+		$(function() {
+			@foreach (var alert in TempData.GetAlerts())
+			{
+				<text>
+				window.alerts.showAlert({
+					message: '@alert.Message.Replace("'", "\\'")',
+					alertClass: '@alert.AlertClass'
+				});
+				</text>
+			}
+		});
+    </script>
 }

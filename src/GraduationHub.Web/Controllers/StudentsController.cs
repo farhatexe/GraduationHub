@@ -8,6 +8,7 @@ using GraduationHub.Web.Data;
 using GraduationHub.Web.Filters;
 using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Infrastructure.Alerts;
+using GraduationHub.Web.Models;
 using GraduationHub.Web.Models.Students;
 
 namespace GraduationHub.Web.Controllers
@@ -49,57 +50,49 @@ namespace GraduationHub.Web.Controllers
             return JsonSuccess(response, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult StudentInformation(string id)
+        public ActionResult Biography(StudentModel model)
         {
-            var studentInfo = _dbContext.GraduateInformation.Project().To<StudentInformationModel>().Single(x => x.StudentId.Equals(id));
-
-            return View(studentInfo).WithInfo("This is to demonstrate what the final app will look like.");
+            return View("Biography", model);
         }
 
-
-        public ActionResult Biography(string id)
+        public ActionResult ExpressionOfThanks(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult ExpressionOfThanks(string id)
+        public ActionResult SlideShowCaption(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult SlideShowCaption(string id)
+        public ActionResult SeniorPortrait(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult SeniorPortrait(string id)
+        public ActionResult BabyPicture(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult BabyPicture(string id)
+        public ActionResult ToddlerPicture(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult ToddlerPicture(string id)
+        public ActionResult ElementaryPicture(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult ElementaryPicture(string id)
+        public ActionResult MiddleSchoolPicture(StudentModel model)
         {
-            return View();
+            return View(model);
         }
 
-        public ActionResult MiddleSchoolPicture(string id)
+        public ActionResult HighSchoolPicture(StudentModel model)
         {
-            return View();
-        }
-
-        public ActionResult HighSchoolPicture(string id)
-        {
-            return View();
+            return View(model);
         }
     }
 }

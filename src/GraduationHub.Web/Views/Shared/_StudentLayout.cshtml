@@ -1,1 +1,42 @@
-﻿
+﻿@model StudentModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string currentAction = ViewContext.RouteData.Values["action"].ToString();
+
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><span class="glyphicon glyphicon-ok"></span> Student Check List</div>
+
+            <!-- List group -->
+            <div class="list-group">
+                @Html.ActionLink("Biography", "Biography", "Students", new{id = Model.Id}, new { @class = currentAction == "Biography" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Expression of Thanks", "ExpressionOfThanks", "Students", new { id = Model.Id }, new { @class = currentAction == "ExpressionOfThanks" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Slideshow Caption", "SlideShowCaption", "Students", new { id = Model.Id }, new { @class = currentAction == "SlideShowCaption" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Senior Portrait", "SeniorPortrait", "Students", new { id = Model.Id }, new { @class = currentAction == "SeniorPortrait" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Baby Picture", "BabyPicture", "Students", new{id = Model.Id}, new { @class = currentAction == "BabyPicture" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Toddler Picture", "ToddlerPicture", "Students", new { id = Model.Id }, new { @class = currentAction == "ToddlerPicture" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Elementary Picture", "ElementaryPicture", "Students", new { id = Model.Id }, new { @class = currentAction == "ElementaryPicture" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("Middle School Picture", "MiddleSchoolPicture", "Students", new { id = Model.Id }, new { @class = currentAction == "MiddleSchoolPicture" ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink("High School Picture", "HighSchoolPicture", "Students", new { id = Model.Id }, new { @class = currentAction == "HighSchoolPicture" ? "list-group-item active" : "list-group-item" })
+           </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        @RenderBody()
+    </div>
+</div>
+
+@section scripts
+{
+    @RenderSection("scripts", false)
+}
+
+@section styles
+{
+    @RenderSection("styles", false)
+}

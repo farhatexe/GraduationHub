@@ -1,8 +1,10 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using GraduationHub.Web.Infrastructure.Mapping;
 
 namespace GraduationHub.Web.Models.Students
 {
+    [Obsolete]
     public class StudentInformationModel : IHaveCustomMappings
     {
         public string StudentName { get; set; }

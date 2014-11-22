@@ -219,3 +219,5 @@ pip-log.txt
 src/GraduationHub.Web/App_Data/aspnet-GraduationHub.Web-20140706115700.mdf
 *.mdf
 *.ldf
+/src/GraduationHub.Web/Content/Video/2014 KEYS Senior Graduation.mp4
+/src/GraduationHub.Web/Content/Video/Senior Photo.jpg
