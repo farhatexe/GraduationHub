@@ -56,25 +56,48 @@ namespace GraduationHub.Web.Controllers
             return View(studentInfo).WithInfo("This is to demonstrate what the final app will look like.");
         }
 
-        public ActionResult GetSeniorPicture(string id)
-        {
-            return null;
-        }
 
-        [ChildActionOnly]
-        public ActionResult StudentPictures(string id)
+        public ActionResult Biography(string id)
         {
             return View();
         }
 
-        [ChildActionOnly]
-        public ActionResult GetPicture(string id)
+        public ActionResult ExpressionOfThanks(string id)
         {
-            return null;
+            return View();
         }
 
-        [ChildActionOnly]
-        public ActionResult StudenExpressions()
+        public ActionResult SlideShowCaption(string id)
+        {
+            return View();
+        }
+
+        public ActionResult SeniorPortrait(string id)
+        {
+            return View();
+        }
+
+        public ActionResult BabyPicture(string id)
+        {
+            return View();
+        }
+
+        public ActionResult ToddlerPicture(string id)
+        {
+            return View();
+        }
+
+        public ActionResult ElementaryPicture(string id)
+        {
+            return View();
+        }
+
+        public ActionResult MiddleSchoolPicture(string id)
+        {
+            return View();
+        }
+
+        public ActionResult HighSchoolPicture(string id)
         {
             return View();
         }

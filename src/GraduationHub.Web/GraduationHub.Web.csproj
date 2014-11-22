@@ -756,7 +756,16 @@
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\_NotFound.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\Students\StudentInformation.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Views\Students\Biography.cshtml" />
+    <Content Include="Views\Students\ExpressionOfThanks.cshtml" />
+    <Content Include="Views\Students\SlideShowCaption.cshtml" />
+    <Content Include="Views\Students\SeniorPortrait.cshtml" />
+    <Content Include="Views\Students\BabyPicture.cshtml" />
+    <Content Include="Views\Students\ToddlerPicture.cshtml" />
+    <Content Include="Views\Students\ElementaryPicture.cshtml" />
+    <Content Include="Views\Students\MiddleSchoolPicture.cshtml" />
+    <Content Include="Views\Students\HighSchoolPicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
