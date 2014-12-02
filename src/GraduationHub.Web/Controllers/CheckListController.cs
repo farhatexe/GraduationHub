@@ -35,7 +35,7 @@ namespace GraduationHub.Web.Controllers
         public ActionResult Biography()
         {
             Response<StudentExpressionModel> response =
-                _mediator.Request(new GetExpression {MaxLength = 200, Type = StudentExpressionType.Biography});
+                _mediator.Request(new GetExpression {MaxLength = 200, Type = StudentExpressionType.Biography, StudentId = _currentUser.User.Id});
 
             return View(response.Data);
         }
@@ -49,6 +49,7 @@ namespace GraduationHub.Web.Controllers
             {
                 _mediator.Notify(new SaveExpression
                 {
+                    StudentId = _currentUser.User.Id,
                     Text = model.Text,
                     Type = StudentExpressionType.Biography
                 });
@@ -66,7 +67,7 @@ namespace GraduationHub.Web.Controllers
         public ActionResult ExpressionOfThanks()
         {
             Response<StudentExpressionModel> response =
-                _mediator.Request(new GetExpression {MaxLength = 100, Type = StudentExpressionType.ThankYou});
+                _mediator.Request(new GetExpression { MaxLength = 100, Type = StudentExpressionType.ThankYou, StudentId = _currentUser.User.Id });
 
             return View(response.Data);
         }
@@ -81,6 +82,7 @@ namespace GraduationHub.Web.Controllers
             {
                 _mediator.Notify(new SaveExpression
                 {
+                    StudentId = _currentUser.User.Id,
                     Text = model.Text,
                     Type = StudentExpressionType.ThankYou
                 });
@@ -98,7 +100,7 @@ namespace GraduationHub.Web.Controllers
         public ActionResult SlideShowCaption()
         {
             Response<StudentExpressionModel> response =
-                _mediator.Request(new GetExpression {MaxLength = 35, Type = StudentExpressionType.SlideshowCaption});
+                _mediator.Request(new GetExpression {MaxLength = 35, Type = StudentExpressionType.SlideshowCaption, StudentId = _currentUser.User.Id});
 
             return View(response.Data);
         }
@@ -112,6 +114,7 @@ namespace GraduationHub.Web.Controllers
             {
                 _mediator.Notify(new SaveExpression
                 {
+                    StudentId = _currentUser.User.Id,
                     Text = model.Text,
                     Type = StudentExpressionType.SlideshowCaption
                 });

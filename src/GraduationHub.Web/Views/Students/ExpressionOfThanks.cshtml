@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model GraduationHub.Web.Models.CheckList.StudentExpressionModel
 
 @{
     ViewBag.Title = "Expressions Of Thanks";
@@ -12,3 +12,28 @@
     <p><em>These will be published in the graduation programs. Please keep your text between <strong>75 - 100 words.</strong></em></p>
 </div>
 <hr />
+
+<div>
+    @using (Html.BeginForm("ExpressionOfThanks", "Students", FormMethod.Post))
+    {
+        @Html.EditorFor(m => m.StudentId)
+        @Html.Partial("_StudentTextEditor", Model)
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/simplyCountable")
+
+    <script>
+        $(document).ready(function() {
+            $("#Text").simplyCountable({
+                counter: '#counter',
+                countType: 'words',
+                maxCount: @Model.TextMaxLength,
+                countDirection: 'down',
+                strictMax: true
+            });
+        })
+    </script>
+}

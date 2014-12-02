@@ -2,7 +2,6 @@
 using AutoMapper.QueryableExtensions;
 using GraduationHub.Web.Data;
 using GraduationHub.Web.Domain;
-using GraduationHub.Web.Infrastructure;
 using GraduationHub.Web.Models.CheckList;
 using ShortBus;
 
@@ -13,23 +12,23 @@ namespace GraduationHub.Web.Requests
         public int MaxLength { get; set; }
 
         public StudentExpressionType Type { get; set; }
+
+        public string StudentId { get; set; }
     }
 
     public class GetExpressionHandler : IRequestHandler<GetExpression, StudentExpressionModel>
     {
-        private readonly ICurrentUser _currentUser;
         private readonly ApplicationDbContext _dbContext;
 
-        public GetExpressionHandler(ApplicationDbContext dbContext, ICurrentUser currentUser)
+        public GetExpressionHandler(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _currentUser = currentUser;
         }
 
         public StudentExpressionModel Handle(GetExpression request)
         {
             StudentExpressionModel expression = _dbContext.StudentExpressions
-                .Where(e => e.StudentId.Equals(_currentUser.User.Id))
+                .Where(e => e.StudentId.Equals(request.StudentId))
                 .Where(e => e.Type == request.Type).Project().To<StudentExpressionModel>()
                 .SingleOrDefault() ?? new StudentExpressionModel();
 
