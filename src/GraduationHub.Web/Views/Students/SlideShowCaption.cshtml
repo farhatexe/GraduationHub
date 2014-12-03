@@ -1,4 +1,5 @@
-﻿@model GraduationHub.Web.Models.CheckList.StudentExpressionModel
+﻿@model StudentModel
+
 
 @{
     ViewBag.Title = "Slide Show Caption";
@@ -16,8 +17,8 @@
 <div>
     @using (Html.BeginForm("SlideShowCaption", "Students", FormMethod.Post))
     {
-        @Html.EditorFor(m => m.StudentId)
-        @Html.Partial("_StudentTextEditor", Model)
+        @Html.Hidden("StudentId", Model.Id)
+        @Html.Action("GetText", new { @Model.StudentExpressionType, Model.Id })
     }
 </div>
 

@@ -61,16 +61,22 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult Biography(StudentModel model)
         {
-            Response<StudentExpressionModel> response =
-                _mediator.Request(new GetExpression { MaxLength = 200, Type = StudentExpressionType.Biography, StudentId = model.Id});
-
-            return View(response.Data);
+            model.StudentExpressionType = StudentExpressionType.Biography;
+            model.TextMaxLength = 200;
+            return View(model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Biography(StudentExpressionModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return
+                    View(new StudentModel
+                    {
+                        StudentExpressionType = StudentExpressionType.Biography,
+                        Id = model.StudentId,
+                        TextMaxLength = 200
+                    });
 
             try
             {
@@ -81,28 +87,35 @@ namespace GraduationHub.Web.Controllers
                     Type = StudentExpressionType.Biography
                 });
 
-                return RedirectToAction<CheckListController>(c => c.Biography())
+                return RedirectToAction("Biography", new {Id = model.StudentId})
                     .WithSuccess("Your \"Biography\" has been saved.");
             }
             catch (Exception)
             {
-                return RedirectToAction<CheckListController>(c => c.Biography())
+                return RedirectToAction("Biography", new {Id = model.StudentId})
                     .WithError("There was a problem. Your \"Biography\" was not saved.");
             }
         }
 
         public ActionResult ExpressionOfThanks(StudentModel model)
         {
-            Response<StudentExpressionModel> response =
-                _mediator.Request(new GetExpression { MaxLength = 200, Type = StudentExpressionType.ThankYou, StudentId = model.Id });
-
-            return View(response.Data);
+            model.StudentExpressionType = StudentExpressionType.ThankYou;
+            model.TextMaxLength = 100;
+            return View(model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult ExpressionOfThanks(StudentExpressionModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return
+                    View(new StudentModel
+                    {
+                        StudentExpressionType = StudentExpressionType.ThankYou,
+                        Id = model.StudentId,
+                        TextMaxLength = 100
+                    });
+
 
             try
             {
@@ -113,12 +126,12 @@ namespace GraduationHub.Web.Controllers
                     Type = StudentExpressionType.ThankYou
                 });
 
-                return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
+                return RedirectToAction("ExpressionOfThanks", new {Id = model.StudentId})
                     .WithSuccess("Your \"Expression of Thanks\" has been saved.");
             }
             catch (Exception)
             {
-                return RedirectToAction<CheckListController>(c => c.ExpressionOfThanks())
+                return RedirectToAction("ExpressionOfThanks", new {Id = model.StudentId})
                     .WithError("There was a problem. Your \"Expression of Thanks\" was not saved.");
             }
         }
@@ -126,16 +139,21 @@ namespace GraduationHub.Web.Controllers
 
         public ActionResult SlideShowCaption(StudentModel model)
         {
-            Response<StudentExpressionModel> response =
-                _mediator.Request(new GetExpression { MaxLength = 200, Type = StudentExpressionType.SlideshowCaption, StudentId = model.Id });
-
-            return View(response.Data);
+            model.StudentExpressionType = StudentExpressionType.SlideshowCaption;
+            model.TextMaxLength = 35;
+            return View(model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult SlideShowCaption(StudentExpressionModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return View(new StudentModel
+                {
+                    StudentExpressionType = StudentExpressionType.SlideshowCaption,
+                    Id = model.StudentId,
+                    TextMaxLength = 35
+                });
 
             try
             {
@@ -146,12 +164,12 @@ namespace GraduationHub.Web.Controllers
                     Type = StudentExpressionType.SlideshowCaption
                 });
 
-                return RedirectToAction<CheckListController>(c => c.SlideShowCaption())
+                return RedirectToAction("SlideShowCaption", new {Id = model.StudentId})
                     .WithSuccess("Your \"Slide Show Caption\" has been saved.");
             }
             catch (Exception)
             {
-                return RedirectToAction<CheckListController>(c => c.SlideShowCaption())
+                return RedirectToAction("SlideShowCaption", new {Id = model.StudentId})
                     .WithError("There was a problem. Your \"Slide Show Caption\" was not Saved.");
             }
         }
@@ -195,9 +213,24 @@ namespace GraduationHub.Web.Controllers
         public void GetPicture(StudentModel model)
         {
             Response<WebImage> response =
-                _mediator.Request(new GetPicture { Type = model.StudentPictureType, UserId = model.Id});
+                _mediator.Request(new GetPicture {Type = model.StudentPictureType, UserId = model.Id});
 
             response.Data.Write();
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetText(StudentModel model)
+        {
+            Response<StudentExpressionModel> response =
+                _mediator.Request(new GetExpression
+                {
+                    MaxLength = model.TextMaxLength,
+                    Type = model.StudentExpressionType,
+                    StudentId = model.Id
+                });
+
+
+            return PartialView("_StudentTextEditor", response.Data);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model GraduationHub.Web.Models.CheckList.StudentExpressionModel
+﻿@model StudentModel
 
 @{
     ViewBag.Title = "Expressions Of Thanks";
@@ -16,8 +16,8 @@
 <div>
     @using (Html.BeginForm("ExpressionOfThanks", "Students", FormMethod.Post))
     {
-        @Html.EditorFor(m => m.StudentId)
-        @Html.Partial("_StudentTextEditor", Model)
+        @Html.Hidden("StudentId", Model.Id)
+        @Html.Action("GetText", new { @Model.StudentExpressionType, Model.Id })
     }
 </div>
 
