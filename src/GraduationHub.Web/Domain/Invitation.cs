@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using GraduationHub.Web.Data;
 
 namespace GraduationHub.Web.Domain
@@ -23,6 +24,21 @@ namespace GraduationHub.Web.Domain
         public bool IsTeacher { get; set; }
 
 
+        public string DisplayName
+        {
+            get
+            {
+                try
+                {
+                    
+                     return string.Join(" ", InviteeName.Split(',').Reverse()).Trim();
+                }
+                catch (Exception)
+                {
+                    return InviteeName.Replace(",", "");
+                }
+            }
+        }
     }
 
 }

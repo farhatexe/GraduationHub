@@ -225,7 +225,7 @@ namespace GraduationHub.Web.Controllers
             dynamic email = invitation.IsTeacher ? new Email("TeacherInvitation") : new Email("StudentInvitation");
 
             email.To = invitation.Email;
-            email.InviteeName = invitation.InviteeName;
+            email.InviteeName = invitation.DisplayName;
             email.InviteCode = invitation.InviteCode;
             email.Send();
 

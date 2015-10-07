@@ -106,7 +106,9 @@ namespace GraduationHub.Web.Controllers
                 Email = invitation.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                IsStudent = !invitation.IsTeacher
+
             };
 
 

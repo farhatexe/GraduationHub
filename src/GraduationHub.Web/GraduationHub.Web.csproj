@@ -446,8 +446,6 @@
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <Content Include="Content\Video\2014 KEYS Senior Graduation.mp4" />
-    <Content Include="Content\Video\Senior Photo.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -460,6 +458,7 @@
     <Content Include="Content\DataTables-1.10.2\images\Sorting icons.psd" />
     <Content Include="Content\jasny-bootstrap.css.map" />
     <Content Include="Content\Files\gradannouncement.pdf" />
+    <Content Include="Content\Graduation Announcement.pdf" />
     <None Include="Properties\PublishProfiles\GraduateHub %282%29.pubxml" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
@@ -797,7 +796,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59422</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
